@@ -18,6 +18,12 @@ Um dieses Repository in MakeCode zu bearbeiten.
 * klicke auf **Importieren** und dann auf **Importiere URL**
 * füge **https://github.com/vritter-zhaw/ines-led-matrix** ein und klicke auf Importieren
 
+## GitHub Pages
+
+Dieses Repository kann als Website veröffentlicht werden über GitHub Pages. [Jekyll](https://jekyllrb.com/docs/) wird verwendet, um die Website mittels GitHub Actions zu generieren. 
+
+
+
 #### Metadaten (verwendet für Suche, Rendering)
 
 * for PXT/microbit

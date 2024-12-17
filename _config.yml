@@ -2,7 +2,62 @@ makecode:
   target: microbit
   platform: microbit
   home_url: https://makecode.microbit.org/
-theme: jekyll-theme-slate
-include:
-  - assets
-  - README.md
+
+
+theme: just-the-docs
+
+title: ZHAW LED Matrix
+description: ""
+baseurl: "" 
+#url: "https://InES-HPMM.github.io/Microbit-LED-Matrix" 
+repository: InES-HPMM/Microbit-LED-Matrix
+
+permalink: pretty
+
+defaults:
+  - scope:
+      path: "docs" # an empty string here means all files in the project
+      type: "pages"
+    values:
+      layout: "default"
+
+# External navigation links
+# nav_external_links:
+#   - title: Übersicht zum Workshop
+#     url: https://www.zhaw.ch/de/engineering/institute-zentren/ines/led-matrix/
+
+enable_copy_code_button: true
+
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true 
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/InES-HPMM/Microbit-LED-Matrix" 
+gh_edit_branch: "master" 
+# gh_edit_source: docs 
+gh_edit_view_mode: "tree"
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+  - jekyll-sitemap
