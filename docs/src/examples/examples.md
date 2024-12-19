@@ -1,18 +1,6 @@
----
-title: Examples
----
-
-
 # Example Project
 
 ```blocks
-NeoPixelMatrix.switchValueChangedThread(function () {
-    if (NeoPixelMatrix.isSwitchSet()) {
-        NeoPixelMatrix.setOnePixel(7, 1, 0xffff00)
-    } else {
-        NeoPixelMatrix.setOnePixel(7, 1, 0xff0000)
-    }
-})
 NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
 basic.pause(100)
 NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
@@ -50,6 +38,15 @@ eMatrixVersion.V2,
 NeoPixelMatrix.setBrightness(127)
 ```
 
+```blocks
+NeoPixelMatrix.switchValueChangedThread(function () {
+    if (NeoPixelMatrix.isSwitchSet()) {
+        NeoPixelMatrix.setOnePixel(7, 1, 0xffff00)
+    } else {
+        NeoPixelMatrix.setOnePixel(7, 1, 0xff0000)
+    }
+})
+```
 
 
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/Microbit-LED-Matrix");</script>

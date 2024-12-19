@@ -1,0 +1,14 @@
+[book]
+title = "LED Matrix Workshop"
+description = "Challenges und Dokumentation für den LED Matrix Workshop"
+authors = ["wimd", "ebep"]
+
+language = "en"
+multilingual = false
+src = "src"
+
+
+
+[build]
+create-missing = false
+
