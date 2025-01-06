@@ -52,6 +52,7 @@ namespace NeoPixelMatrix {
     let totalWidth: number = 0;
     let index: number = 0;
     let debugEnabled: boolean = false;
+    let pixelBuffer: Buffer = Buffer.create(3*8*8)
 
 
     /* FUNCTIONS */
@@ -230,6 +231,54 @@ namespace NeoPixelMatrix {
         serialDebugMsg("setOnePixel: Pixel: " + x + "," + y + " is set to color(R,G,B): (" + R + "," + G + "," + B + ")");
     }
 
+    //% blockId="Matrix_GetPixelRGB"
+    //% block="Get Color at Pixel x: $x y: $y"
+    //% x.min=0 x.max=7 y.min=0 y.max=7
+    //% group="Pixels" weight=106
+    export function getColorFromPixel(x: number, y: number): number {
+        let color = 0x000000;
+        let index = (matrixHeight - 1 - y) * matrixWidth + x;
+        if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
+            color |= pixelBuffer.getUint8(index * 3 + 0) << 16;
+            color |= pixelBuffer.getUint8(index * 3 + 1) << 8;
+            color |= pixelBuffer.getUint8(index * 3 + 2) << 0;
+            serialDebugMsg("color is" + color)
+        }
+        return color
+    }
+
+    //% blockId="Matrix_AddPixelRGB"
+    //% block="Add R: $R G: $G B: $B to pixel at x: $x y: $y"
+    //% x.min=0 x.max=7 y.min=0 y.max=7
+    //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
+    //% group="Pixels" weight=105
+    //% blockExternalInputs=true
+    export function addColorToPixel(x: number, y: number, R: number, G: number, B: number) {
+        let index = (matrixHeight - 1 - y) * matrixWidth + x;
+        if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
+            R = Math.max(0, Math.min(255, pixelBuffer.getUint8(index * 3 + 0) + R));
+            G = Math.max(0, Math.min(255, pixelBuffer.getUint8(index * 3 + 1) + G));
+            B = Math.max(0, Math.min(255, pixelBuffer.getUint8(index * 3 + 2) + B));
+        }
+        setOnePixelRGB(x, y, R, G, B);
+    }
+
+    //% blockId="Matrix_SubtractPixelRGB"
+    //% block="Subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
+    //% x.min=0 x.max=7 y.min=0 y.max=7
+    //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
+    //% group="Pixels" weight=105
+    //% blockExternalInputs=true
+    export function subtractColorFromPixel(x: number, y: number, R: number, G: number, B: number) {
+        let index = (matrixHeight - 1 - y) * matrixWidth + x;
+        if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
+            R = Math.max(0, Math.min(255, pixelBuffer.getUint8(index * 3 + 0) - R));
+            G = Math.max(0, Math.min(255, pixelBuffer.getUint8(index * 3 + 1) - G));
+            B = Math.max(0, Math.min(255, pixelBuffer.getUint8(index * 3 + 2) - B));
+        }
+        setOnePixelRGB(x, y, R, G, B);
+    }
+
     //% blockId="Input_GPIORead"
     //% block="read GPIO $pin"
     //% group="Input"
@@ -321,16 +370,17 @@ namespace NeoPixelMatrix {
     /* Creates thread to poll joystick direction and execute callback when direction changes. */
     //% block="Input_JoystickCallback"
     //% block="when joystick changed"
+    //% draggableParameters
     //% group="Input"
-    export function joystickChangedThread(callback: () => void): void {
+    export function joystickChangedThread(callback: (direction: number) => void): void {
         control.inBackground(() => {
-            let currentJoystickDirection: eJoystickDirection = 0;
+            let currentJoystickDirection: eJoystickDirection = eJoystickDirection.NotPressed;
             while (true) {
                 currentJoystickDirection = readJoystick();
                 if (lastJoystickDirection !== currentJoystickDirection) {
                     lastJoystickDirection = currentJoystickDirection;
                     serialDebugMsg("joystickChangedThread: Joystick direction changed to: " + currentJoystickDirection);
-                    callback();
+                    callback(currentJoystickDirection);
                 }
                 basic.pause(pollingInterval);
             }
