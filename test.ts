@@ -15,17 +15,17 @@
  * ------------------------------------------------------------------
  */
 
-NeoPixelMatrix.switchValueChangedThread(function () {
-    basic.showNumber(NeoPixelMatrix.readSwitch())
-    serial.writeValue("switch", NeoPixelMatrix.readSwitch())
-    NeoPixelMatrix.setCurrentTime(h, m, s)
+Lumatrix.switchValueChangedThread(function () {
+    basic.showNumber(Lumatrix.readSwitch())
+    serial.writeValue("switch", Lumatrix.readSwitch())
+    Lumatrix.setCurrentTime(h, m, s)
 })
 let s = 0
 let m = 0
 let h = 0
-NeoPixelMatrix.debugEnable(true)
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 135)
-NeoPixelMatrix.createWordClock(
+Lumatrix.debugEnable(true)
+Lumatrix.initializeMatrix(DigitalPin.P0, 135)
+Lumatrix.createWordClock(
 eMatrixVersion.V1,
 0x00ff00,
 0x007fff,
@@ -36,5 +36,5 @@ m = 22
 s = 55
 while (true) {
     basic.pause(5000)
-    serial.writeLine(NeoPixelMatrix.getCurrentTimeAsText())
+    serial.writeLine(Lumatrix.getCurrentTimeAsText())
 }

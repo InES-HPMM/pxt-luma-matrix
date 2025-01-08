@@ -14,7 +14,7 @@
  * --
  * ------------------------------------------------------------------
  */
-namespace NeoPixelMatrix {
+namespace Lumatrix {
 
     const startTime = control.millis();
     let currentTimeSeconds: number = 0;

@@ -9,15 +9,15 @@
  * --
  * -- File:	    ines-led-matrix.ts
  * -- Project:  micro:bit InES Matrix
- * -- Date:	    16.12.2024
+ * -- Date:	    08.01.2025
  * -- Author:   vore, hesu, ebep
  * --
  * ------------------------------------------------------------------
  */
 
 
-//% color=#3162a3 icon="\uf00a" block="InES Matrix"
-namespace NeoPixelMatrix {
+//% color=#3162a3 icon="\uf00a" block="Lumatrix"
+namespace Lumatrix {
 
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;

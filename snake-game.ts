@@ -14,7 +14,7 @@
  * --
  * ------------------------------------------------------------------
  */
-namespace NeoPixelMatrix {
+namespace Lumatrix {
 
     //% blockId="Game_Snake"
     //% block="Snake Game"
