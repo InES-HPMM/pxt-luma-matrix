@@ -13,13 +13,15 @@
         "enums.ts",
         "matrix-lut.ts",
         "_locales/de/InES LED-Matrix-strings.json",
-        "_locales/de/InES LED-Matrix-jsdoc-strings.json"
+        "_locales/de/InES LED-Matrix-jsdoc-strings.json",
+        "wordclock.ts",
+        "snake-game.ts"
     ],
     "testFiles": [
         "test.ts"
     ],
     "targetVersions": {
-        "target": "7.0.51",
+        "target": "7.0.57",
         "targetId": "microbit"
     },
     "supportedTargets": [
