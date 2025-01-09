@@ -9,32 +9,32 @@
  * --
  * -- File:	    test.ts
  * -- Project:  micro:bit InES Matrix
- * -- Date:	    16.12.2024
- * -- Author:   hesu
+ * -- Date:	    08.01.2024
+ * -- Author:   ebep
  * --
+ * -- Description:  Illustrate and test core functionality
  * ------------------------------------------------------------------
  */
 
-NeoPixelMatrix.switchValueChangedThread(function () {
-    basic.showNumber(NeoPixelMatrix.readSwitch())
-    serial.writeValue("switch", NeoPixelMatrix.readSwitch())
-    NeoPixelMatrix.setCurrentTime(h, m, s)
-})
-let s = 0
-let m = 0
-let h = 0
-NeoPixelMatrix.debugEnable(true)
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 135)
-NeoPixelMatrix.createWordClock(
-eMatrixVersion.V1,
-0x00ff00,
-0x007fff,
-0xff0000
-)
-h = 0
-m = 22
-s = 55
+
+Lumatrix.debugEnable(true)
+Lumatrix.initializeMatrix(DigitalPin.P0, 135)
+Lumatrix.scrollText("LUMATRIX", 0xff00FF, 90)
+Lumatrix.showImage(Lumatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    # . . . . . . #
+    . # . . . . # .
+    . . # # # # . .
+    . . . . . . . .
+    `), 0xffff00)
+basic.pause(2000)
+Lumatrix.createWordClock(eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
+Lumatrix.setCurrentTime(15, 33, 0)
+
 while (true) {
     basic.pause(5000)
-    serial.writeLine(NeoPixelMatrix.getCurrentTimeAsText())
+    serial.writeLine(Lumatrix.getCurrentTimeAsText())
 }

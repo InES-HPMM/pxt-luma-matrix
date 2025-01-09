@@ -1,5 +1,5 @@
 
-> Diese Seite bei [https://vritter-zhaw.github.io/ines-led-matrix/](https://vritter-zhaw.github.io/ines-led-matrix/) öffnen
+> Diese Seite bei [https://ines-hpmm.github.io/ines-led-matrix/](https://ines-hpmm.github.io/ines-led-matrix/) öffnen
 
 ## Als Erweiterung verwenden
 
@@ -8,7 +8,7 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 * öffne [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * klicke auf **Neues Projekt**
 * klicke auf **Erweiterungen** unter dem Zahnrad-Menü
-* nach **https://github.com/vritter-zhaw/ines-led-matrix** suchen und importieren
+* nach **https://github.com/ines-hpmm/ines-led-matrix** suchen und importieren
 
 ## Dieses Projekt bearbeiten
 
@@ -16,7 +16,7 @@ Um dieses Repository in MakeCode zu bearbeiten.
 
 * öffne [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * klicke auf **Importieren** und dann auf **Importiere URL**
-* füge **https://github.com/vritter-zhaw/ines-led-matrix** ein und klicke auf Importieren
+* füge **https://github.com/ines-hpmm/ines-led-matrix** ein und klicke auf Importieren
 
 ## Übersetzung aktualisieren
 Übersetzung der Blöcke ist im Ordner `_locales/de` gespeichert. Um die Übersetzung zu aktualisieren können die entrsprechenden Dateien in MakeCode geändert werden. Bei grösseren Änderungen bzw. neu hinzugefügten Blöcken kann die [Anleitung](https://makecode.com/extensions/localization) von MakeCode verwendet werden.
