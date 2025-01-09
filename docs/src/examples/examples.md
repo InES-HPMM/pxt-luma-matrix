@@ -1,9 +1,9 @@
 # Example Project
 
 ```blocks
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
+Lumatrix.initializeMatrix(DigitalPin.P0, 127)
 basic.pause(100)
-NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
+Lumatrix.showImage(Lumatrix.matrix8x8(`
     # . . . . . . .
     # . . . . . . .
     # . . . . . . .
@@ -14,7 +14,7 @@ NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
     . . . . . . . .
     `), 0x007fff)
 basic.pause(1000)
-NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
+Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . . . . . . .
     . . . . . . . .
     . . . . . . . .
@@ -24,26 +24,26 @@ NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
     . . . . # . . .
     . # . . . . . .
     `), 0x00ff00)
-NeoPixelMatrix.setBrightness(255)
-if (NeoPixelMatrix.compareJoystick(NeoPixelMatrix.readJoystick(), eJoystickDirection.Down)) {
-    NeoPixelMatrix.setOnePixel(7, 0, 0xffff00)
+Lumatrix.setBrightness(255)
+if (Lumatrix.compareJoystick(Lumatrix.readJoystick(), eJoystickDirection.Down)) {
+    Lumatrix.setOnePixel(7, 0, 0xffff00)
 }
 basic.pause(1000)
-NeoPixelMatrix.createWordClock(
+Lumatrix.createWordClock(
 eMatrixVersion.V2,
 0x007fff,
 0xffff00,
 0x00ff00
 )
-NeoPixelMatrix.setBrightness(127)
+Lumatrix.setBrightness(127)
 ```
 
 ```blocks
-NeoPixelMatrix.switchValueChangedThread(function () {
-    if (NeoPixelMatrix.isSwitchSet()) {
-        NeoPixelMatrix.setOnePixel(7, 1, 0xffff00)
+Lumatrix.switchValueChangedThread(function () {
+    if (Lumatrix.isSwitchSet()) {
+        Lumatrix.setOnePixel(7, 1, 0xffff00)
     } else {
-        NeoPixelMatrix.setOnePixel(7, 1, 0xff0000)
+        Lumatrix.setOnePixel(7, 1, 0xff0000)
     }
 })
 ```

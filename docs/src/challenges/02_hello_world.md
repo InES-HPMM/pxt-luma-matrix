@@ -6,14 +6,14 @@ In dieser Challenge wirst du einen Lauftext auf deiner Matrix anzeigen.
 ## Initialisiere die Matrix
 
 ```blocks
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
+Lumatrix.initializeMatrix(DigitalPin.P0, 127)
 Welchen_Block_musst_du_hier_einsetzen?
 ```
 
 ## Lösung
 ```blocks
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
-NeoPixelMatrix.scrollText("HELLO WORLD", 0x00ffff, 80)
+Lumatrix.initializeMatrix(DigitalPin.P0, 127)
+Lumatrix.scrollText("HELLO WORLD", 0x00ffff, 80)
 ```
 
 

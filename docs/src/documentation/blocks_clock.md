@@ -5,7 +5,7 @@
 Create a clock thread to track time and light up specific LEDs to display the time.
 
 ```blocks	
-NeoPixelMatrix.createWordClock(
+Lumatrix.createWordClock(
 eMatrixVersion.V2,
 0x007fff,
 0xffff00,

@@ -7,7 +7,7 @@ On the back of th matrix there are two inputs, a joystick and a switch.
 Read the value from a specified GPIO pin.
 
 ```blocks
-let gpioValue = NeoPixelMatrix.readGPIO(DigitalPin.P1)
+let gpioValue = Lumatrix.readGPIO(DigitalPin.P1)
 ```
 
 ### Read Switch
@@ -15,7 +15,7 @@ let gpioValue = NeoPixelMatrix.readGPIO(DigitalPin.P1)
 Read the current value of the switch.
 
 ```blocks
-let switchValue = NeoPixelMatrix.readSwitch()
+let switchValue = Lumatrix.readSwitch()
 ```
 
 ### Check if Switch is Set
@@ -23,7 +23,7 @@ let switchValue = NeoPixelMatrix.readSwitch()
 Check if the switch is set.
 
 ```blocks
-let isSwitchSet = NeoPixelMatrix.isSwitchSet()
+let isSwitchSet = Lumatrix.isSwitchSet()
 ```
 
 ### Read Joystick Direction
@@ -31,7 +31,7 @@ let isSwitchSet = NeoPixelMatrix.isSwitchSet()
 Read the current direction of the joystick.
 
 ```blocks
-let joystickDirection = NeoPixelMatrix.readJoystick()
+let joystickDirection = Lumatrix.readJoystick()
 ```
 
 ### Read Joystick Direction as Text
@@ -39,7 +39,7 @@ let joystickDirection = NeoPixelMatrix.readJoystick()
 Read the current direction of the joystick as text.
 
 ```blocks
-let joystickDirectionText = NeoPixelMatrix.readJoystickText()
+let joystickDirectionText = Lumatrix.readJoystickText()
 ```
 
 ### Compare Joystick Direction
@@ -47,7 +47,7 @@ let joystickDirectionText = NeoPixelMatrix.readJoystickText()
 Compare the current joystick direction with a specified direction.
 
 ```blocks
-let isJoystickDown = NeoPixelMatrix.compareJoystick(joystickDirection, eJoystickDirection.Down)
+let isJoystickDown = Lumatrix.compareJoystick(joystickDirection, eJoystickDirection.Down)
 ```
 
 ### Joystick Direction Changed Callback
@@ -55,7 +55,7 @@ let isJoystickDown = NeoPixelMatrix.compareJoystick(joystickDirection, eJoystick
 Execute a callback function when the joystick direction changes.
 
 ```blocks
-NeoPixelMatrix.joystickChangedThread(() => {
+Lumatrix.joystickChangedThread(() => {
   console.log("Joystick direction changed")
 })
 ```
@@ -65,15 +65,15 @@ NeoPixelMatrix.joystickChangedThread(() => {
 Execute a callback function when the joystick moves in a specified direction.
 
 ```blocks
-NeoPixelMatrix.joystickDirectionThread(eJoystickDirection.Up, () => {
+Lumatrix.joystickDirectionThread(eJoystickDirection.Up, () => {
   console.log("Joystick moved up")
 })
 ```
 
 
 ```blocks	
-if (NeoPixelMatrix.compareJoystick(NeoPixelMatrix.readJoystick(), eJoystickDirection.Down)) {
-    NeoPixelMatrix.setOnePixel(7, 0, 0xffff00)
+if (Lumatrix.compareJoystick(Lumatrix.readJoystick(), eJoystickDirection.Down)) {
+    Lumatrix.setOnePixel(7, 0, 0xffff00)
 }
 ```
 

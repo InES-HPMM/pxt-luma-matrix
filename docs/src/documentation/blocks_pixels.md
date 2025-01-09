@@ -7,7 +7,7 @@ Pixels blocks are used to control the LEDs on the matrix.
 Initialize the matrix with the pin and brightness. The brightness can be set from 0 to 255. The default brightness is 127. This function needs to be called before any other function which interacts with the matrix.
 
 ```blocks	
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
+Lumatrix.initializeMatrix(DigitalPin.P0, 127)
 ```
 
 
@@ -17,7 +17,7 @@ NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
 Set the brightness of the LEDs. The brightness can be set from 0 to 255. The default brightness is 127.
 
 ```blocks	
-NeoPixelMatrix.setBrightness(255)
+Lumatrix.setBrightness(255)
 ```
 
 ### Show Image
@@ -26,7 +26,7 @@ Draw an image in a specific color on the matrix. The image is a string of 64 cha
 The selcted pixels will be added to the matrix and displayed along with the existing pixels. 
 
 ```blocks	
-NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
+Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . . . . . . .
     . . . . . . . .
     . . # . . # . .

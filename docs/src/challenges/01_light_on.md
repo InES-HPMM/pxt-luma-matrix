@@ -6,14 +6,14 @@ In dieser Challenge wirst du deine Matrix aufleuchten lassen.
 ## Initialisiere die Matrix
 
 ```blocks
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
+Lumatrix.initializeMatrix(DigitalPin.P0, 127)
 Welchen_Block_musst_du_hier_einsetzen?
 ```
 
 ## Lösung
 ```blocks
-NeoPixelMatrix.initializeMatrix(DigitalPin.P0, 127)
-NeoPixelMatrix.showImage(NeoPixelMatrix.matrix8x8(`
+Lumatrix.initializeMatrix(DigitalPin.P0, 127)
+Lumatrix.showImage(Lumatrix.matrix8x8(`
     # # # # # # # #
     # # # # # # # #
     # # # # # # # #
