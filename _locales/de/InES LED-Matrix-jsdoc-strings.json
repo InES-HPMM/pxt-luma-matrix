@@ -1,0 +1,9 @@
+{
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert": "Diese Funktion initialisiert die Matrix mit den angegebenen Pins für joystick und den Schalter.",
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinCenterButtonTemp": "ist der GPIO-Pin für den Mittelknopf des Joysticks",
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinDownButtonTemp": "ist der GPIO-Pin für den Knopf nach unten des Joysticks",
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinLeftButtonTemp": "ist der GPIO-Pin für den Knopf nach links des Joysticks",
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinRightButtonTemp": "ist der GPIO-Pin für den Knopf nach rechts des Joysticks",
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinSwitchTemp": "ist der GPIO-Pin für den Schalter",
+    "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinUpButtonTemp": "ist der GPIO-Pin für den Knopf nach oben des Joysticks"
+}

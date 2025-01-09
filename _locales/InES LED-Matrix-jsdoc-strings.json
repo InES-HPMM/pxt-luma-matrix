@@ -1,0 +1,9 @@
+{
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert": "This function allows to use custom pins for the input devices.",
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinCenterButtonTemp": "is the GPIO pin for the center button of the joystick",
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinDownButtonTemp": "is the GPIO pin for the down button of the joystick",
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinLeftButtonTemp": "is the GPIO pin for the left button of the joystick",
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinRightButtonTemp": "is the GPIO pin for the right button of the joystick",
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinSwitchTemp": "is the GPIO pin for the switch",
+  "NeoPixelMatrix.initializeMatrixInterfaceExpert|param|pinUpButtonTemp": "is the GPIO pin for the up button of the joystick"
+}
