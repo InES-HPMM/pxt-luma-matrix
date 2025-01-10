@@ -3,6 +3,7 @@
     "description": "Erweiterung für die Hardware zum LED-Matrix Workshop",
     "dependencies": {
         "core": "*",
+        "radio": "*",
         "neopixel": "github:microsoft/pxt-neopixel#v0.7.5"
     },
     "files": [
@@ -13,7 +14,8 @@
         "_locales/de/InES LED-Matrix-strings.json",
         "_locales/de/InES LED-Matrix-jsdoc-strings.json",
         "wordclock.ts",
-        "snake-game.ts"
+        "snake-game.ts",
+        "rf-messages.ts"
     ],
     "testFiles": [
         "test.ts"

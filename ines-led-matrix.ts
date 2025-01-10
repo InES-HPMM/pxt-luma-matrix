@@ -68,7 +68,7 @@ namespace Lumatrix {
     //% blockId="Debug_Enable"
     //% block="set serial debugging prints to $enable"
     //% enable.shadow="toggleOnOff"
-    //% advanced=true
+    //% advanced=true group="Debug"
     export function debugEnable(enable: boolean): void {
         debugEnabled = enable;
     }
@@ -134,7 +134,7 @@ namespace Lumatrix {
     */
     //% blockId="Matrix_InitExpert"
     //% block="initialize LED Matrix Interface (Expert). \nSwitch pin $pinSwitchTemp \nCenter button pin $pinCenterButtonTemp \nUp button pin $pinUpButtonTemp \nDown button pin $pinDownButtonTemp \nRight button pin $pinRightButtonTemp \nLeft button pin $pinLeftButtonTemp"
-    //% advanced=true
+    //% advanced=true group="Debug"
     export function initializeMatrixInterfaceExpert(
         pinSwitchTemp: DigitalPin,
         pinCenterButtonTemp: DigitalPin,
@@ -167,6 +167,7 @@ namespace Lumatrix {
         if (strip) {
             strip.clear();
             strip.show();
+            pixelBuffer.fill(0)
         }
     }
 
@@ -225,6 +226,42 @@ namespace Lumatrix {
         setPixel(x, y, color);
         strip.show();
         serialDebugMsg("setOnePixel: Pixel: " + x + "," + y + " is set to color(R,G,B): (" + R + "," + G + "," + B + ")");
+    }
+
+    //% blockId="Matrix_GetMatrixImage"
+    //% block="Get Image from Matrix"
+    //% group="Pixels" weight=106
+    export function getMatrixImage(): Image {
+        let img = images.createImage(`
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+    `); // Initialize an 8x8 image
+
+        try {
+            let imagewidth = img.width();
+            let imageheight = img.height();
+
+            for (let y = 0; y < imageheight; y++) {
+                for (let x = 0; x < imagewidth; x++) {
+                    let index = (matrixHeight - 1 - y) * matrixWidth + x;
+                    if (pixelBuffer.getUint8(3 * index + 0) || pixelBuffer.getUint8(3 * index + 1) || pixelBuffer.getUint8(3 * index + 2)) {
+                        img.setPixel(x, y, true); // Set the pixel if the bit is 1
+                    } else {
+                        img.setPixel(x, y, false); // Clear the pixel if the bit is 0
+                    }
+                }
+            }
+        } catch (e) {
+            console.log(`bufferToBitmap error: ${e}`);
+        }
+
+        return img;
     }
 
     //% blockId="Matrix_GetPixelRGB"
@@ -366,7 +403,7 @@ namespace Lumatrix {
     /* Creates thread to poll joystick direction and execute callback when direction changes. */
     //% block="Input_JoystickCallback"
     //% block="when joystick changed"
-    //% draggableParameters
+    //% draggableParameters="reporter"
     //% group="Input"
     export function joystickChangedThread(callback: (direction: number) => void): void {
         control.inBackground(() => {
@@ -608,9 +645,11 @@ namespace Lumatrix {
     }
     
 
+    
+
     //% blockId="Debug_MatrixHardware"
     //% block="Test LED matrix hardware"
-    //% advanced=true
+    //% advanced=true group="Debug"
     export function testLedMatrixHW(): void {
         let oldBrightness: number = currentBrightness
 
