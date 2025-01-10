@@ -338,15 +338,16 @@ namespace Lumatrix {
     /* Creates thread to poll switch value and execute callback when value changes. */
     //% blockId="Input_SwitchCallback"
     //% block="when switch value changed"
+    //% draggableParameters="reporter"
     //% group="Input"
-    export function switchValueChangedThread(callback: () => void): void {
+    export function switchValueChangedThread(callback: (state: boolean) => void): void {
         control.inBackground(() => {
             let currentSwitchValue = 0;
             while (true) {
                 currentSwitchValue = pins.digitalReadPin(pinSwitch);
                 if (currentSwitchValue !== lastSwitchValue) {
                     lastSwitchValue = currentSwitchValue;
-                    callback();
+                    callback(<any>currentSwitchValue)
                 }
                 basic.pause(pollingInterval);
             }
