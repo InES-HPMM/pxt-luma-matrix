@@ -190,6 +190,9 @@ namespace Lumatrix {
             if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
                 index = (matrixHeight - 1 - y) * matrixWidth + x; // (y)* 8 + x;
                 strip.setPixelColor(index, color);
+                pixelBuffer.setUint8(3 * index + 0, (color >> 16) & 0xff)
+                pixelBuffer.setUint8(3 * index + 1, (color >> 8) & 0xff)
+                pixelBuffer.setUint8(3 * index + 2, (color >> 0) & 0xff)
                 // serialDebugMsg("setPixel: set pixel(" + x + "," + y + ") to = #" + color);
             } else {
                 serialDebugMsg("setPixel: Error pixel out of range");
