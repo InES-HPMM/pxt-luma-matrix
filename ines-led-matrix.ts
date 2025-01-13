@@ -264,6 +264,49 @@ namespace Lumatrix {
         return img;
     }
 
+    //% blockId="Matrix_GetPixelBuffer"
+    //% block="Get Pixel Buffer"
+    //% group="Pixels" weight=106
+    export function getPixelBuffer(): Buffer {
+        return pixelBuffer
+    }
+
+    //% blockId="Matrix_ApplyPixelBuffer"
+    //% block="Apply Pixel Buffer $buf"
+    //% group="Pixels" weight=106
+    export function applyPixelBuffer(buf: Buffer) {
+        const dataLen = buf.length;
+
+        // Ensure buffer length is a multiple of 3
+        if (dataLen % 3 !== 0) {
+            serialDebugMsg("Error: Buffer length " + dataLen + " is not a multiple of 3.");
+            return;
+        }
+        if (dataLen < 192) {
+            serialDebugMsg("Error: Buffer length " + dataLen + " to small.");
+            return;
+        }
+
+        serialDebugMsg("Applying " + dataLen + " bytes ");
+
+        for (let i = 0; i < dataLen; i += 3) {
+            const pixelIndex = Math.floor(i / 3);
+            let x = pixelIndex % matrixWidth;
+            let y = matrixHeight - 1 - Math.floor(pixelIndex / matrixWidth);
+
+            // Safely pack the color from the buffer
+            if (i + 2 < dataLen) {
+                const r = buf.getUint8(i + 0);
+                const g = buf.getUint8(i + 1);
+                const b = buf.getUint8(i + 2);
+                const color = (r << 16) | (g << 8) | b;
+                setOnePixel(x, y, color);
+            } else {
+                serialDebugMsg("Error: Incomplete RGB triplet at buffer index " + i);
+            }
+        }
+    }
+
     //% blockId="Matrix_GetPixelRGB"
     //% block="Get Color at Pixel x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
@@ -461,11 +504,13 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_ImageStatic"
-    //% block="show image on Matrix | $image | with color $color"
+    //% block="show image on Matrix | $image | with color $color || Layer $layer"
     //% image.shadow="Image_8x8"
     //% color.shadow="colorNumberPicker"
+    //% layer.defl=true
+    //% layer.shadow="toggleOnOff"
     //% group="Pixels" weight=70
-    export function showImage(image: Image, color: number): void {
+    export function showImage(image: Image, color: number, layer?: boolean): void {
         try {
             let imagewidth = image.width();
             let imageheight = image.height();
@@ -476,6 +521,8 @@ namespace Lumatrix {
                     //serialDebugMsg("generating matrix 0");
                     if (image.pixel(x, y)) {
                         setPixel(x, y, color);
+                    } else if (layer == false){
+                        setPixel(x, y, 0x000000);
                     }
                 }
             }
