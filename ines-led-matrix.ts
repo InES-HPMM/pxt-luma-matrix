@@ -201,6 +201,17 @@ namespace Lumatrix {
         }
     }
 
+    //% blockId="Matrix_RGBToColor"
+    //% block="R: $R G: $G B: $B"
+    //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255 
+    //% group="Pixels" weight=108
+    export function rgbToColor(R: number, G: number, B: number): number {
+        R = Math.max(0, Math.min(255, R));
+        G = Math.max(0, Math.min(255, G));
+        B = Math.max(0, Math.min(255, B));
+        return neopixel.rgb(R, G, B);
+    }
+
     //% blockId="Matrix_SetPixelColor"
     //% block="set one pixel at x $x y $y to color $color"
     //% x.min=0 x.max=7 y.min=0 y.max=7
@@ -327,7 +338,7 @@ namespace Lumatrix {
     //% block="Add R: $R G: $G B: $B to pixel at x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
-    //% group="Pixels" weight=105
+    //% group="Pixels" advanced=true
     //% blockExternalInputs=true
     export function addColorToPixel(x: number, y: number, R: number, G: number, B: number) {
         let index = (matrixHeight - 1 - y) * matrixWidth + x;
@@ -343,7 +354,7 @@ namespace Lumatrix {
     //% block="Subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
-    //% group="Pixels" weight=105
+    //% group="Pixels" advanced=true
     //% blockExternalInputs=true
     export function subtractColorFromPixel(x: number, y: number, R: number, G: number, B: number) {
         let index = (matrixHeight - 1 - y) * matrixWidth + x;
