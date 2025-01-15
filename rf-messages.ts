@@ -71,7 +71,7 @@ namespace Lumatrix {
     //% color.shadow="dropdown"
     //% color.defl=eColorPalette.Yellow
     //% subcategory="Communication"
-    export function getColor(color: eColorPalette): number {
+    export function getColorPalette(color: eColorPalette): number {
         let R = predefinedPalette[color][0] << 16 
         let G = predefinedPalette[color][1] << 8 
         let B = predefinedPalette[color][2];
@@ -169,7 +169,7 @@ namespace Lumatrix {
     }
 
     //% blockId="RF_OnReceived"
-    //% block="on received"
+    //% block="on received matrix buffer"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
     export function onReceivedMatrix(callback: (dataType: number, receivedBuffer: Buffer) => void): void {
