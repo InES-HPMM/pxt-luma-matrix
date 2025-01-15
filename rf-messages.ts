@@ -15,24 +15,35 @@
  * ------------------------------------------------------------------
  */
 
-enum eDataType {
-    Unkown,
-    Bitmap,
-    RGBImage
-}
 
-enum eColors {
-    Red,
-    Green,
-    Blue,
-    Orange,
-    Yellow,
-    Violet,
-    White,
-    Black
-}
 
 namespace Lumatrix {
+
+    //% blockId="RF_DataTypeEnum" block="%dataType"
+    //% blockHidden=true
+    //% dataType.shadow="dropdown"
+    //% subcategory="Communication"
+    export enum eDataType {
+        Unkown = 0,
+        Bitmap = 1,
+        RGBImage = 2
+    }
+
+
+    //% blockId="RF_ColorsEnum" block="%color"
+    //% blockHidden=true
+    //% color.shadow="dropdown"
+    //% subcategory="Communication"
+    export enum eColorPalette {
+        Red = 0,
+        Green = 1,
+        Blue = 2,
+        Orange = 3,
+        Yellow = 4,
+        Violet = 5,
+        White = 6,
+        Black = 7
+    }
 
     const predefinedPalette = [
         [255, 0, 0],        // Red
@@ -47,11 +58,20 @@ namespace Lumatrix {
 
     let incomImgBuffer: Buffer = Buffer.create(24);
 
-
-    //% blockId=color_picker block="get color $color"
-    //% color.shadow="dropdown" color.defl=eColors.Yellow
+    //% blockId="RF_DataType" 
+    //% block="DataType $dataType"
+    //% dataType.shadow="dropdown" dataType.defl=eDataType.RGBImage
     //% subcategory="Communication"
-    export function getColor(color: eColors): number {
+    export function getDataType(dataType: eDataType): eDataType {
+        return dataType
+    }
+
+    //% blockId="RF_ColorPicker" 
+    //% block="Color Palette $color"
+    //% color.shadow="dropdown"
+    //% color.defl=eColorPalette.Yellow
+    //% subcategory="Communication"
+    export function getColor(color: eColorPalette): number {
         let R = predefinedPalette[color][0] << 16 
         let G = predefinedPalette[color][1] << 8 
         let B = predefinedPalette[color][2];
@@ -184,18 +204,28 @@ namespace Lumatrix {
         });
     }
 
-    //% blockId="RF_ParseImageWithColor"
-    //% block="parse $receivedBuffer for image with color"
+    //% blockId="RF_ParseImage"
+    //% block="parse $receivedBuffer for image"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
-    export function parseImageWithColor(receivedBuffer: Buffer): Image {
+    export function parseImage(receivedBuffer: Buffer): Image {
         let dataLen = receivedBuffer.length
         let dataType = eDataType.Unkown
 
         dataType = eDataType.Bitmap
-        let color = 0xffffff; // Default color
         let imgBuffer = receivedBuffer.slice(0, 8); // First 8 bytes for image data
         let image = bufferToBitmap(imgBuffer); // Convert to image
+
+        return image
+    }
+
+    //% blockId="RF_ParseForColor"
+    //% block="parse $receivedBuffer for color"
+    //% draggableParameters="reporter"
+    //% subcategory="Communication"
+    export function parseBufferForColor(receivedBuffer: Buffer): number {
+        let dataLen = receivedBuffer.length
+        let color = 0xffffff; // Default color
 
         // Check if there's color data
         if (receivedBuffer.length >= 11) {
@@ -205,7 +235,7 @@ namespace Lumatrix {
             color = (red << 16) | (green << 8) | blue; // Combine RGB into a single number
         }
 
-        return image
+        return color
     }
 
 
