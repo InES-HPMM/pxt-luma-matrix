@@ -21,6 +21,13 @@ Um dieses Repository in MakeCode zu bearbeiten.
 ## Übersetzung aktualisieren
 Übersetzung der Blöcke ist im Ordner `_locales/de` gespeichert. Um die Übersetzung zu aktualisieren können die entrsprechenden Dateien in MakeCode geändert werden. Bei grösseren Änderungen bzw. neu hinzugefügten Blöcken kann die [Anleitung](https://makecode.com/extensions/localization) von MakeCode verwendet werden.
 
+```shell
+# NodeJS und npm müssen installiert sein
+npm install -g pxt
+pxt target microbit
+pxt gendocs --locs
+```
+
 #### Metadaten (verwendet für Suche, Rendering)
 
 * for PXT/microbit

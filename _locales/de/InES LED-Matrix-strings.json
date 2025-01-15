@@ -56,5 +56,6 @@
   "{id:group}Clock": "Uhr",
   "{id:group}Input": "Eingabe",
   "{id:group}Pixels": "Anzeige",
+  "{id:subcategory}Communication": "Kommunikation",
   "{id:subcategory}Games": "Spiele"
 }

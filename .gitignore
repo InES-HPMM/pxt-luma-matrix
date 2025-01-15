@@ -10,3 +10,5 @@ _site
 *.tgz
 .header.json
 .simstate.json
+package-lock.json
+package.json
