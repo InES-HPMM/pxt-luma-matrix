@@ -240,7 +240,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_GetMatrixImage"
-    //% block="Get Image from Matrix"
+    //% block="get Image from Matrix"
     //% group="Pixels" weight=106
     export function getMatrixImage(): Image {
         let img = images.createImage(`
@@ -276,14 +276,14 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_GetPixelBuffer"
-    //% block="Get Pixel Buffer"
+    //% block="get Pixel Buffer"
     //% group="Pixels" weight=106
     export function getPixelBuffer(): Buffer {
         return pixelBuffer
     }
 
     //% blockId="Matrix_ApplyPixelBuffer"
-    //% block="Apply Pixel Buffer $buf"
+    //% block="apply Pixel Buffer $buf"
     //% group="Pixels" weight=106
     export function applyPixelBuffer(buf: Buffer) {
         const dataLen = buf.length;
@@ -319,7 +319,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_GetPixelRGB"
-    //% block="Get Color at Pixel x: $x y: $y"
+    //% block="get color at pixel x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% group="Pixels" weight=106
     export function getColorFromPixel(x: number, y: number): number {
@@ -335,7 +335,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_AddPixelRGB"
-    //% block="Add R: $R G: $G B: $B to pixel at x: $x y: $y"
+    //% block="add R: $R G: $G B: $B to pixel at x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" advanced=true
@@ -351,7 +351,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_SubtractPixelRGB"
-    //% block="Subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
+    //% block="subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" advanced=true
@@ -383,7 +383,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Input_SwitchReadBool"
-    //% block="Switch is set"
+    //% block="switch is set"
     //% group="Input"
     export function isSwitchSet(): boolean {
         return (pins.digitalReadPin(pinSwitch) != 0);
@@ -503,7 +503,7 @@ namespace Lumatrix {
     /**
      */
     //% blockId="Image_8x8"
-    //% block="Image 8x8"
+    //% block="image 8x8"
     //% imageLiteral=1
     //% imageLiteralColumns=8
     //% imageLiteralRows=8
@@ -707,7 +707,7 @@ namespace Lumatrix {
     
 
     //% blockId="Debug_MatrixHardware"
-    //% block="Test LED matrix hardware"
+    //% block="test LED matrix hardware"
     //% advanced=true group="Debug"
     export function testLedMatrixHW(): void {
         let oldBrightness: number = currentBrightness

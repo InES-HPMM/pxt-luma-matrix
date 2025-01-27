@@ -67,7 +67,7 @@ namespace Lumatrix {
     }
 
     //% blockId="RF_ColorPicker" 
-    //% block="Color Palette $color"
+    //% block="color Palette $color"
     //% color.shadow="dropdown"
     //% color.defl=eColorPalette.Yellow
     //% subcategory="Communication"
@@ -79,7 +79,7 @@ namespace Lumatrix {
     }
 
     //% blockId="RF_EncodeImage"
-    //% block="Bitmap $image to Buffer"
+    //% block="bitmap $image to buffer"
     //% image.shadow="Image_8x8"
     //% subcategory="Communication"
     function bitmapToBuffer(image: Image): Buffer {
@@ -106,7 +106,7 @@ namespace Lumatrix {
     }
 
     //% blockId="RF_DecodeImage"
-    //% block="Buffer $buf to Bitmap"
+    //% block="buffer $buf to bitmap"
     //% imageLiteralColumns=8
     //% imageLiteralRows=8
     //% subcategory="Communication"
@@ -145,7 +145,7 @@ namespace Lumatrix {
 
 
     //% blockId="RF_SendImage"
-    //% block="Send $image in color %color"
+    //% block="send $image in color %color"
     //% color.shadow="colorNumberPicker"
     //% image.shadow="Image_8x8"
     //% subcategory="Communication"
@@ -157,7 +157,7 @@ namespace Lumatrix {
     }
 
     //% blockId="RF_SendPixelBuffer"
-    //% block="Send compressed Pixel Buffer $buf"
+    //% block="send compressed pixel buffer $buf"
     //% buf.shadow="Matrix_GetPixelBuffer"
     export function sendPixelBuffer(buf: Buffer) {
         let compressed = compressRGB(buf)
@@ -240,7 +240,7 @@ namespace Lumatrix {
 
 
     //% blockId="RF_ParseReceivedColorImage"
-    //% block="Parse $receivedBuffer for color image"
+    //% block="parse $receivedBuffer for color image"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
     export function parseColorImage(receivedBuffer: Buffer): Buffer {
