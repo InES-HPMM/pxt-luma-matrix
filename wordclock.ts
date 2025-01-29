@@ -26,6 +26,7 @@ namespace Lumatrix {
     let wordClockDisplayUpdateInterval = 60; // in seconds
     let joystickTimeSetEnable = false;
     let icons: number[] = [0, 0, 0, 0]
+    let iconsMode: number[] = [0, 0, 0, 0]
 
     /* Function to calculate the current time, needs to be run in the background. */
     export function calculateCurrentTime(): void {
@@ -67,7 +68,7 @@ namespace Lumatrix {
     
     //% blockId="Clock_TimeGet"
     //% block="get current time"
-    //% group="Clock"
+    //% subcategory="Clock" group="Time"
     export function getCurrentTime(): number {
         let currentTimeSecondsLocal = 0;
         if (!isUpdatingTime) { // Mutex to prevent reading time while it is being calculated
@@ -82,7 +83,7 @@ namespace Lumatrix {
 
     //% blockId="Clock_TimeGetStr"
     //% block="get current time as text"
-    //% group="Clock"
+    //% subcategory="Clock" group="Time"
     export function getCurrentTimeAsText(): string {
         let currentTimeSecondsLocal = 0;
         if (!isUpdatingTime) { // Mutex to prevent reading time while it is being calculated
@@ -111,7 +112,7 @@ namespace Lumatrix {
     //% hours.min=0 hours.max=23
     //% minutes.min = 0 minutes.max = 59
     //% seconds.min = 0 seconds.max = 59
-    //% group="Clock"
+    //% subcategory="Clock" group="Time"
     export function setCurrentTime(hours: number, minutes: number, seconds: number): void {
         // Validate the input time
         if (hours < 0 || hours > 23) {
@@ -139,7 +140,7 @@ namespace Lumatrix {
 
     //% blockId="Clock_TimeSetStr"
     //% block="set current time to $timestring"
-    //% group="Clock"
+    //% subcategory="Clock" group="Time"
     export function setCurrentTimeStr(timestring: string): void {
         let data = timestring.split(":", 2)
         let hours = parseInt(data[0])
@@ -151,6 +152,7 @@ namespace Lumatrix {
     //% blockId="Clock_IconSet"
     //% block="set icon %icon to color %color"
     //% color.shadow="colorNumberPicker"
+    //% subcategory="Clock" group="Icon"
     export function setIconColor(icon: number, color: number) {
         if (!wordClock) {
             serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
@@ -160,11 +162,26 @@ namespace Lumatrix {
         wordClock.displayTime()
     }
 
+    //% blockId="Clock_IconSetMode"
+    //% block="set icon %icon to color %color with mode %mode"
+    //% color.shadow="colorNumberPicker"
+    //% subcategory="Clock" group="Icon"
+    export function setIconColorMode(icon: number, color: number, mode: number) {
+        if (!wordClock) {
+            serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
+            return
+        }
+        icons[icon] = color
+        iconsMode[icon] = mode
+        wordClock.displayTime()
+    }
+
     //% blockId="Clock_ColorsSet"
     //% block="set word colors | hour color $hourColor | minute color $minuteColor | word color $wordColor"
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
+    //% subcategory="Clock" group="Design"
     export function setWordColors(hourColor: number, minuteColor: number, wordColor: number){
         if (!wordClock) {
             serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
@@ -179,6 +196,7 @@ namespace Lumatrix {
     //% blockId="Clock_JoystickTimeSet"
     //% block="Set joystick time setting to %state"
     //% state.shadow="toggleOnOff"
+    //% subcategory="Clock" group="Behaviour"
     export function setJoystickTimeEnable(state: boolean) {
         joystickTimeSetEnable = state
     }
@@ -337,7 +355,11 @@ namespace Lumatrix {
 
             /* Set icon pixels */
             for (let y = 0; y < 4; y++) {
-                this.setClockPixels([[0,y]], icons[y])
+                if(iconsMode[y] & 0x01){
+                    this.setClockPixels([[0,y]], icons[y])
+                } else {
+                    this.setClockPixels([[0, y]], 0)
+                }
             }
 
             this._matrix.setBrightness(this.brightness);
@@ -387,7 +409,7 @@ namespace Lumatrix {
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
     //% joystickEnable.shadow="toggleOnOff" joystickEnable.defl=true
-    //% group="Clock"
+    //% subcategory="Clock" group="Time"
     export function createWordClock(version: eMatrixVersion, hourColor: number, minuteColor: number, wordColor: number, joystickEnable?: boolean): void {
         wordClock = new WordClock(version, hourColor, minuteColor, wordColor);
         basic.pause(100);
