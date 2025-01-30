@@ -138,17 +138,53 @@ namespace LumaMatrix {
         wordClock.displayTime()
     }
 
+
+    /**
+     * Set internal time to new value
+     * @param timestring is in format "hh:mm:ss"
+    */
     //% blockId="Clock_TimeSetStr"
     //% block="set current time to $timestring"
     //% subcategory="Clock" group="Time"
     export function setCurrentTimeStr(timestring: string): void {
-        let data = timestring.split(":", 2)
-        let hours = parseInt(data[0])
-        let minutes = parseInt(data[1])
-        let seconds = parseInt(data[2])
-        setCurrentTime(hours, minutes, seconds)
+        try {
+            let data = timestring.split(":", 2)
+            let hours = parseInt(data[0])
+            let minutes = parseInt(data[1])
+            let seconds = parseInt(data[2])
+            setCurrentTime(hours, minutes, seconds)
+        } catch {
+            serialDebugMsg("setCurrentTimeStr: wrong format")
+        }
     }
 
+    /**
+     * Clear icon
+     * @param icon is number of icon [0..3]. Others will clear all
+    */
+    //% blockId="Clock_IconClear"
+    //% block="clear icon || %icon
+    //% icon.defl=-1
+    //% subcategory="Clock" group="Icon"
+    export function clearIcon(icon?: number) {
+        if (!wordClock) {
+            serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
+            return
+        }
+        if(icon >= 0 && icon <4){
+            icons[icon] = 0
+        } else {
+            for(let i=0; i<4; i++){
+                icons[i] = 0
+            }
+        }
+        wordClock.displayTime()
+    }
+
+    /**
+     * Set an icon to a specified color
+     * @param icon is number of icon [0..3]
+    */
     //% blockId="Clock_IconSet"
     //% block="set icon %icon to color %color"
     //% color.shadow="colorNumberPicker"
@@ -158,23 +194,17 @@ namespace LumaMatrix {
             serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
             return
         }
-        icons[icon] = color
+        if (icon >= 0 && icon < 4){
+            icons[icon] = color
+        } else {
+            for(let i=0; i<4; i++){
+                icons[i] = color
+            }
+        }
+        
         wordClock.displayTime()
     }
 
-    //% blockId="Clock_IconSetMode"
-    //% block="set icon %icon to color %color with mode %mode"
-    //% color.shadow="colorNumberPicker"
-    //% subcategory="Clock" group="Icon"
-    export function setIconColorMode(icon: number, color: number, mode: number) {
-        if (!wordClock) {
-            serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
-            return
-        }
-        icons[icon] = color
-        iconsMode[icon] = mode
-        wordClock.displayTime()
-    }
 
     //% blockId="Clock_ColorsSet"
     //% block="set word colors | hour color $hourColor | minute color $minuteColor | word color $wordColor"
@@ -193,6 +223,11 @@ namespace LumaMatrix {
         wordClock.displayTime()
     }
 
+
+    /**
+     * Enable time setting with joystick. Up/Down for hours and Left/Right for minutes
+     * @param state if true enables the joystick
+    */
     //% blockId="Clock_JoystickTimeSet"
     //% block="Set joystick time setting to %state"
     //% state.shadow="toggleOnOff"
@@ -355,11 +390,7 @@ namespace LumaMatrix {
 
             /* Set icon pixels */
             for (let y = 0; y < 4; y++) {
-                if(iconsMode[y] & 0x01){
-                    this.setClockPixels([[0,y]], icons[y])
-                } else {
-                    this.setClockPixels([[0, y]], 0)
-                }
+                this.setClockPixels([[0,y]], icons[y])
             }
 
             this._matrix.setBrightness(this.brightness);
