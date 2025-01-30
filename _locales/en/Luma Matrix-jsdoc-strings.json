@@ -1,9 +1,17 @@
 {
+  "LumaMatrix.clearIcon": "Clear icon",
+  "LumaMatrix.clearIcon|param|icon": "is number of icon [0..3]. Others will clear all",
   "LumaMatrix.initializeMatrixInterfaceExpert": "This function allows to use custom pins for the input devices.",
   "LumaMatrix.initializeMatrixInterfaceExpert|param|pinCenterButtonTemp": "is the GPIO pin for the center button of the joystick",
   "LumaMatrix.initializeMatrixInterfaceExpert|param|pinDownButtonTemp": "is the GPIO pin for the down button of the joystick",
   "LumaMatrix.initializeMatrixInterfaceExpert|param|pinLeftButtonTemp": "is the GPIO pin for the left button of the joystick",
   "LumaMatrix.initializeMatrixInterfaceExpert|param|pinRightButtonTemp": "is the GPIO pin for the right button of the joystick",
   "LumaMatrix.initializeMatrixInterfaceExpert|param|pinSwitchTemp": "is the GPIO pin for the switch",
-  "LumaMatrix.initializeMatrixInterfaceExpert|param|pinUpButtonTemp": "is the GPIO pin for the up button of the joystick"
+  "LumaMatrix.initializeMatrixInterfaceExpert|param|pinUpButtonTemp": "is the GPIO pin for the up button of the joystick",
+  "LumaMatrix.setCurrentTimeStr": "Set internal time to new value",
+  "LumaMatrix.setCurrentTimeStr|param|timestring": "is in format \"hh:mm:ss\"",
+  "LumaMatrix.setIconColor": "Set an icon to a specified color",
+  "LumaMatrix.setIconColor|param|icon": "is number of icon [0..3]",
+  "LumaMatrix.setJoystickTimeEnable": "Enable time setting with joystick. Up/Down for hours and Left/Right for minutes",
+  "LumaMatrix.setJoystickTimeEnable|param|state": "if true enables the joystick"
 }
