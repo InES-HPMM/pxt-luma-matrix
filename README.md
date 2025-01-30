@@ -13,16 +13,16 @@ This repository can be added as an **extension** in MakeCode.
 ## Initialize Matrix
 The matrix must be initialized at the beginning of every program. There is a block for this:
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 135)
+LumaMatrix.initializeMatrix(DigitalPin.P0, 135)
 
 ```
 
 Example
 The available blocks can display images and text, as well as control individual pixels.
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 135)
-Lumatrix.scrollText("LUMATRIX", 0xff00FF, 90)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+LumaMatrix.initializeMatrix(DigitalPin.P0, 135)
+LumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
+LumaMatrix.showImage(LumaMatrix.matrix8x8(`
     . . . . . . . .
     . # # . . # # .
     . # # . . # # .

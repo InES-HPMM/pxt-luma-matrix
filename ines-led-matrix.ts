@@ -16,8 +16,8 @@
  */
 
 
-//% color=#3162a3 icon="\uf00a" block="Lumatrix"
-namespace Lumatrix {
+//% color=#3162a3 icon="\uf00a" block="Luma Matrix"
+namespace LumaMatrix {
 
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
@@ -93,7 +93,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_Init"
-    //% block="initialize Lumatrix with pin $pin and brightness $brightness"
+    //% block="initialize Luma Matrix with pin $pin and brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=120
     export function initializeMatrix(pin: DigitalPin = DigitalPin.P0, brightness: number): void {

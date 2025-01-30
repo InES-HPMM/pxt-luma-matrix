@@ -1,7 +1,7 @@
 {
-    "name": "InES LED-Matrix",
+    "name": "Luma Matrix",
     "version": "1.0.1",
-    "description": "Erweiterung für die Hardware zum LED-Matrix Workshop",
+    "description": "Extension for the LED-Matrix Workshop at ZHAW",
     "dependencies": {
         "core": "*",
         "radio": "*",
@@ -17,8 +17,7 @@
         "wordclock.ts",
         "snake-game.ts",
         "rf-messages.ts",
-        "tutorial-info-cache.json",
-        "_locales/de/README.md"
+        "tutorial-info-cache.json"
     ],
     "testFiles": [
         "test.ts"

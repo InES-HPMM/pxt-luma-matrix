@@ -14,7 +14,7 @@
  * --
  * ------------------------------------------------------------------
  */
-namespace Lumatrix {
+namespace LumaMatrix {
 
     const startTime = control.millis();
     let currentTimeSeconds: number = 0;
