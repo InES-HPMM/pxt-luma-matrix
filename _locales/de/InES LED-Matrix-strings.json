@@ -6,7 +6,7 @@
   "LumaMatrix.getCurrentTimeAsText|block": "Aktuelle Zeit als Text",
   "LumaMatrix.getCurrentTime|block": "Aktuelle Zeit in Sekunden",
   "LumaMatrix.initializeMatrixInterfaceExpert|block": "Initialisiere Luma Matrix Interface (Expert). \nSchalter-Pin $pinSwitchTemp \nMittel-Taste Pin $pinCenterButtonTemp \nHoch-Taste Pin $pinUpButtonTemp \nRunter-Taste Pin $pinDownButtonTemp \nRechts-Taste Pin $pinRightButtonTemp \nLinks-Taste Pin $pinLeftButtonTemp",
-  "LumaMatrix.initializeMatrix|block": "Initialisiere Luma Matrix an Pin $pin mit Helligkeit $brightness",
+  "LumaMatrix.initializeMatrix|block": "Initialisiere Luma Matrix mit Helligkeit $brightness",
   "LumaMatrix.isSwitchSet|block": "Ist der Schalter ein?",
   "LumaMatrix.joystickChangedThread|block": "Wenn Joystick geändert",
   "LumaMatrix.joystickDirectionThread|block": "Wenn Joystick richtung: %direction",
