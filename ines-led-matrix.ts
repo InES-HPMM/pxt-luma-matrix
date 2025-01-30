@@ -25,6 +25,7 @@ namespace LumaMatrix {
     let matrixHeight = 8; // y
     export let currentBrightness = 100; // 0 to 255
     export let pollingInterval = 10 // 10ms Interval for polling LED Matrix Interface. Adjust the polling interval as needed.
+    let pinNeopixels: DigitalPin = DigitalPin.P0;
     let pinSwitch: DigitalPin = DigitalPin.P1;
     let pinCenterButton: DigitalPin = DigitalPin.P2;
     let pinUpButton: DigitalPin = DigitalPin.P9;
@@ -93,15 +94,15 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_Init"
-    //% block="initialize Luma Matrix with pin $pin and brightness $brightness"
+    //% block="initialize Luma Matrix with brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=120
-    export function initializeMatrix(pin: DigitalPin = DigitalPin.P0, brightness: number): void {
+    export function initializeMatrix(brightness: number): void {
         serial.setBaudRate(BaudRate.BaudRate115200)
         serial.redirectToUSB();
 
         currentBrightness = brightness;
-        strip = neopixel.create(pin, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+        strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
         strip.setBrightness(brightness);
         clear();
         initializeMatrixInterface();
@@ -110,7 +111,7 @@ namespace LumaMatrix {
                 calculateCurrentTime();
             }
         });
-        serialDebugMsg("initializeMatrix: Matrix init on pin: " + pin + " with brightness: " + brightness);
+        serialDebugMsg("initializeMatrix: Matrix init on pin: " + pinNeopixels + " with brightness: " + brightness);
     }
 
     function initializeMatrixInterface(): void {

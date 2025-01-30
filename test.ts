@@ -18,7 +18,7 @@
 
 
 LumaMatrix.debugEnable(true)
-LumaMatrix.initializeMatrix(DigitalPin.P0, 135)
+LumaMatrix.initializeMatrix(135)
 LumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
 LumaMatrix.showImage(LumaMatrix.matrix8x8(`
     . . . . . . . .
