@@ -14,7 +14,7 @@
  * --
  * ------------------------------------------------------------------
  */
-namespace Lumatrix {
+namespace LumaMatrix {
 
     //% blockId="Game_Snake"
     //% block="Snake Game"

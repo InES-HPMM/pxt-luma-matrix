@@ -1,6 +1,7 @@
 {
-    "name": "InES LED-Matrix",
-    "description": "Erweiterung für die Hardware zum LED-Matrix Workshop",
+    "name": "Luma Matrix",
+    "version": "0.0.2",
+    "description": "Extension for the LED-Matrix Workshop at ZHAW",
     "dependencies": {
         "core": "*",
         "radio": "*",
@@ -11,8 +12,8 @@
         "ines-led-matrix.ts",
         "enums.ts",
         "matrix-lut.ts",
-        "_locales/de/InES LED-Matrix-strings.json",
-        "_locales/de/InES LED-Matrix-jsdoc-strings.json",
+        "_locales/de/Luma Matrix-strings.json",
+        "_locales/de/Luma Matrix-jsdoc-strings.json",
         "wordclock.ts",
         "snake-game.ts",
         "rf-messages.ts"
@@ -28,6 +29,7 @@
         "microbit"
     ],
     "preferredEditor": "tsprj",
+    "icon": "icon.png",
     "disablesVariants": [
         "mbdal"
     ]

@@ -17,10 +17,10 @@
  */
 
 
-Lumatrix.debugEnable(true)
-Lumatrix.initializeMatrix(DigitalPin.P0, 135)
-Lumatrix.scrollText("LUMATRIX", 0xff00FF, 90)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+LumaMatrix.debugEnable(true)
+LumaMatrix.initializeMatrix(135)
+LumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
+LumaMatrix.showImage(LumaMatrix.matrix8x8(`
     . . . . . . . .
     . # # . . # # .
     . # # . . # # .
@@ -31,10 +31,10 @@ Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . . . . . . .
     `), 0xffff00)
 basic.pause(2000)
-Lumatrix.createWordClock(eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
-Lumatrix.setCurrentTime(15, 33, 0)
+LumaMatrix.createWordClock(eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
+LumaMatrix.setCurrentTime(15, 33, 0)
 
 while (true) {
     basic.pause(5000)
-    serial.writeLine(Lumatrix.getCurrentTimeAsText())
+    serial.writeLine(LumaMatrix.getCurrentTimeAsText())
 }

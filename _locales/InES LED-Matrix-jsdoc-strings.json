@@ -1,9 +1,0 @@
-{
-  "Lumatrix.initializeMatrixInterfaceExpert": "This function allows to use custom pins for the input devices.",
-  "Lumatrix.initializeMatrixInterfaceExpert|param|pinCenterButtonTemp": "is the GPIO pin for the center button of the joystick",
-  "Lumatrix.initializeMatrixInterfaceExpert|param|pinDownButtonTemp": "is the GPIO pin for the down button of the joystick",
-  "Lumatrix.initializeMatrixInterfaceExpert|param|pinLeftButtonTemp": "is the GPIO pin for the left button of the joystick",
-  "Lumatrix.initializeMatrixInterfaceExpert|param|pinRightButtonTemp": "is the GPIO pin for the right button of the joystick",
-  "Lumatrix.initializeMatrixInterfaceExpert|param|pinSwitchTemp": "is the GPIO pin for the switch",
-  "Lumatrix.initializeMatrixInterfaceExpert|param|pinUpButtonTemp": "is the GPIO pin for the up button of the joystick"
-}

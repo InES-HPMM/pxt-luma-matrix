@@ -16,8 +16,8 @@
  */
 
 
-//% color=#3162a3 icon="\uf00a" block="Lumatrix"
-namespace Lumatrix {
+//% color=#3162a3 icon="\uf00a" block="Luma Matrix"
+namespace LumaMatrix {
 
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
@@ -25,6 +25,7 @@ namespace Lumatrix {
     let matrixHeight = 8; // y
     export let currentBrightness = 100; // 0 to 255
     export let pollingInterval = 10 // 10ms Interval for polling LED Matrix Interface. Adjust the polling interval as needed.
+    let pinNeopixels: DigitalPin = DigitalPin.P0;
     let pinSwitch: DigitalPin = DigitalPin.P1;
     let pinCenterButton: DigitalPin = DigitalPin.P2;
     let pinUpButton: DigitalPin = DigitalPin.P9;
@@ -93,15 +94,15 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_Init"
-    //% block="initialize Lumatrix with pin $pin and brightness $brightness"
+    //% block="initialize Luma Matrix with brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=120
-    export function initializeMatrix(pin: DigitalPin = DigitalPin.P0, brightness: number): void {
+    export function initializeMatrix(brightness: number): void {
         serial.setBaudRate(BaudRate.BaudRate115200)
         serial.redirectToUSB();
 
         currentBrightness = brightness;
-        strip = neopixel.create(pin, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+        strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
         strip.setBrightness(brightness);
         clear();
         initializeMatrixInterface();
@@ -110,7 +111,7 @@ namespace Lumatrix {
                 calculateCurrentTime();
             }
         });
-        serialDebugMsg("initializeMatrix: Matrix init on pin: " + pin + " with brightness: " + brightness);
+        serialDebugMsg("initializeMatrix: Matrix init on pin: " + pinNeopixels + " with brightness: " + brightness);
     }
 
     function initializeMatrixInterface(): void {
@@ -240,7 +241,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_GetMatrixImage"
-    //% block="Get Image from Matrix"
+    //% block="get Image from Matrix"
     //% group="Pixels" weight=106
     export function getMatrixImage(): Image {
         let img = images.createImage(`
@@ -276,14 +277,14 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_GetPixelBuffer"
-    //% block="Get Pixel Buffer"
+    //% block="get Pixel Buffer"
     //% group="Pixels" weight=106
     export function getPixelBuffer(): Buffer {
         return pixelBuffer
     }
 
     //% blockId="Matrix_ApplyPixelBuffer"
-    //% block="Apply Pixel Buffer $buf"
+    //% block="apply Pixel Buffer $buf"
     //% group="Pixels" weight=106
     export function applyPixelBuffer(buf: Buffer) {
         const dataLen = buf.length;
@@ -319,7 +320,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_GetPixelRGB"
-    //% block="Get Color at Pixel x: $x y: $y"
+    //% block="get color at pixel x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% group="Pixels" weight=106
     export function getColorFromPixel(x: number, y: number): number {
@@ -335,7 +336,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_AddPixelRGB"
-    //% block="Add R: $R G: $G B: $B to pixel at x: $x y: $y"
+    //% block="add R: $R G: $G B: $B to pixel at x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" advanced=true
@@ -351,7 +352,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Matrix_SubtractPixelRGB"
-    //% block="Subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
+    //% block="subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" advanced=true
@@ -383,7 +384,7 @@ namespace Lumatrix {
     }
 
     //% blockId="Input_SwitchReadBool"
-    //% block="Switch is set"
+    //% block="switch is set"
     //% group="Input"
     export function isSwitchSet(): boolean {
         return (pins.digitalReadPin(pinSwitch) != 0);
@@ -511,7 +512,7 @@ namespace Lumatrix {
     /**
      */
     //% blockId="Image_8x8"
-    //% block="Image 8x8"
+    //% block="image 8x8"
     //% imageLiteral=1
     //% imageLiteralColumns=8
     //% imageLiteralRows=8
@@ -715,7 +716,7 @@ namespace Lumatrix {
     
 
     //% blockId="Debug_MatrixHardware"
-    //% block="Test LED matrix hardware"
+    //% block="test LED matrix hardware"
     //% advanced=true group="Debug"
     export function testLedMatrixHW(): void {
         let oldBrightness: number = currentBrightness

@@ -1,0 +1,9 @@
+{
+    "LumaMatrix.initializeMatrixInterfaceExpert": "Diese Funktion initialisiert die Matrix mit den angegebenen Pins für joystick und den Schalter.",
+    "LumaMatrix.initializeMatrixInterfaceExpert|param|pinCenterButtonTemp": "ist der GPIO-Pin für den Mittelknopf des Joysticks",
+    "LumaMatrix.initializeMatrixInterfaceExpert|param|pinDownButtonTemp": "ist der GPIO-Pin für den Knopf nach unten des Joysticks",
+    "LumaMatrix.initializeMatrixInterfaceExpert|param|pinLeftButtonTemp": "ist der GPIO-Pin für den Knopf nach links des Joysticks",
+    "LumaMatrix.initializeMatrixInterfaceExpert|param|pinRightButtonTemp": "ist der GPIO-Pin für den Knopf nach rechts des Joysticks",
+    "LumaMatrix.initializeMatrixInterfaceExpert|param|pinSwitchTemp": "ist der GPIO-Pin für den Schalter",
+    "LumaMatrix.initializeMatrixInterfaceExpert|param|pinUpButtonTemp": "ist der GPIO-Pin für den Knopf nach oben des Joysticks"
+}
