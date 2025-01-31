@@ -1,5 +1,5 @@
 {
-  "LumaMatrix.clearIcon|block": "Löschen",
+  "LumaMatrix.clearIcon|block": "Lösche Icon || %icon",
   "LumaMatrix.clear|block": "Matrix löschen",
   "LumaMatrix.compareJoystick|block": "$joystick == $direction",
   "LumaMatrix.createWordClock|block": "Erstelle Word Clock Version $version Stunden-Farbe $hourColor Minuten-Farbe $minuteColor Wörter-Farbe $wordColor",

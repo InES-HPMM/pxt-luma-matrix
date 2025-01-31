@@ -1,7 +1,7 @@
 {
   "LumaMatrix.addColorToPixel|block": "add R: $R G: $G B: $B to pixel at x: $x y: $y",
   "LumaMatrix.applyPixelBuffer|block": "apply Pixel Buffer $buf",
-  "LumaMatrix.clearIcon|block": "clear",
+  "LumaMatrix.clearIcon|block": "clear icon || %icon",
   "LumaMatrix.clear|block": "clear Matrix",
   "LumaMatrix.compareJoystick|block": "$joystick == $direction",
   "LumaMatrix.createWordClock|block": "create word clock version $version hour color $hourColor minute color $minuteColor word color $wordColor || Set time with joystick %joystickEnable",

@@ -13,5 +13,11 @@
     "LumaMatrix.setIconColor": "Setze die Farbe des angegebenen Icons",
     "LumaMatrix.setIconColor|param|icon": "ist die Nummer des Icons [0..3]. Andere Werte setzen die Farbe aller Icons",
     "LumaMatrix.setJoystickTimeEnable": "Aktiviert oder deaktiviert die Joystick-Zeitsteuerung. Rauf/Runter ändert die Stunden, Links/Rechts ändert die Minuten",
-    "LumaMatrix.setJoystickTimeEnable|param|state": "ist true, um die Joystick-Zeitsteuerung zu aktivieren"
+    "LumaMatrix.setJoystickTimeEnable|param|state": "ist true, um die Joystick-Zeitsteuerung zu aktivieren",
+    "LumaMatrix.getCurrentTime": "Lese die aktuelle Zeit.\r\n@returns {number} aktuelle Zeit in Sekunden, bei Fehler 0.",
+    "LumaMatrix.getCurrentTimeAsText": "Lese die aktuelle Zeit als String \"hh:mm:ss\".\r\n@returns {string} aktuelle Zeit im \"hh:mm:ss\" Format.",
+    "LumaMatrix.setCurrentTime": "Setze interne Zeit auf neuen Wert",
+    "LumaMatrix.setCurrentTime|param|hours": "Zahl von 0 bis 23",
+    "LumaMatrix.setCurrentTime|param|minutes": "Zahl von 0 bis 59",
+    "LumaMatrix.setCurrentTime|param|seconds": "Zahl von 0 bis 59"
 }

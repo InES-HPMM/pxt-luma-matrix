@@ -170,7 +170,7 @@ namespace LumaMatrix {
      * @param icon is number of icon [0..3]. Others will clear all
     */
     //% blockId="Clock_IconClear"
-    //% block="clear icon || %icon
+    //% block="clear icon || %icon"
     //% icon.defl=-1
     //% subcategory="Clock" group="Icon"
     export function clearIcon(icon?: number) {
