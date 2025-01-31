@@ -26,7 +26,6 @@ namespace LumaMatrix {
     let wordClockDisplayUpdateInterval = 60; // in seconds
     let joystickTimeSetEnable = false;
     let icons: number[] = [0, 0, 0, 0]
-    let iconsMode: number[] = [0, 0, 0, 0]
 
     /* Function to calculate the current time, needs to be run in the background. */
     export function calculateCurrentTime(): void {
@@ -57,8 +56,6 @@ namespace LumaMatrix {
         const currentTime = control.millis();
         const delay = targetTime - currentTime;
 
-        // serialDebugMsg("sleepUntil: Current time: " + currentTime + " ms Target time: " + targetTime + " ms Delay: " + delay + " ms");
-
         if (delay <= 0) {
             /* If the target time is in the past or now, call the callback immediately. */
         } else {
@@ -66,6 +63,10 @@ namespace LumaMatrix {
         }
     }
     
+    /**
+    * Get the current time in seconds.
+    * @returns {number} The current time in seconds, 0 otherwise.
+    */
     //% blockId="Clock_TimeGet"
     //% block="get current time"
     //% subcategory="Clock" group="Time"
@@ -77,10 +78,15 @@ namespace LumaMatrix {
             isUpdatingTime = false;
         } else {
             serialDebugMsg("getCurrentTime: Time is being updated, please try again later.");
+            return 0
         }
         return currentTimeSecondsLocal;
     }
 
+    /**
+    * Get the current time as a formatted string in "hh:mm:ss".
+    * @returns {string} The current time in "hh:mm:ss" format.
+    */
     //% blockId="Clock_TimeGetStr"
     //% block="get current time as text"
     //% subcategory="Clock" group="Time"
@@ -97,16 +103,15 @@ namespace LumaMatrix {
         let minutes = Math.floor((currentTimeSecondsLocal % 3600) / 60);
         let seconds = currentTimeSecondsLocal % 60;
 
-        /* return the time as a 2D array of numbers. */
-        // return [
-        //     [hours],
-        //     [minutes],
-        //     [seconds]
-        // ];
         return `${hours}:${minutes}:${seconds}`; // return the time as a string
     }
 
-    /* TODO Bug in block no switch for setting time, only works with variables. */
+    /** 
+     * Set internal time to new value
+     * @param hours is number from 0 to 23
+     * @param minutes is number from 0 to 59
+     * @param seconds is number from 0 to 59
+    */
     //% blockId="Clock_TimeSet"
     //% block="set current time to $hours:$minutes:$seconds"
     //% hours.min=0 hours.max=23
@@ -114,6 +119,7 @@ namespace LumaMatrix {
     //% seconds.min = 0 seconds.max = 59
     //% subcategory="Clock" group="Time"
     export function setCurrentTime(hours: number, minutes: number, seconds: number): void {
+        // TODO Bug in block no switch for setting time, only works with variables
         // Validate the input time
         if (hours < 0 || hours > 23) {
             serialDebugMsg("Invalid hours. Must be between 0 and 23.");
@@ -123,7 +129,7 @@ namespace LumaMatrix {
             serialDebugMsg("Invalid seconds. Must be between 0 and 59.");
         } else {
             if (!isUpdatingTime) { // Mutex to prevent updating time while it is being calculated
-                /* Calculate the curet time in seconds. */
+                // Calculate the curet time in seconds.
                 // serialDebugMsg(`setCurrentTime: Current time is ${currentTimeSeconds}`);
                 isUpdatingTime = true;
                 currentTimeSeconds = hours * 3600 + minutes * 60 + seconds;
@@ -148,10 +154,11 @@ namespace LumaMatrix {
     //% subcategory="Clock" group="Time"
     export function setCurrentTimeStr(timestring: string): void {
         try {
-            let data = timestring.split(":", 2)
-            let hours = parseInt(data[0])
-            let minutes = parseInt(data[1])
-            let seconds = parseInt(data[2])
+            let data = timestring.split(":", 3)
+            serialDebugMsg("setCurrentTimeStr: " + data[0] + data[1] + data[2])
+            let hours = parseInt(data[0]) || 0
+            let minutes = parseInt(data[1]) || 0
+            let seconds = parseInt(data[2]) || 0
             setCurrentTime(hours, minutes, seconds)
         } catch {
             serialDebugMsg("setCurrentTimeStr: wrong format")
@@ -180,6 +187,7 @@ namespace LumaMatrix {
         }
         wordClock.displayTime()
     }
+
 
     /**
      * Set an icon to a specified color
