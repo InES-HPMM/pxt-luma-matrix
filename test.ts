@@ -31,7 +31,7 @@ lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     . . . . . . . .
     `), 0xffff00)
 basic.pause(2000)
-lumaMatrix.createWordClock(eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
+lumaMatrix.createWordClock(lumaMatrix.eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
 lumaMatrix.setCurrentTime(15, 33, 0)
 
 while (true) {
