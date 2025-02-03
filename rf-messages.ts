@@ -19,6 +19,9 @@
 
 namespace lumaMatrix {
 
+    /**
+     * Enum with predefined datatypes in messages sent over radio
+     */
     //% blockId="RF_DataTypeEnum" block="%dataType"
     //% blockHidden=true
     //% dataType.shadow="dropdown"
@@ -32,7 +35,9 @@ namespace lumaMatrix {
         RGBImage = 2
     }
 
-
+    /**
+     * Enum with predefined colours to reduce packet size over radio
+     */
     //% blockId="RF_ColorsEnum" block="%color"
     //% blockHidden=true
     //% color.shadow="dropdown"
@@ -69,6 +74,9 @@ namespace lumaMatrix {
 
     let incomImgBuffer: Buffer = Buffer.create(24);
 
+    /**
+     * Get element from enum with predefined datatypes in messages sent over radio
+     */
     //% blockId="RF_DataType" 
     //% block="datatype $dataType"
     //% dataType.shadow="dropdown" dataType.defl=eDataType.RGBImage
@@ -77,6 +85,9 @@ namespace lumaMatrix {
         return dataType
     }
 
+    /**
+     * Get element from enum with predefined colours to reduce packet size over radio
+     */
     //% blockId="RF_ColorPicker" 
     //% block="color palette $color"
     //% color.shadow="dropdown"
@@ -89,6 +100,9 @@ namespace lumaMatrix {
         return (R | G | B)
     }
 
+    /**
+     * Encode a bitmap into a buffer which can be transmitted over radio
+     */
     //% blockId="RF_EncodeImage"
     //% block="bitmap $image to buffer"
     //% image.shadow="Image_8x8"
@@ -116,6 +130,9 @@ namespace lumaMatrix {
         return imgBuffer;
     }
 
+    /**
+     * Decode a received buffer back into a bitmap
+     */
     //% blockId="RF_DecodeImage"
     //% block="buffer $buf to bitmap"
     //% imageLiteralColumns=8
@@ -155,6 +172,9 @@ namespace lumaMatrix {
     }
 
 
+    /**
+     * Send bitmap in single colour to other Luma Matrix over radio. Radio channel needs to be set in advance
+     */
     //% blockId="RF_SendImage"
     //% block="send $image in color %color"
     //% color.shadow="colorNumberPicker"
@@ -167,6 +187,10 @@ namespace lumaMatrix {
         radio.sendBuffer(packagedBuffer)
     }
 
+
+    /**
+     * Send compressed pixel buffer in colors of pallette to other Luma Matrix over radio. Radio channel needs to be set in advance
+     */
     //% blockId="RF_SendPixelBuffer"
     //% block="send compressed pixel buffer $buf"
     //% buf.shadow="Matrix_GetPixelBuffer"
@@ -179,6 +203,10 @@ namespace lumaMatrix {
         radio.sendBuffer(lower)
     }
 
+
+    /**
+     * Listen on incomming radio messages from other Luma Matrix. Radio channel needs to be set in advance
+     */
     //% blockId="RF_OnReceived"
     //% block="on received matrix buffer"
     //% draggableParameters="reporter"
@@ -215,6 +243,10 @@ namespace lumaMatrix {
         });
     }
 
+
+    /**
+     * Parse received message for image
+     */
     //% blockId="RF_ParseImage"
     //% block="image from $receivedBuffer"
     //% draggableParameters="reporter"
@@ -230,6 +262,10 @@ namespace lumaMatrix {
         return image
     }
 
+
+    /**
+     * Parse received message for colour
+     */
     //% blockId="RF_ParseForColor"
     //% block="color from $receivedBuffer"
     //% draggableParameters="reporter"
@@ -250,6 +286,9 @@ namespace lumaMatrix {
     }
 
 
+    /**
+     * Parse received message for coloured image
+     */
     //% blockId="RF_ParseReceivedColorImage"
     //% block="color image from $receivedBuffer"
     //% draggableParameters="reporter"
@@ -293,6 +332,7 @@ namespace lumaMatrix {
 
         return compressed;
     }
+
 
     // Function to decompress a buffer of 24 bytes back to 192 bytes
     function decompressRGB(buffer: Buffer): Buffer {

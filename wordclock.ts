@@ -64,8 +64,7 @@ namespace lumaMatrix {
     }
     
     /**
-    * Get the current time in seconds.
-    * @returns The current time in seconds, 0 otherwise.
+    * Get the current time in seconds, 0 if currently unavailable.
     */
     //% blockId="Clock_TimeGet"
     //% block="current time"
@@ -85,7 +84,6 @@ namespace lumaMatrix {
 
     /**
     * Get the current time as a formatted string in "hh:mm:ss".
-    * @returns The current time in "hh:mm:ss" format.
     */
     //% blockId="Clock_TimeGetStr"
     //% block="current time as text"
@@ -103,7 +101,7 @@ namespace lumaMatrix {
         let minutes = Math.floor((currentTimeSecondsLocal % 3600) / 60);
         let seconds = currentTimeSecondsLocal % 60;
 
-        return `${hours}:${minutes}:${seconds}`; // return the time as a string
+        return `${hours}:${minutes}:${seconds}`;
     }
 
     /** 
@@ -213,7 +211,9 @@ namespace lumaMatrix {
         wordClock.displayTime()
     }
 
-
+    /**
+     * Set colours of the words to new values
+     */
     //% blockId="Clock_ColorsSet"
     //% block="set word colors | hour color $hourColor | minute color $minuteColor | word color $wordColor"
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
@@ -440,7 +440,11 @@ namespace lumaMatrix {
         }
     }
 
-    /* Not if this block is used with the control.inBackground block, it will not work #BUG */
+
+    /**
+     * Initialize Word Clock with given colours. Time will be tracked and pixels on the matrix updated in background.
+     * Optional joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
+     */
     //% blockId="Clock_CreateWordClock"
     //% block="create word clock version $version hour color $hourColor minute color $minuteColor word color $wordColor || Set time with joystick %joystickEnable"
     //% version.defl=eMatrixVersion.V1
@@ -449,6 +453,7 @@ namespace lumaMatrix {
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
     //% joystickEnable.shadow="toggleOnOff" joystickEnable.defl=true
     //% subcategory="Clock" group="Time"
+    // Not if this block is used with the control.inBackground block, it will not work #BUG 
     export function createWordClock(version: eMatrixVersion, hourColor: number, minuteColor: number, wordColor: number, joystickEnable?: boolean): void {
         wordClock = new WordClock(version, hourColor, minuteColor, wordColor);
         basic.pause(100);

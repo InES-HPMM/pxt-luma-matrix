@@ -99,7 +99,7 @@ namespace lumaMatrix {
     /**
      * Initialize the 8 by 8 Neopixel Matrix with a joystick. 
      * This block needs to be execute only once at the start.
-    */
+     */
     //% blockId="Matrix_Init"
     //% block="initialize Luma Matrix with brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
@@ -141,7 +141,7 @@ namespace lumaMatrix {
      * @param pinDownButtonTemp is the GPIO pin for the down button of the joystick
      * @param pinRightButtonTemp is the GPIO pin for the right button of the joystick
      * @param pinLeftButtonTemp is the GPIO pin for the left button of the joystick
-    */
+     */
     //% blockId="Matrix_InitExpert"
     //% block="initialize LED Matrix Interface (Expert). \nSwitch pin $pinSwitchTemp \nCenter button pin $pinCenterButtonTemp \nUp button pin $pinUpButtonTemp \nDown button pin $pinDownButtonTemp \nRight button pin $pinRightButtonTemp \nLeft button pin $pinLeftButtonTemp"
     //% advanced=true group="Debug"
@@ -170,6 +170,9 @@ namespace lumaMatrix {
         serialDebugMsg("initializeMatrixInterface: pinSwitch: " + pinSwitch + ", pinCenterButton:" + pinCenterButton + ", pinUpButton: " + pinUpButton + ", pinDownButton: " + pinDownButton + ", pinRightButton:" + pinRightButton + ", pinLeftButton: " + pinLeftButton);
     }
 
+    /**
+     * Clear the pixels of the Luma Matrix
+     */
     //% blockId="Matrix_Clear"
     //% block="clear matrix"
     //% group="Pixels" weight=110
@@ -181,6 +184,9 @@ namespace lumaMatrix {
         }
     }
 
+    /**
+     * Set the brightness of the pixels inside range from 0 to 255.
+     */
     //% blockId="Matrix_Brightness"
     //% block="set brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
@@ -211,6 +217,9 @@ namespace lumaMatrix {
         }
     }
 
+    /**
+     * Combine colour channels into a 24 bit colour number
+     */
     //% blockId="Matrix_RGBToColor"
     //% block="red $R green $G blue $B"
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255 
@@ -222,19 +231,25 @@ namespace lumaMatrix {
         return neopixel.rgb(R, G, B);
     }
 
+    /**
+     * Set colour of pixel a coordinate to a 24 bit color value
+     */
     //% blockId="Matrix_SetPixelColor"
-    //% block="set one pixel at x $x y $y to color $color"
+    //% block="set pixel at x $x y $y to colour $color"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% color.shadow="colorNumberPicker"
     //% group="Pixels" weight=108
     export function setOnePixel(x: number, y: number, color: number): void {
         setPixel(x, y, color);
         strip.show();
-        serialDebugMsg("setOnePixel: Pixel: " + x + "," + y + " is set to color: " + color);
+        serialDebugMsg("setOnePixel: Pixel: " + x + "," + y + " is set to colour: " + color);
     }
 
+    /**
+     * Set colour of pixel a coordinate to the colour channels
+     */
     //% blockId="Matrix_SetPixelRGB"
-    //% block="set one pixel at | x $x y $y to RGB colors | red $R green $G blue $B"
+    //% block="set pixel at | x $x y $y to colour | red $R green $G blue $B"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" weight=107
@@ -249,6 +264,9 @@ namespace lumaMatrix {
         serialDebugMsg("setOnePixel: Pixel: " + x + "," + y + " is set to color(R,G,B): (" + R + "," + G + "," + B + ")");
     }
 
+    /**
+     * Get a representation of which pixels are turned on. Only bitmap is available without colour information.
+     */
     //% blockId="Matrix_GetMatrixImage"
     //% block="image from matrix"
     //% group="Pixels" weight=106
@@ -286,7 +304,7 @@ namespace lumaMatrix {
     }
 
     /**
-     * Get the buffer with stored colors for each pixel. Each pixel uses 3 bytes in order red, green, blue.
+     * Get the buffer with stored colours for each pixel. Each pixel uses 3 bytes in order red, green, blue.
      */
     //% blockId="Matrix_GetPixelBuffer"
     //% block="Pixel Buffer"
@@ -296,7 +314,7 @@ namespace lumaMatrix {
     }
 
     /**
-     * Write a buffer full of colors to the matrix. Color must be split into 3 successive bytes following order red, green, blue.
+     * Write a buffer full of colours to the matrix. Color must be split into 3 successive bytes following order red, green, blue.
      */
     //% blockId="Matrix_ApplyPixelBuffer"
     //% block="apply Pixel Buffer $buf"
@@ -334,8 +352,11 @@ namespace lumaMatrix {
         }
     }
 
+    /**
+     * Get the colour of the pixel at coordinate (x,y)
+     */
     //% blockId="Matrix_GetPixelRGB"
-    //% block="color at pixel x $x y $y"
+    //% block="colour at pixel x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% group="Pixels" weight=106
     export function getColorFromPixel(x: number, y: number): number {
@@ -384,13 +405,17 @@ namespace lumaMatrix {
 
     //% blockId="Input_GPIORead"
     //% block="GPIO $pin"
+    //% blockHidden=true // Function not really needed, just for debugging
     //% group="Input"
-    export function readGPIO(pin: DigitalPin): number { // Function not really needed, just for debugging
+    export function readGPIO(pin: DigitalPin): number { 
         let value = pins.analogReadPin(pin);
         serialDebugMsg("readGPIO: GPIO: " + pin + " Value: " + value);
         return value;
     }
 
+    /**
+     * Read Luma Matrix switch position
+     */
     //% blockId="Input_SwitchRead"
     //% block="switch position"
     //% group="Input"
@@ -398,6 +423,9 @@ namespace lumaMatrix {
         return pins.digitalReadPin(pinSwitch);
     }
 
+    /**
+     * Compare Luma Matrix switch position
+     */
     //% blockId="Input_SwitchReadBool"
     //% block="switch is $state"
     //% state.shadow="toggleOnOff"
@@ -430,6 +458,9 @@ namespace lumaMatrix {
         });
     }
 
+    /**
+     * Read Luma Matrix joystick position
+     */
     //% blockId="Input_JoystickRead"
     //% block="joystick direction"
     //% group="Input"
@@ -449,6 +480,9 @@ namespace lumaMatrix {
         }
     }
 
+    /**
+     * Read Luma Matrix joystick position as text
+     */
     //% blockId="Input_JoystickReadStr"
     //% block="joystick direction text"
     //% group="Input"
@@ -468,6 +502,9 @@ namespace lumaMatrix {
         }
     }
 
+    /**
+     * Compare Luma Matrix joystick position
+     */
     //% blockId="Input_JoystickCompare"
     //% block="$joystick == $direction"
     //% joystick.shadow="Input_JoystickRead"
@@ -500,12 +537,14 @@ namespace lumaMatrix {
         });
     }
 
-    /* Creates thread to poll joystick direction and execute callback when direction changes. */
-    /* TODO #BUG when using multiple joystickDirectionThread blocks and the callback function do not finish before executing the other joystickDirectionThread block, microbit crashes. */
+    /*
+     * Creates thread to poll joystick direction and execute callback when direction changes. 
+    */
     //% blockId="Input_JoystickCallbackDir"
     //% block="when joystick direction: %direction"
     //% direction.defl=eJoystickDirection.Center
     //% group="Input"
+    // TODO #BUG when using multiple joystickDirectionThread blocks and the callback function do not finish before executing the other joystickDirectionThread block, microbit crashes.
     export function joystickDirectionThread(direction: eJoystickDirection, callback: () => void): void {
         serialDebugMsg("joystickDirectionThread: Selected trigger direction: " + direction);
         basic.pause(getRandomInt(1, 100)); // Wait 1 to 100ms to asynchron threads
@@ -525,6 +564,9 @@ namespace lumaMatrix {
         });
     }
 
+    /**
+     * Select direction from joystick enum
+     */
     //% blockId="IO_JoystickDirectionEnum" 
     //% block="Direction $dir"
     //% dir.shadow="dropdown" dir.defl=eJoystickDirection.Center
@@ -534,6 +576,7 @@ namespace lumaMatrix {
     }
 
     /**
+     * 8 by 8 matrix bitmap
      */
     //% blockId="Image_8x8"
     //% block="image 8x8"
@@ -548,11 +591,11 @@ namespace lumaMatrix {
     }
 
     /**
-     * Write bitmap of pixels in defined color to the matrix.
+     * Write bitmap of pixels in defined colour to the matrix.
      * layer is true by default and will not clear unset pixels.
      */
     //% blockId="Matrix_ImageStatic"
-    //% block="show image on Matrix | $image | with color $color || Layer $layer"
+    //% block="show image on Matrix | $image | with colour $color || Layer $layer"
     //% image.shadow="Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% layer.defl=true
@@ -585,7 +628,7 @@ namespace lumaMatrix {
      * Let text scroll across the matrix, letter by letter from right to the left.
      */
     //% blockId="Matrix_ImageMoving"
-    //% block="show moving image on Matrix | $image with color $color and speed $speed in direction $direction"
+    //% block="show moving image on Matrix | $image with colour $color and speed $speed in direction $direction"
     //% image.shadow="Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% speed.defl=10 speed.min=1 speed.max=100
@@ -634,8 +677,11 @@ namespace lumaMatrix {
         }
     }
 
+    /**
+     * Let text scroll across the Luma Matrix pixels.
+     */
     //% blockId="Matrix_TextScroll"
-    //% block="scroll text $text with color $color and speed $speed"
+    //% block="scroll text $text with colour $color and speed $speed"
     //% color.shadow="colorNumberPicker"
     //% speed.defl=10 speed.min=1 speed.max=100
     //% group="Pixels" weight=71
