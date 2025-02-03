@@ -1,6 +1,11 @@
 
 > Open this page at [https://ines-hpmm.github.io/pxt-luma-matrix/](https://ines-hpmm.github.io/pxt-luma-matrix/)
 
+## About the Project
+
+The Luma Matrix is a Workshop by ZHAW to play and create with coding. The center of the workshop is an 8 by 8 pixel matrix controlled with a micro:bit. 
+Use the blocks from the extension to build whatever you have in mind. Draw images, show text, display the time, or even connect it to other Luma Matrices.
+
 ## Use as an Extension
 
 This repository can be added as an **extension** in MakeCode.
@@ -10,19 +15,19 @@ This repository can be added as an **extension** in MakeCode.
 * Click on **Extensions** under the gear menu
 * Search for **https://github.com/ines-hpmm/pxt-luma-matrix** and import
 
-## Initialize Matrix
+### Initialize Matrix
 The matrix must be initialized at the beginning of every program. There is a block for this:
 ```blocks
-LumaMatrix.initializeMatrix(135)
+lumaMatrix.initializeMatrix(135)
 
 ```
 
-Example
+## Example
 The available blocks can display images and text, as well as control individual pixels.
 ```blocks
-LumaMatrix.initializeMatrix(135)
-LumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
-LumaMatrix.showImage(LumaMatrix.matrix8x8(`
+lumaMatrix.initializeMatrix(135)
+lumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     . . . . . . . .
     . # # . . # # .
     . # # . . # # .
@@ -33,6 +38,56 @@ LumaMatrix.showImage(LumaMatrix.matrix8x8(`
     . . . . . . . .
     `), 0xffff00)
 ```
+
+### Communication
+```blocks
+radio.setGroup(25)
+lumaMatrix.initializeMatrix(135)
+lumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    # . . . . . . #
+    . # . . . . # .
+    . . # # # # . .
+    . . . . . . . .
+    `), 0xffff00)
+
+
+loops.everyInterval(5000, function() {
+    lumaMatrix.sendImageWithColor(lumaMatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    # . . . . . . #
+    . # . . . . # .
+    . . # # # # . .
+    . . . . . . . .
+    `), 0xffff00)
+    basic.pause(300)
+    lumaMatrix.sendImageWithColor(lumaMatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    . . . . . . . .
+    . # # # # # # .
+    . . . . . . . .
+    . . . . . . . .
+    `), 0xffff00)
+})
+
+lumaMatrix.onReceivedMatrix(function(dataType: number, receivedBuffer: Buffer) {
+    if (dataType == lumaMatrix.getDataType(lumaMatrix.eDataType.Bitmap)) {
+        lumaMatrix.showImage(lumaMatrix.parseImage(receivedBuffer), lumaMatrix.parseBufferForColor(receivedBuffer))
+    }
+})
+
+```
+
 
 ## Edit This Project
 
