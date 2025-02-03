@@ -66,6 +66,9 @@ namespace LumaMatrix {
         return result;
     }
 
+    /**
+     * Enable serial messages for debugging printed by the Luma Matrix extension.
+     */
     //% blockId="Debug_Enable"
     //% block="set serial debugging prints to $enable"
     //% enable.shadow="toggleOnOff"
@@ -93,6 +96,10 @@ namespace LumaMatrix {
         return lowerOutputRangeLimit + factor * (upperOutputRangeLimit - lowerOutputRangeLimit);
     }
 
+    /**
+     * Initialize the 8 by 8 Neopixel Matrix with a joystick. 
+     * This block needs to be execute only once at the start.
+    */
     //% blockId="Matrix_Init"
     //% block="initialize Luma Matrix with brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
@@ -125,7 +132,9 @@ namespace LumaMatrix {
     }
 
     /**
-     * This function allows to use custom pins for the input devices.
+     * Initialize the 8 by 8 Neopixel Matrix with a joystick.
+     * This block needs to be execute only once at the start.
+     * This block allows to use custom pins for the input devices.
      * @param pinSwitchTemp is the GPIO pin for the switch
      * @param pinCenterButtonTemp is the GPIO pin for the center button of the joystick
      * @param pinUpButtonTemp is the GPIO pin for the up button of the joystick
@@ -162,7 +171,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_Clear"
-    //% block="clear Matrix"
+    //% block="clear matrix"
     //% group="Pixels" weight=110
     export function clear(): void {
         if (strip) {
@@ -173,7 +182,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_Brightness"
-    //% block="set Brightness $brightness"
+    //% block="set brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=109
     export function setBrightness(brightness: number): void {
@@ -203,7 +212,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_RGBToColor"
-    //% block="R: $R G: $G B: $B"
+    //% block="red $R green $G blue $B"
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255 
     //% group="Pixels" weight=108
     export function rgbToColor(R: number, G: number, B: number): number {
@@ -225,7 +234,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_SetPixelRGB"
-    //% block="set one pixel at | x: $x y: $y to RGB colors | R: $R G: $G B: $B"
+    //% block="set one pixel at | x $x y $y to RGB colors | red $R green $G blue $B"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" weight=107
@@ -241,7 +250,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_GetMatrixImage"
-    //% block="get Image from Matrix"
+    //% block="image from matrix"
     //% group="Pixels" weight=106
     export function getMatrixImage(): Image {
         let img = images.createImage(`
@@ -276,13 +285,19 @@ namespace LumaMatrix {
         return img;
     }
 
+    /**
+     * Get the buffer with stored colors for each pixel. Each pixel uses 3 bytes in order red, green, blue.
+     */
     //% blockId="Matrix_GetPixelBuffer"
-    //% block="get Pixel Buffer"
+    //% block="Pixel Buffer"
     //% group="Pixels" weight=106
     export function getPixelBuffer(): Buffer {
         return pixelBuffer
     }
 
+    /**
+     * Write a buffer full of colors to the matrix. Color must be split into 3 successive bytes following order red, green, blue.
+     */
     //% blockId="Matrix_ApplyPixelBuffer"
     //% block="apply Pixel Buffer $buf"
     //% group="Pixels" weight=106
@@ -320,7 +335,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_GetPixelRGB"
-    //% block="get color at pixel x: $x y: $y"
+    //% block="color at pixel x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% group="Pixels" weight=106
     export function getColorFromPixel(x: number, y: number): number {
@@ -336,7 +351,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_AddPixelRGB"
-    //% block="add R: $R G: $G B: $B to pixel at x: $x y: $y"
+    //% block="add red $R green $G blue $B to pixel at x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" advanced=true
@@ -352,7 +367,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Matrix_SubtractPixelRGB"
-    //% block="subtract R: $R G: $G B: $B from pixel at x: $x y: $y"
+    //% block="subtract red $R green $G blue $B from pixel at x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
     //% group="Pixels" advanced=true
@@ -368,7 +383,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Input_GPIORead"
-    //% block="read GPIO $pin"
+    //% block="GPIO $pin"
     //% group="Input"
     export function readGPIO(pin: DigitalPin): number { // Function not really needed, just for debugging
         let value = pins.analogReadPin(pin);
@@ -377,20 +392,26 @@ namespace LumaMatrix {
     }
 
     //% blockId="Input_SwitchRead"
-    //% block="read switch value"
+    //% block="switch position"
     //% group="Input"
     export function readSwitch(): number {
         return pins.digitalReadPin(pinSwitch);
     }
 
     //% blockId="Input_SwitchReadBool"
-    //% block="switch is set"
+    //% block="switch is $state"
+    //% state.shadow="toggleOnOff"
     //% group="Input"
-    export function isSwitchSet(): boolean {
-        return (pins.digitalReadPin(pinSwitch) != 0);
+    export function isSwitchSet(state: boolean): boolean {
+        if(state){
+            return (pins.digitalReadPin(pinSwitch) != 0);
+        }
+        return (pins.digitalReadPin(pinSwitch) == 0);
     }
 
-    /* Creates thread to poll switch value and execute callback when value changes. */
+    /**
+     * Creates thread to poll switch state and execute callback when state changes. 
+    */
     //% blockId="Input_SwitchCallback"
     //% block="when switch value changed"
     //% draggableParameters="reporter"
@@ -410,7 +431,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Input_JoystickRead"
-    //% block="read joystick direction"
+    //% block="joystick direction"
     //% group="Input"
     export function readJoystick(): number {
         if (pins.digitalReadPin(pinCenterButton) == 0) {
@@ -429,7 +450,7 @@ namespace LumaMatrix {
     }
 
     //% blockId="Input_JoystickReadStr"
-    //% block="read joystick direction as text"
+    //% block="joystick direction text"
     //% group="Input"
     export function readJoystickText(): string {
         if (pins.digitalReadPin(pinCenterButton) == 0) {
@@ -456,7 +477,10 @@ namespace LumaMatrix {
         return joystick === direction;
     }
 
-    /* Creates thread to poll joystick direction and execute callback when direction changes. */
+    /**
+     * Creates thread to poll joystick direction and execute callback when direction changes. 
+     * The draggable parameter "direction" holds the value which triggered the call
+    */
     //% block="Input_JoystickCallback"
     //% block="when joystick changed"
     //% draggableParameters="reporter"
@@ -523,6 +547,10 @@ namespace LumaMatrix {
         return im
     }
 
+    /**
+     * Write bitmap of pixels in defined color to the matrix.
+     * layer is true by default and will not clear unset pixels.
+     */
     //% blockId="Matrix_ImageStatic"
     //% block="show image on Matrix | $image | with color $color || Layer $layer"
     //% image.shadow="Image_8x8"
@@ -553,6 +581,9 @@ namespace LumaMatrix {
         im = <Image><any>'';
     }
 
+    /**
+     * Let text scroll across the matrix, letter by letter from right to the left.
+     */
     //% blockId="Matrix_ImageMoving"
     //% block="show moving image on Matrix | $image with color $color and speed $speed in direction $direction"
     //% image.shadow="Image_8x8"
@@ -714,7 +745,9 @@ namespace LumaMatrix {
     
 
     
-
+    /**
+     * Defined test sequence which checks every aspect of the hardware. 
+     */
     //% blockId="Debug_MatrixHardware"
     //% block="test LED matrix hardware"
     //% advanced=true group="Debug"
