@@ -19,9 +19,9 @@ Lumatrix.initializeMatrix(DigitalPin.P0, 135)
 ## Beispiel
 Die vorhandenen Blöcke können Bilder und Text darstellen, sowie einzelne Pixel ansteuern.
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 135)
-Lumatrix.scrollText("LUMATRIX", 0xff00FF, 90)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+lumaMatrix.initializeMatrix(135)
+lumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     . . . . . . . .
     . # # . . # # .
     . # # . . # # .
@@ -31,6 +31,55 @@ Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . # # # # . .
     . . . . . . . .
     `), 0xffff00)
+```
+
+### Kommunikation
+```blocks
+radio.setGroup(25)
+lumaMatrix.initializeMatrix(135)
+lumaMatrix.scrollText("LUMA MATRIX", 0xff00FF, 90)
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    # . . . . . . #
+    . # . . . . # .
+    . . # # # # . .
+    . . . . . . . .
+    `), 0xffff00)
+
+
+loops.everyInterval(5000, function() {
+    lumaMatrix.sendImageWithColor(lumaMatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    # . . . . . . #
+    . # . . . . # .
+    . . # # # # . .
+    . . . . . . . .
+    `), 0xffff00)
+    basic.pause(300)
+    lumaMatrix.sendImageWithColor(lumaMatrix.matrix8x8(`
+    . . . . . . . .
+    . # # . . # # .
+    . # # . . # # .
+    . . . . . . . .
+    . . . . . . . .
+    . # # # # # # .
+    . . . . . . . .
+    . . . . . . . .
+    `), 0xffff00)
+})
+
+lumaMatrix.onReceivedMatrix(function(dataType: number, receivedBuffer: Buffer) {
+    if (dataType == lumaMatrix.getDataType(lumaMatrix.eDataType.Bitmap)) {
+        lumaMatrix.showImage(lumaMatrix.parseImage(receivedBuffer), lumaMatrix.parseBufferForColor(receivedBuffer))
+    }
+})
+
 ```
 
 ## Dieses Projekt bearbeiten

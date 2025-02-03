@@ -104,6 +104,7 @@ The block translations are stored in the `_locales/de` folder. To update the tra
 # NodeJS and npm must be installed
 npm install -g pxt
 pxt target microbit
+pxt install
 pxt gendocs --locs
 ```
 
