@@ -17,7 +17,7 @@
 
 
 
-namespace LumaMatrix {
+namespace lumaMatrix {
 
     //% blockId="RF_DataTypeEnum" block="%dataType"
     //% blockHidden=true

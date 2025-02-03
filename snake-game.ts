@@ -14,7 +14,7 @@
  * --
  * ------------------------------------------------------------------
  */
-namespace LumaMatrix {
+namespace lumaMatrix {
 
     /**
      * Fully implemented hungry snake game with joystick controls.

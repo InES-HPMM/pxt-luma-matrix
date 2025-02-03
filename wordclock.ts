@@ -14,7 +14,7 @@
  * --
  * ------------------------------------------------------------------
  */
-namespace LumaMatrix {
+namespace lumaMatrix {
 
     let wordClock: WordClock;
     const startTime = control.millis();

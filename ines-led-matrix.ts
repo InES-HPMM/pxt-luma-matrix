@@ -17,7 +17,7 @@
 
 
 //% color=#3162a3 icon="\uf00a" block="Luma Matrix"
-namespace LumaMatrix {
+namespace lumaMatrix {
 
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
