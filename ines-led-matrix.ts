@@ -406,7 +406,7 @@ namespace lumaMatrix {
     //% blockId="Input_GPIORead"
     //% block="GPIO $pin"
     //% blockHidden=true // Function not really needed, just for debugging
-    //% group="Input"
+    //% subcategory="Input"
     export function readGPIO(pin: DigitalPin): number { 
         let value = pins.analogReadPin(pin);
         serialDebugMsg("readGPIO: GPIO: " + pin + " Value: " + value);
@@ -418,7 +418,7 @@ namespace lumaMatrix {
      */
     //% blockId="Input_SwitchRead"
     //% block="switch position"
-    //% group="Input"
+    //% subcategory="Input"
     export function readSwitch(): number {
         return pins.digitalReadPin(pinSwitch);
     }
@@ -429,7 +429,7 @@ namespace lumaMatrix {
     //% blockId="Input_SwitchReadBool"
     //% block="switch is $state"
     //% state.shadow="toggleOnOff"
-    //% group="Input"
+    //% subcategory="Input"
     export function isSwitchSet(state: boolean): boolean {
         if(state){
             return (pins.digitalReadPin(pinSwitch) != 0);
@@ -443,7 +443,7 @@ namespace lumaMatrix {
     //% blockId="Input_SwitchCallback"
     //% block="when switch value changed"
     //% draggableParameters="reporter"
-    //% group="Input"
+    //% subcategory="Input"
     export function switchValueChangedThread(callback: (state: boolean) => void): void {
         control.inBackground(() => {
             let currentSwitchValue = 0;
@@ -463,7 +463,7 @@ namespace lumaMatrix {
      */
     //% blockId="Input_JoystickRead"
     //% block="joystick direction"
-    //% group="Input"
+    //% subcategory="Input"
     export function readJoystick(): number {
         if (pins.digitalReadPin(pinCenterButton) == 0) {
             return eJoystickDirection.Center;
@@ -485,7 +485,7 @@ namespace lumaMatrix {
      */
     //% blockId="Input_JoystickReadStr"
     //% block="joystick direction text"
-    //% group="Input"
+    //% subcategory="Input"
     export function readJoystickText(): string {
         if (pins.digitalReadPin(pinCenterButton) == 0) {
             return "Center\n";
@@ -509,7 +509,7 @@ namespace lumaMatrix {
     //% block="$joystick == $direction"
     //% joystick.shadow="Input_JoystickRead"
     //% direction.defl=eJoystickDirection.Center
-    //% group="Input"
+    //% subcategory="Input"
     export function compareJoystick(joystick: number, direction: eJoystickDirection): boolean {
         return joystick === direction;
     }
@@ -521,7 +521,7 @@ namespace lumaMatrix {
     //% block="Input_JoystickCallback"
     //% block="when joystick changed"
     //% draggableParameters="reporter"
-    //% group="Input"
+    //% subcategory="Input"
     export function joystickChangedThread(callback: (direction: number) => void): void {
         control.inBackground(() => {
             let currentJoystickDirection: eJoystickDirection = eJoystickDirection.NotPressed;
@@ -543,7 +543,7 @@ namespace lumaMatrix {
     //% blockId="Input_JoystickCallbackDir"
     //% block="when joystick direction: %direction"
     //% direction.defl=eJoystickDirection.Center
-    //% group="Input"
+    //% subcategory="Input"
     // TODO #BUG when using multiple joystickDirectionThread blocks and the callback function do not finish before executing the other joystickDirectionThread block, microbit crashes.
     export function joystickDirectionThread(direction: eJoystickDirection, callback: () => void): void {
         serialDebugMsg("joystickDirectionThread: Selected trigger direction: " + direction);
@@ -570,7 +570,7 @@ namespace lumaMatrix {
     //% blockId="IO_JoystickDirectionEnum" 
     //% block="Direction $dir"
     //% dir.shadow="dropdown" dir.defl=eJoystickDirection.Center
-    //% group="Input"
+    //% subcategory="Input"
     export function getJoystickDirectionEnum(dir: eJoystickDirection): number {
         return dir
     }
