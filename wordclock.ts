@@ -443,11 +443,12 @@ namespace lumaMatrix {
 
     /**
      * Initialize Word Clock with given colours. Time will be tracked and pixels on the matrix updated in background.
-     * Optional joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
+     * Note: Initialize Luma Matrix before this block.
+     * Optional: joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
      */
     //% blockId="Clock_CreateWordClock"
     //% block="create word clock version $version hour color $hourColor minute color $minuteColor word color $wordColor || Set time with joystick %joystickEnable"
-    //% version.defl=eMatrixVersion.V1
+    //% version.defl=lumaMatrix.eMatrixVersion.V1
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00

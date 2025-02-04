@@ -508,7 +508,7 @@ namespace lumaMatrix {
     //% blockId="Input_JoystickCompare"
     //% block="$joystick == $direction"
     //% joystick.shadow="Input_JoystickRead"
-    //% direction.defl=eJoystickDirection.Center
+    //% direction.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     export function compareJoystick(joystick: number, direction: eJoystickDirection): boolean {
         return joystick === direction;
@@ -542,7 +542,7 @@ namespace lumaMatrix {
     */
     //% blockId="Input_JoystickCallbackDir"
     //% block="when joystick direction: %direction"
-    //% direction.defl=eJoystickDirection.Center
+    //% direction.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     // TODO #BUG when using multiple joystickDirectionThread blocks and the callback function do not finish before executing the other joystickDirectionThread block, microbit crashes.
     export function joystickDirectionThread(direction: eJoystickDirection, callback: () => void): void {
@@ -569,7 +569,7 @@ namespace lumaMatrix {
      */
     //% blockId="IO_JoystickDirectionEnum" 
     //% block="Direction $dir"
-    //% dir.shadow="dropdown" dir.defl=eJoystickDirection.Center
+    //% dir.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     export function getJoystickDirectionEnum(dir: eJoystickDirection): number {
         return dir
@@ -632,7 +632,7 @@ namespace lumaMatrix {
     //% image.shadow="Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% speed.defl=10 speed.min=1 speed.max=100
-    //% direction.defl=eDirection.Right
+    //% direction.defl=lumaMatrix.eDirection.Right
     //% group="Pixels" weight=69
     export function movingImage(image: Image, color: number, speed: number, direction: eDirection): void {
         /* Due to a bug the block is always generated with speed of 0. In this case we set it to the slowest speed. */

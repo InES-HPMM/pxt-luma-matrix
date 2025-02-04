@@ -24,7 +24,6 @@ namespace lumaMatrix {
      */
     //% blockId="RF_DataTypeEnum" block="%dataType"
     //% blockHidden=true
-    //% dataType.shadow="dropdown"
     //% subcategory="Communication"
     export enum eDataType {
         //% block="unknown"
@@ -40,7 +39,6 @@ namespace lumaMatrix {
      */
     //% blockId="RF_ColorsEnum" block="%color"
     //% blockHidden=true
-    //% color.shadow="dropdown"
     //% subcategory="Communication"
     export enum eColorPalette {
         //% block="red"
@@ -79,7 +77,7 @@ namespace lumaMatrix {
      */
     //% blockId="RF_DataType" 
     //% block="datatype $dataType"
-    //% dataType.shadow="dropdown" dataType.defl=eDataType.RGBImage
+    //% dataType.defl=lumaMatrix.eDataType.RGBImage
     //% subcategory="Communication"
     export function getDataType(dataType: eDataType): eDataType {
         return dataType
@@ -90,8 +88,7 @@ namespace lumaMatrix {
      */
     //% blockId="RF_ColorPicker" 
     //% block="color palette $color"
-    //% color.shadow="dropdown"
-    //% color.defl=eColorPalette.Yellow
+    //% color.defl=lumaMatrix.eColorPalette.Yellow
     //% subcategory="Communication"
     export function getColorPalette(color: eColorPalette): number {
         let R = predefinedPalette[color][0] << 16 
