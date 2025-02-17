@@ -17,7 +17,8 @@
         "_locales/de/Luma Matrix-jsdoc-strings.json",
         "wordclock.ts",
         "snake-game.ts",
-        "rf-messages.ts"
+        "rf-messages.ts",
+        "docs/build-your-own.md"
     ],
     "testFiles": [
         "test.ts"
