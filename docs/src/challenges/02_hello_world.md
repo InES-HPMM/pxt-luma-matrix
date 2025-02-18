@@ -1,19 +1,18 @@
 
 # Challenge 2
 
-In dieser Challenge wirst du einen Lauftext auf deiner Matrix anzeigen.
-
-## Initialisiere die Matrix
+In this challenge you will learn how to scroll text across the LED matrix.
 
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 127)
-Welchen_Block_musst_du_hier_einsetzen?
+lumaMatrix.initializeMatrix(127)
+Which_block_is_needed_here?
 ```
 
-## Lösung
+## Solution
+
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 127)
-Lumatrix.scrollText("HELLO WORLD", 0x00ffff, 80)
+lumaMatrix.initializeMatrix(127)
+lumaMatrix.scrollText("HELLO WORLD", 0x00ffff, 80)
 ```
 
 

@@ -1,19 +1,18 @@
 
 # Challenge 1
 
-In dieser Challenge wirst du deine Matrix aufleuchten lassen.
-
-## Initialisiere die Matrix
+In this challenge you will learn how to turn on all the LEDs of the LED matrix.
 
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 127)
-Welchen_Block_musst_du_hier_einsetzen?
+lumaMatrix.initializeMatrix(127)
+Which_block_is_needed_here?
 ```
 
-## Lösung
+## Solution
+
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 127)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+lumaMatrix.initializeMatrix(127)
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     # # # # # # # #
     # # # # # # # #
     # # # # # # # #
