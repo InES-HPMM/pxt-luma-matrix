@@ -7,7 +7,7 @@ On the back of th matrix there are two inputs, a joystick and a switch.
 Read the value from a specified GPIO pin.
 
 ```blocks
-let gpioValue = Lumatrix.readGPIO(DigitalPin.P1)
+let gpioValue = lumaMatrix.readGPIO(DigitalPin.P1)
 ```
 
 ### Read Switch
@@ -15,7 +15,7 @@ let gpioValue = Lumatrix.readGPIO(DigitalPin.P1)
 Read the current value of the switch.
 
 ```blocks
-let switchValue = Lumatrix.readSwitch()
+let switchValue = lumaMatrix.readSwitch()
 ```
 
 ### Check if Switch is Set
@@ -23,7 +23,7 @@ let switchValue = Lumatrix.readSwitch()
 Check if the switch is set.
 
 ```blocks
-let isSwitchSet = Lumatrix.isSwitchSet()
+let isSwitchSet = lumaMatrix.isSwitchSet(true)
 ```
 
 ### Read Joystick Direction
@@ -31,7 +31,7 @@ let isSwitchSet = Lumatrix.isSwitchSet()
 Read the current direction of the joystick.
 
 ```blocks
-let joystickDirection = Lumatrix.readJoystick()
+let joystickDirection = lumaMatrix.readJoystick()
 ```
 
 ### Read Joystick Direction as Text
@@ -39,7 +39,7 @@ let joystickDirection = Lumatrix.readJoystick()
 Read the current direction of the joystick as text.
 
 ```blocks
-let joystickDirectionText = Lumatrix.readJoystickText()
+let joystickDirectionText = lumaMatrix.readJoystickText()
 ```
 
 ### Compare Joystick Direction
@@ -47,7 +47,7 @@ let joystickDirectionText = Lumatrix.readJoystickText()
 Compare the current joystick direction with a specified direction.
 
 ```blocks
-let isJoystickDown = Lumatrix.compareJoystick(joystickDirection, eJoystickDirection.Down)
+let isJoystickDown = lumaMatrix.compareJoystick(joystickDirection, lumaMatrix.eJoystickDirection.Down)
 ```
 
 ### Joystick Direction Changed Callback
@@ -55,7 +55,7 @@ let isJoystickDown = Lumatrix.compareJoystick(joystickDirection, eJoystickDirect
 Execute a callback function when the joystick direction changes.
 
 ```blocks
-Lumatrix.joystickChangedThread(() => {
+lumaMatrix.joystickChangedThread(() => {
   console.log("Joystick direction changed")
 })
 ```
@@ -65,15 +65,15 @@ Lumatrix.joystickChangedThread(() => {
 Execute a callback function when the joystick moves in a specified direction.
 
 ```blocks
-Lumatrix.joystickDirectionThread(eJoystickDirection.Up, () => {
+lumaMatrix.joystickDirectionThread(lumaMatrix.eJoystickDirection.Up, () => {
   console.log("Joystick moved up")
 })
 ```
 
 
 ```blocks	
-if (Lumatrix.compareJoystick(Lumatrix.readJoystick(), eJoystickDirection.Down)) {
-    Lumatrix.setOnePixel(7, 0, 0xffff00)
+if (lumaMatrix.compareJoystick(lumaMatrix.readJoystick(), lumaMatrix.eJoystickDirection.Down)) {
+    lumaMatrix.setOnePixel(7, 0, 0xffff00)
 }
 ```
 

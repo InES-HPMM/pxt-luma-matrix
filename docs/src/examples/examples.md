@@ -1,9 +1,9 @@
 # Example Project
 
 ```blocks
-Lumatrix.initializeMatrix(DigitalPin.P0, 127)
+lumaMatrix.initializeMatrix(127)
 basic.pause(100)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     # . . . . . . .
     # . . . . . . .
     # . . . . . . .
@@ -14,7 +14,7 @@ Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . . . . . . .
     `), 0x007fff)
 basic.pause(1000)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     . . . . . . . .
     . . . . . . . .
     . . . . . . . .
@@ -24,26 +24,26 @@ Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . . . # . . .
     . # . . . . . .
     `), 0x00ff00)
-Lumatrix.setBrightness(255)
-if (Lumatrix.compareJoystick(Lumatrix.readJoystick(), eJoystickDirection.Down)) {
-    Lumatrix.setOnePixel(7, 0, 0xffff00)
+lumaMatrix.setBrightness(255)
+if (lumaMatrix.compareJoystick(lumaMatrix.readJoystick(), lumaMatrix.eJoystickDirection.Down)) {
+    lumaMatrix.setOnePixel(7, 0, 0xffff00)
 }
 basic.pause(1000)
-Lumatrix.createWordClock(
-eMatrixVersion.V2,
+lumaMatrix.createWordClock(
+lumaMatrix.eMatrixVersion.V2,
 0x007fff,
 0xffff00,
 0x00ff00
 )
-Lumatrix.setBrightness(127)
+lumaMatrix.setBrightness(127)
 ```
 
 ```blocks
-Lumatrix.switchValueChangedThread(function () {
-    if (Lumatrix.isSwitchSet()) {
-        Lumatrix.setOnePixel(7, 1, 0xffff00)
+lumaMatrix.switchValueChangedThread(function () {
+    if (lumaMatrix.isSwitchSet()) {
+        lumaMatrix.setOnePixel(7, 1, 0xffff00)
     } else {
-        Lumatrix.setOnePixel(7, 1, 0xff0000)
+        lumaMatrix.setOnePixel(7, 1, 0xff0000)
     }
 })
 ```
