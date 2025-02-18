@@ -15,7 +15,7 @@
  * ------------------------------------------------------------------
  */
 
-namespace Lumatrix {
+namespace lumaMatrix {
     /* Simple 8x8 font */
     /* TODO: Text Font need to be reworked. */
     export let textFont: { [char: string]: number[] } = {

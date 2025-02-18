@@ -16,11 +16,10 @@
  * ------------------------------------------------------------------
  */
 
-
-Lumatrix.debugEnable(true)
-Lumatrix.initializeMatrix(DigitalPin.P0, 135)
-Lumatrix.scrollText("LUMATRIX", 0xff00FF, 90)
-Lumatrix.showImage(Lumatrix.matrix8x8(`
+lumaMatrix.debugEnable(true)
+lumaMatrix.initializeMatrix(135)
+lumaMatrix.scrollText("LUMA MATRIX", 0xff00ff, 90)
+lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     . . . . . . . .
     . # # . . # # .
     . # # . . # # .
@@ -30,11 +29,16 @@ Lumatrix.showImage(Lumatrix.matrix8x8(`
     . . # # # # . .
     . . . . . . . .
     `), 0xffff00)
+for (let i = 0; i < 8; i++) {
+    lumaMatrix.setOnePixelRGB(0, i, 0, 255, 0)
+    basic.pause(100)
+}
 basic.pause(2000)
-Lumatrix.createWordClock(eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
-Lumatrix.setCurrentTime(15, 33, 0)
+lumaMatrix.createWordClock(lumaMatrix.eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
+lumaMatrix.setCurrentTime(15, 33, 0)
 
 while (true) {
     basic.pause(5000)
-    serial.writeLine(Lumatrix.getCurrentTimeAsText())
+    serial.writeLine(lumaMatrix.getCurrentTimeAsText())
 }
+
