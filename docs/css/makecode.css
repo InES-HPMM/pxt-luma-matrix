@@ -7,16 +7,17 @@
   transform-origin: center;
   touch-action: none; /* Prevents default touch behaviors */
   display: block; /* Ensure proper display in MDBook */
-  margin: 0.5em auto; /* Reduced vertical spacing */
+  margin: 0; /* Remove margins from image itself */
 }
 
 .codeblock-container {
   position: relative;
-  overflow: hidden;
-  margin: 0.5em auto; /* Reduced vertical spacing */
+  overflow: visible; /* Allow image to overflow slightly */
+  margin: 0.5em auto; /* Keep margin on container instead of image */
   max-width: 100%;
   line-height: 0; /* Remove extra space below image */
   transition: height 0.3s ease; /* Smooth transition for height changes */
+  padding: 2px 0; /* Add small vertical padding to prevent cropping */
 }
 
 .codeblock.zoomed {
@@ -36,6 +37,7 @@
 
 /* When an image is zoomed, ensure the container adjusts accordingly */
 .codeblock-container:has(.zoomed) {
+  overflow: hidden; /* Hide overflow only when zoomed */
   height: auto !important; /* Override any inline height */
   min-height: 600px !important; /* Provide enough space for zoomed content */
 }
