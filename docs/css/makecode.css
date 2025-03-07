@@ -1,5 +1,46 @@
-.makecode-embed {
-    max-width: 100%;
-    height: auto;
-  }
-  
+.codeblock {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* cursor is now set dynamically in JavaScript based on whether the image is zoomable */
+  transition: transform 0.3s ease;
+  transform-origin: center;
+  touch-action: none; /* Prevents default touch behaviors */
+  display: block; /* Ensure proper display in MDBook */
+  margin: 0.5em auto; /* Reduced vertical spacing */
+}
+
+.codeblock-container {
+  position: relative;
+  overflow: hidden;
+  margin: 0.5em auto; /* Reduced vertical spacing */
+  max-width: 100%;
+  line-height: 0; /* Remove extra space below image */
+  transition: height 0.3s ease; /* Smooth transition for height changes */
+}
+
+.codeblock.zoomed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  cursor: grab;
+  transform-origin: center;
+  transition: none; /* Disable transition for smooth panning */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* When an image is zoomed, ensure the container adjusts accordingly */
+.codeblock-container:has(.zoomed) {
+  height: auto !important; /* Override any inline height */
+  min-height: 600px !important; /* Provide enough space for zoomed content */
+}
+
+/* .codeblock:hover {
+  transform: scale(1.1);
+} */
+

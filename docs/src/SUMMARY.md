@@ -15,4 +15,5 @@
     - [Communication](./documentation/blocks_communication.md)
 
 - [Examples](./examples/examples.md)
+    - [Countdown](./examples/ex_countdown.md)
     - [Challenge Template](./challenges/xx_template.md)

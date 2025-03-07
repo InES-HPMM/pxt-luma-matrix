@@ -102,4 +102,8 @@ If you experience issues with communication:
 4. Monitor the serial output for debugging messages
 5. Consider reducing the radio group number if there's interference
 
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
+<!-- <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
+ -->
+
+<script src="../assets/js/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
+<script src="../assets/js/makecode-init.js"></script>

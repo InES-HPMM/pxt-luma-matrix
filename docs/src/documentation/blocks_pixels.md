@@ -10,8 +10,6 @@ Initialize the matrix with the pin and brightness. The brightness can be set fro
 lumaMatrix.initializeMatrix(127)
 ```
 
-
-
 ### Set Brightness
 
 Set the brightness of the LEDs. The brightness can be set from 0 to 255. The default brightness is 127.
@@ -38,5 +36,7 @@ lumaMatrix.showImage(lumaMatrix.matrix8x8(`
     `), 0x00ff00)
 ```
 
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
+<!-- <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
+ -->
 
+<script src="../assets/js/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>

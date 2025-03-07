@@ -4,3 +4,4 @@ This section contains a series of challenges to help you get started with the Lu
 
 Let's get started! 🤖🛠️🕹️
 
+<script src="../assets/js/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
