@@ -447,7 +447,7 @@ namespace lumaMatrix {
      * Optional: joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
      */
     //% blockId="Clock_CreateWordClock"
-    //% block="create word clock \nhour color $hourColor minute color $minuteColor word color $wordColor || clock dial $version \nset time with joystick %joystickEnable"
+    //% block="create word clock | hour color $hourColor minute color $minuteColor word color $wordColor | clock dial $version | set time with joystick %joystickEnable"
     //% version.defl=lumaMatrix.eMatrixVersion.V2
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
