@@ -143,7 +143,7 @@ namespace lumaMatrix {
      * @param pinLeftButtonTemp is the GPIO pin for the left button of the joystick
      */
     //% blockId="Matrix_InitExpert"
-    //% block="initialize LED Matrix Interface (Expert). \nSwitch pin $pinSwitchTemp \nCenter button pin $pinCenterButtonTemp \nUp button pin $pinUpButtonTemp \nDown button pin $pinDownButtonTemp \nRight button pin $pinRightButtonTemp \nLeft button pin $pinLeftButtonTemp"
+    //% block="initialize LED matrix interface (expert). \nswitch pin $pinSwitchTemp \ncenter button pin $pinCenterButtonTemp \nup button pin $pinUpButtonTemp \ndown button pin $pinDownButtonTemp \nright button pin $pinRightButtonTemp \nleft button pin $pinLeftButtonTemp"
     //% advanced=true group="Debug"
     export function initializeMatrixInterfaceExpert(
         pinSwitchTemp: DigitalPin,
@@ -307,7 +307,7 @@ namespace lumaMatrix {
      * Get the buffer with stored colours for each pixel. Each pixel uses 3 bytes in order red, green, blue.
      */
     //% blockId="Matrix_GetPixelBuffer"
-    //% block="Pixel Buffer"
+    //% block="pixel buffer"
     //% group="Pixels" weight=106
     export function getPixelBuffer(): Buffer {
         return pixelBuffer
@@ -317,7 +317,7 @@ namespace lumaMatrix {
      * Write a buffer full of colours to the matrix. Color must be split into 3 successive bytes following order red, green, blue.
      */
     //% blockId="Matrix_ApplyPixelBuffer"
-    //% block="apply Pixel Buffer $buf"
+    //% block="apply pixel buffer $buf"
     //% group="Pixels" weight=106
     export function applyPixelBuffer(buf: Buffer) {
         const dataLen = buf.length;
@@ -568,7 +568,7 @@ namespace lumaMatrix {
      * Select direction from joystick enum
      */
     //% blockId="IO_JoystickDirectionEnum" 
-    //% block="Direction $dir"
+    //% block="direction $dir"
     //% dir.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     export function getJoystickDirectionEnum(dir: eJoystickDirection): number {
@@ -595,7 +595,7 @@ namespace lumaMatrix {
      * layer is true by default and will not clear unset pixels.
      */
     //% blockId="Matrix_ImageStatic"
-    //% block="show image on Matrix | $image | with colour $color || Layer $layer"
+    //% block="show image on matrix | $image | with colour $color || layer $layer"
     //% image.shadow="Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% layer.defl=true
@@ -628,10 +628,10 @@ namespace lumaMatrix {
      * Let text scroll across the matrix, letter by letter from right to the left.
      */
     //% blockId="Matrix_ImageMoving"
-    //% block="show moving image on Matrix | $image with colour $color and speed $speed in direction $direction"
+    //% block="show moving image on matrix | $image with colour $color and speed $speed in direction $direction"
     //% image.shadow="Image_8x8"
     //% color.shadow="colorNumberPicker"
-    //% speed.defl=10 speed.min=1 speed.max=100
+    //% speed.defl=10 speed.min=1 speed.max=99
     //% direction.defl=lumaMatrix.eDirection.Right
     //% group="Pixels" weight=69
     export function movingImage(image: Image, color: number, speed: number, direction: eDirection): void {

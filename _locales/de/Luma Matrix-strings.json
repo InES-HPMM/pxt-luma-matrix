@@ -2,7 +2,7 @@
   "lumaMatrix.clearIcon|block": "Lösche Icon || %icon",
   "lumaMatrix.clear|block": "Matrix löschen",
   "lumaMatrix.compareJoystick|block": "$joystick == $direction",
-  "lumaMatrix.createWordClock|block": "Erstelle Word Clock Version $version Stunden-Farbe $hourColor Minuten-Farbe $minuteColor Wörter-Farbe $wordColor",
+  "lumaMatrix.createWordClock|block": "Erstelle Word Clock  \nStunden-Farbe $hourColor Minuten-Farbe $minuteColor Wörter-Farbe $wordColor || Zifferblatt $version \nZeitsetzung mit Joystick %joystickEnable",
   "lumaMatrix.debugEnable|block": "Serielles Debuggen auf $enable setzen",
   "lumaMatrix.getCurrentTimeAsText|block": "Aktuelle Zeit als Text",
   "lumaMatrix.getCurrentTime|block": "Aktuelle Zeit in Sekunden",

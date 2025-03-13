@@ -21,7 +21,7 @@ namespace lumaMatrix {
      * Place only this block at the start
      */
     //% blockId="Game_Snake"
-    //% block="Snake Game"
+    //% block="snake game"
     //% subcategory="Games"
     export function snake(): void {
         control.inBackground(() => {

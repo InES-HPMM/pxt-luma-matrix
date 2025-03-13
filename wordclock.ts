@@ -447,15 +447,15 @@ namespace lumaMatrix {
      * Optional: joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
      */
     //% blockId="Clock_CreateWordClock"
-    //% block="create word clock version $version hour color $hourColor minute color $minuteColor word color $wordColor || Set time with joystick %joystickEnable"
-    //% version.defl=lumaMatrix.eMatrixVersion.V1
+    //% block="create word clock \nhour color $hourColor minute color $minuteColor word color $wordColor || clock dial $version \nset time with joystick %joystickEnable"
+    //% version.defl=lumaMatrix.eMatrixVersion.V2
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
     //% joystickEnable.shadow="toggleOnOff" joystickEnable.defl=true
     //% subcategory="Clock" group="Time"
     // Not if this block is used with the control.inBackground block, it will not work #BUG 
-    export function createWordClock(version: eMatrixVersion, hourColor: number, minuteColor: number, wordColor: number, joystickEnable?: boolean): void {
+    export function createWordClock(hourColor: number, minuteColor: number, wordColor: number, version?: eMatrixVersion, joystickEnable?: boolean): void {
         wordClock = new WordClock(version, hourColor, minuteColor, wordColor);
         basic.pause(100);
         if (!wordClock) {
