@@ -4,7 +4,7 @@
 Building your own Luma Matrix requires some advanced knowledge in electronics and soldering. The guide assumes you have experience with these topics. If you are not familiar with these topics, start with a simpler project to build your skills.
 ```
 
-The extension allows to render graphics for a 8x8 NeoPixel Matrix using MakeCode. The matrix can be used to display images, text, and control individual pixels. 
+The extension allows to render graphics for a 8x8 NeoPixel Matrix using MakeCode. The matrix can be used to display images, text, and control individual pixels. You can build your own Luma Matrix experience using off-the-shelf components according to schematics and parts list below. Alternatively, the design files for the custom PCB are available in [InES-HPMM/LED-Matrix-Workshop](https://github.com/InES-HPMM/LED-Matrix-Workshop) with gerber for PCB order.
 
 ![lumatrix-schematic](../assets/lumatrix-schematic-extended.png)
 

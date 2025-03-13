@@ -1,5 +1,5 @@
 
-> Open this page at [https://ines-hpmm.github.io/pxt-luma-matrix/](https://ines-hpmm.github.io/pxt-luma-matrix/)
+> Documentation for this extension is available as mdbook, hosted on GitHub Pages at [https://ines-hpmm.github.io/pxt-luma-matrix/](https://ines-hpmm.github.io/pxt-luma-matrix/)
 
 ## About the Project
 
@@ -12,18 +12,11 @@ Use the blocks from the extension to build whatever you have in mind. Draw image
 > Using these blocks requires the [micro:bit V2](https://makecode.microbit.org/device/v2) hardware. On a micro:bit v1 board, you will see memory errors with **9xx** error code on the screen.
 > <img src="./docs/src/assets/v2-only.png" alt="v2-only" style="width:180px;" /> 
 
-The extension is built around a PCB with an 8x8 LED matrix, paired with a 3d printed frame and a plastic diffuser. The hardware is not available for sale but can be built on your own. Design files are available in [InES-HPMM/LED-Matrix-Workshop](https://github.com/InES-HPMM/LED-Matrix-Workshop) with gerber for PCB order.
+The extension is built around a PCB with an 8x8 LED matrix, paired with a 3d printed frame and a plastic diffuser. The hardware is not available for sale but can be built on your own. If you like to build your own Luma Matrix experience using off-the-shelf components, follow the guide in the [Build your own Luma Matrix](docs/src/guides/build-your-own.md) section.
 
-If you like to build your own Luma Matrix experience using off-the-shelf components, follow the guide in the [Build your own Luma Matrix](docs/src/guides/build-your-own.md) section.
 
-## Use as an Extension
 
-This repository can be added as an **extension** in MakeCode.
-
-* Open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* Click on **New Project**
-* Click on **Extensions** under the gear menu
-* Search for **https://github.com/ines-hpmm/pxt-luma-matrix** and import
+## Examples
 
 ### Initialize Matrix
 The matrix must be initialized at the beginning of every program. There is a block for this:
@@ -32,7 +25,6 @@ lumaMatrix.initializeMatrix(135)
 
 ```
 
-## Example
 The available blocks can display images and text, as well as control individual pixels.
 ```blocks
 lumaMatrix.initializeMatrix(135)
@@ -98,6 +90,14 @@ lumaMatrix.onReceivedMatrix(function(dataType: number, receivedBuffer: Buffer) {
 })
 ```
 
+## Use as an Extension
+
+This repository can be added as an **extension** in MakeCode.
+
+* Open [https://makecode.microbit.org/](https://makecode.microbit.org/)
+* Click on **New Project**
+* Click on **Extensions** under the gear menu
+* Search for **https://github.com/ines-hpmm/pxt-luma-matrix** and import
 
 ## Edit This Project
 
@@ -117,6 +117,10 @@ pxt target microbit
 pxt install
 pxt gendocs --locs
 ```
+
+## GitHub Pages
+
+Documentation for this extension is available as mdbook, hosted on GitHub Pages. Open this page at [https://ines-hpmm.github.io/pxt-luma-matrix/](https://ines-hpmm.github.io/pxt-luma-matrix/)
 
 ## Supported targets
 
