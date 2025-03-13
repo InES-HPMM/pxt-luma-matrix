@@ -18,10 +18,10 @@ namespace lumaMatrix {
 
     /**
      * Fully implemented hungry snake game with joystick controls.
-     * Place only this block at the start
+     * Warning: Place only this block at the start and do not implement other code.
      */
     //% blockId="Game_Snake"
-    //% block="Snake Game"
+    //% block="snake game"
     //% subcategory="Games"
     export function snake(): void {
         control.inBackground(() => {

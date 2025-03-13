@@ -20,16 +20,16 @@ namespace lumaMatrix {
     //% blockId="Matrix_Version"
     //% blockHidden=true
     export enum eMatrixVersion {
-        //% block="V1"
+        //% block="version 1"
         V1 = 1,
-        //% block="V2"
+        //% block="version 2"
         V2 = 2,
     }
 
     //% blockId="Matrix_JoystickDirection"
     //% blockHidden=true
     export enum eJoystickDirection {
-        //% block="notPressed"
+        //% block="not pressed"
         NotPressed = 0,
         //% block="center"
         Center = 1,

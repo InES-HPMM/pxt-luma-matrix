@@ -27,7 +27,7 @@ namespace lumaMatrix {
     //% subcategory="Communication"
     export enum eDataType {
         //% block="unknown"
-        Unkown = 0,
+        Unknown = 0,
         //% block="bitmap"
         Bitmap = 1,
         //% block="color image"
@@ -212,7 +212,7 @@ namespace lumaMatrix {
     export function onReceivedMatrix(callback: (dataType: number, receivedBuffer: Buffer) => void): void {
         radio.onReceivedBuffer(function (receivedBuffer: Buffer) {
             let dataLen = receivedBuffer.length
-            let dataType = eDataType.Unkown
+            let dataType = eDataType.Unknown
             if (dataLen > 12) {
                 if (incomImgBuffer.getUint8(0) == 0xa1 && receivedBuffer.getUint8(0) == 0xa0) {
                     let upper = receivedBuffer.slice(1, 13)
@@ -251,7 +251,7 @@ namespace lumaMatrix {
     //% subcategory="Communication"
     export function parseImage(receivedBuffer: Buffer): Image {
         let dataLen = receivedBuffer.length
-        let dataType = eDataType.Unkown
+        let dataType = eDataType.Unknown
 
         dataType = eDataType.Bitmap
         let imgBuffer = receivedBuffer.slice(0, 8); // First 8 bytes for image data
