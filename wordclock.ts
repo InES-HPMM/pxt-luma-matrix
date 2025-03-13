@@ -444,6 +444,7 @@ namespace lumaMatrix {
     /**
      * Initialize Word Clock with given colours. Time will be tracked and pixels on the matrix updated in background.
      * Note: Initialize Luma Matrix before this block.
+     * Warning: Do not use other methods from Pixel group while using this as those blocks will work against the clock logic.
      * Optional: joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
      */
     //% blockId="Clock_CreateWordClock"
