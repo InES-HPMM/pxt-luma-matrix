@@ -371,6 +371,12 @@ namespace lumaMatrix {
         return color
     }
 
+
+    /**
+     * Increase the colour intensity of pixel (x,y) with given colours red, green and blue. 
+     * Previously applied color value is considered.
+     * Intensity will not go above 255.
+     */
     //% blockId="Matrix_AddPixelRGB"
     //% block="add red $R green $G blue $B to pixel at x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
@@ -387,6 +393,12 @@ namespace lumaMatrix {
         setOnePixelRGB(x, y, R, G, B);
     }
 
+
+    /**
+     * Decrease the colour intensity of pixel (x,y) with given colours red, green and blue. 
+     * Previously applied color value is considered.
+     * Intensity will not go below 0.
+     */
     //% blockId="Matrix_SubtractPixelRGB"
     //% block="subtract red $R green $G blue $B from pixel at x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
