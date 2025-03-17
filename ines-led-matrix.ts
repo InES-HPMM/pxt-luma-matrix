@@ -550,10 +550,10 @@ namespace lumaMatrix {
     }
 
     /**
-     * Creates thread to poll joystick direction and execute callback when direction changes. 
+     * Creates thread to poll joystick direction and execute callback when specified direction happens. 
     */
     //% blockId="ZHAW_Input_JoystickCallbackDir"
-    //% block="when joystick direction: %direction"
+    //% block="when joystick direction is %direction"
     //% direction.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     // TODO #BUG when using multiple joystickDirectionThread blocks and the callback function do not finish before executing the other joystickDirectionThread block, microbit crashes.
