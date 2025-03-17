@@ -132,9 +132,8 @@ namespace lumaMatrix {
     }
 
     /**
-     * Initialize the 8 by 8 Neopixel Matrix with a joystick.
-     * This block needs to be execute only once at the start.
-     * This block allows to use custom pins for the input devices.
+     * set custom gpio pins for the input devices. 
+     * Note: Initialize matrix first
      * @param pinSwitchTemp is the GPIO pin for the switch
      * @param pinCenterButtonTemp is the GPIO pin for the center button of the joystick
      * @param pinUpButtonTemp is the GPIO pin for the up button of the joystick
@@ -143,7 +142,7 @@ namespace lumaMatrix {
      * @param pinLeftButtonTemp is the GPIO pin for the left button of the joystick
      */
     //% blockId="ZHAW_Matrix_InitExpert"
-    //% block="initialize LED matrix interface (expert). \nswitch pin $pinSwitchTemp \ncenter button pin $pinCenterButtonTemp \nup button pin $pinUpButtonTemp \ndown button pin $pinDownButtonTemp \nright button pin $pinRightButtonTemp \nleft button pin $pinLeftButtonTemp"
+    //% block="customize input pins (expert). \nswitch pin $pinSwitchTemp \ncenter button pin $pinCenterButtonTemp \nup button pin $pinUpButtonTemp \ndown button pin $pinDownButtonTemp \nright button pin $pinRightButtonTemp \nleft button pin $pinLeftButtonTemp"
     //% advanced=true group="Debug"
     export function initializeMatrixInterfaceExpert(
         pinSwitchTemp: DigitalPin,
