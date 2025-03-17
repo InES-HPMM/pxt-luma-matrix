@@ -34,7 +34,7 @@ for (let i = 0; i < 8; i++) {
     basic.pause(100)
 }
 basic.pause(2000)
-lumaMatrix.createWordClock(lumaMatrix.eMatrixVersion.V1, 0xff00ff, 0x00ffff, 0xffff00)
+lumaMatrix.createWordClock(0xff00ff, 0x00ffff, 0xffff00, lumaMatrix.eMatrixVersion.V2)
 lumaMatrix.setCurrentTime(15, 33, 0)
 
 while (true) {

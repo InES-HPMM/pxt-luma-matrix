@@ -17,7 +17,7 @@
 
 namespace lumaMatrix {
 
-    //% blockId="Matrix_Version"
+    //% blockId="ZHAW_Matrix_Version"
     //% blockHidden=true
     export enum eMatrixVersion {
         //% block="version 1"
@@ -26,7 +26,7 @@ namespace lumaMatrix {
         V2 = 2,
     }
 
-    //% blockId="Matrix_JoystickDirection"
+    //% blockId="ZHAW_Matrix_JoystickDirection"
     //% blockHidden=true
     export enum eJoystickDirection {
         //% block="not pressed"
@@ -43,7 +43,7 @@ namespace lumaMatrix {
         Left = 5
     }
 
-    //% blockId="Matrix_Direction"
+    //% blockId="ZHAW_Matrix_Direction"
     //% blockHidden=true
     export enum eDirection {
         //% block="right"

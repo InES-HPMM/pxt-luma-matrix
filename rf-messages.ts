@@ -22,7 +22,7 @@ namespace lumaMatrix {
     /**
      * Enum with predefined datatypes in messages sent over radio
      */
-    //% blockId="RF_DataTypeEnum" block="%dataType"
+    //% blockId="ZHAW_RF_DataTypeEnum" block="%dataType"
     //% blockHidden=true
     //% subcategory="Communication"
     export enum eDataType {
@@ -37,7 +37,7 @@ namespace lumaMatrix {
     /**
      * Enum with predefined colours to reduce packet size over radio
      */
-    //% blockId="RF_ColorsEnum" block="%color"
+    //% blockId="ZHAW_RF_ColorsEnum" block="%color"
     //% blockHidden=true
     //% subcategory="Communication"
     export enum eColorPalette {
@@ -75,7 +75,7 @@ namespace lumaMatrix {
     /**
      * Get element from enum with predefined datatypes in messages sent over radio
      */
-    //% blockId="RF_DataType" 
+    //% blockId="ZHAW_RF_DataType" 
     //% block="datatype $dataType"
     //% dataType.defl=lumaMatrix.eDataType.RGBImage
     //% subcategory="Communication"
@@ -86,7 +86,7 @@ namespace lumaMatrix {
     /**
      * Get element from enum with predefined colours to reduce packet size over radio
      */
-    //% blockId="RF_ColorPicker" 
+    //% blockId="ZHAW_RF_ColorPicker" 
     //% block="color palette $color"
     //% color.defl=lumaMatrix.eColorPalette.Yellow
     //% subcategory="Communication"
@@ -100,7 +100,7 @@ namespace lumaMatrix {
     /**
      * Encode a bitmap into a buffer which can be transmitted over radio
      */
-    //% blockId="RF_EncodeImage"
+    //% blockId="ZHAW_RF_EncodeImage"
     //% block="bitmap $image to buffer"
     //% image.shadow="Image_8x8"
     //% subcategory="Communication"
@@ -130,7 +130,7 @@ namespace lumaMatrix {
     /**
      * Decode a received buffer back into a bitmap
      */
-    //% blockId="RF_DecodeImage"
+    //% blockId="ZHAW_RF_DecodeImage"
     //% block="buffer $buf to bitmap"
     //% imageLiteralColumns=8
     //% imageLiteralRows=8
@@ -172,7 +172,7 @@ namespace lumaMatrix {
     /**
      * Send bitmap in single colour to other Luma Matrix over radio. Radio channel needs to be set in advance
      */
-    //% blockId="RF_SendImage"
+    //% blockId="ZHAW_RF_SendImage"
     //% block="send $image in color %color"
     //% color.shadow="colorNumberPicker"
     //% image.shadow="Image_8x8"
@@ -188,7 +188,7 @@ namespace lumaMatrix {
     /**
      * Send compressed pixel buffer in colors of pallette to other Luma Matrix over radio. Radio channel needs to be set in advance
      */
-    //% blockId="RF_SendPixelBuffer"
+    //% blockId="ZHAW_RF_SendPixelBuffer"
     //% block="send compressed pixel buffer $buf"
     //% buf.shadow="Matrix_GetPixelBuffer"
     //% subcategory="Communication"
@@ -205,7 +205,7 @@ namespace lumaMatrix {
     /**
      * Listen on incomming radio messages from other Luma Matrix. Radio channel needs to be set in advance
      */
-    //% blockId="RF_OnReceived"
+    //% blockId="ZHAW_RF_OnReceived"
     //% block="on received matrix buffer"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
@@ -245,7 +245,7 @@ namespace lumaMatrix {
     /**
      * Parse received message for image
      */
-    //% blockId="RF_ParseImage"
+    //% blockId="ZHAW_RF_ParseImage"
     //% block="image from $receivedBuffer"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
@@ -264,7 +264,7 @@ namespace lumaMatrix {
     /**
      * Parse received message for colour
      */
-    //% blockId="RF_ParseForColor"
+    //% blockId="ZHAW_RF_ParseForColor"
     //% block="color from $receivedBuffer"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
@@ -287,7 +287,7 @@ namespace lumaMatrix {
     /**
      * Parse received message for coloured image
      */
-    //% blockId="RF_ParseReceivedColorImage"
+    //% blockId="ZHAW_RF_ParseReceivedColorImage"
     //% block="color image from $receivedBuffer"
     //% draggableParameters="reporter"
     //% subcategory="Communication"
