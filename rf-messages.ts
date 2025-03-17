@@ -102,7 +102,7 @@ namespace lumaMatrix {
      */
     //% blockId="ZHAW_RF_EncodeImage"
     //% block="bitmap $image to buffer"
-    //% image.shadow="Image_8x8"
+    //% image.shadow="ZHAW_Image_8x8"
     //% subcategory="Communication"
     function bitmapToBuffer(image: Image): Buffer {
         let imgBuffer = control.createBuffer(8); // Create an 8-byte buffer
@@ -175,8 +175,8 @@ namespace lumaMatrix {
     //% blockId="ZHAW_RF_SendImage"
     //% block="send $image in color %color"
     //% color.shadow="colorNumberPicker"
-    //% image.shadow="Image_8x8"
-    //% subcategory="Communication"
+    //% image.shadow="ZHAW_Image_8x8"
+    //% subcategory="Communication" weight=110
     export function sendImageWithColor(image: Image, color: number) {
         let msgBuf = bitmapToBuffer(image)
         let colors = [color >> 16 & 0xff, color >> 8 & 0xff, color & 0xff]
@@ -190,8 +190,8 @@ namespace lumaMatrix {
      */
     //% blockId="ZHAW_RF_SendPixelBuffer"
     //% block="send compressed pixel buffer $buf"
-    //% buf.shadow="Matrix_GetPixelBuffer"
-    //% subcategory="Communication"
+    //% buf.shadow="ZHAW_Matrix_GetPixelBuffer"
+    //% subcategory="Communication" weight=109
     export function sendPixelBuffer(buf: Buffer) {
         let compressed = compressRGB(buf)
         let upper = Buffer.fromArray([0xa0]).concat(compressed.slice(0, 12))
@@ -208,7 +208,7 @@ namespace lumaMatrix {
     //% blockId="ZHAW_RF_OnReceived"
     //% block="on received matrix buffer"
     //% draggableParameters="reporter"
-    //% subcategory="Communication"
+    //% subcategory="Communication" weight=120
     export function onReceivedMatrix(callback: (dataType: number, receivedBuffer: Buffer) => void): void {
         radio.onReceivedBuffer(function (receivedBuffer: Buffer) {
             let dataLen = receivedBuffer.length

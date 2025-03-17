@@ -18,7 +18,7 @@
 
 //% color=#3162a3 icon="\uf00a" block="Luma Matrix"
 namespace lumaMatrix {
-
+    
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
     let matrixWidth = 8; // x
@@ -318,6 +318,7 @@ namespace lumaMatrix {
      */
     //% blockId="ZHAW_Matrix_ApplyPixelBuffer"
     //% block="apply pixel buffer $buf"
+    //% buf.shadow="ZHAW_Matrix_GetPixelBuffer"
     //% group="Pixels" weight=106
     export function applyPixelBuffer(buf: Buffer) {
         const dataLen = buf.length;
@@ -519,7 +520,7 @@ namespace lumaMatrix {
      */
     //% blockId="ZHAW_Input_JoystickCompare"
     //% block="$joystick == $direction"
-    //% joystick.shadow="Input_JoystickRead"
+    //% joystick.shadow="ZHAW_Input_JoystickRead"
     //% direction.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     export function compareJoystick(joystick: number, direction: eJoystickDirection): boolean {
@@ -608,7 +609,7 @@ namespace lumaMatrix {
      */
     //% blockId="ZHAW_Matrix_ImageStatic"
     //% block="show image on matrix | $image | with colour $color || layer $layer"
-    //% image.shadow="Image_8x8"
+    //% image.shadow="ZHAW_Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% layer.defl=true
     //% layer.shadow="toggleOnOff"
@@ -641,7 +642,7 @@ namespace lumaMatrix {
      */
     //% blockId="ZHAW_Matrix_ImageMoving"
     //% block="show moving image on matrix | $image with colour $color and speed $speed in direction $direction"
-    //% image.shadow="Image_8x8"
+    //% image.shadow="ZHAW_Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% speed.defl=10 speed.min=1 speed.max=99
     //% direction.defl=lumaMatrix.eDirection.Right
