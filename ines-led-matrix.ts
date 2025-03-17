@@ -708,6 +708,11 @@ namespace lumaMatrix {
         }
         speed = linearizeInt(speed, 1, 100, 1, 1000) // Convert speed to ms
 
+        if (text.length < 1){
+            serialDebugMsg("scrollText: Text is empty. \n");
+            return
+        }
+
         if (text.length > 255) {
             text = text.substr(0, 255);
             serialDebugMsg("scrollText: Text is to long, anything longer than 255 is cut off. \n");
