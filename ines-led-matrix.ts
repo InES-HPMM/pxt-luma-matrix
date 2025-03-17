@@ -549,7 +549,7 @@ namespace lumaMatrix {
         });
     }
 
-    /*
+    /**
      * Creates thread to poll joystick direction and execute callback when direction changes. 
     */
     //% blockId="ZHAW_Input_JoystickCallbackDir"
