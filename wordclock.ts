@@ -66,7 +66,7 @@ namespace lumaMatrix {
     /**
     * Get the current time in seconds, 0 if currently unavailable.
     */
-    //% blockId="Clock_TimeGet"
+    //% blockId="ZHAW_Clock_TimeGet"
     //% block="current time"
     //% subcategory="Clock" group="Time"
     export function getCurrentTime(): number {
@@ -85,7 +85,7 @@ namespace lumaMatrix {
     /**
     * Get the current time as a formatted string in "hh:mm:ss".
     */
-    //% blockId="Clock_TimeGetStr"
+    //% blockId="ZHAW_Clock_TimeGetStr"
     //% block="current time as text"
     //% subcategory="Clock" group="Time"
     export function getCurrentTimeAsText(): string {
@@ -110,7 +110,7 @@ namespace lumaMatrix {
      * @param minutes is number from 0 to 59
      * @param seconds is number from 0 to 59
     */
-    //% blockId="Clock_TimeSet"
+    //% blockId="ZHAW_Clock_TimeSet"
     //% block="set current time to $hours:$minutes:$seconds"
     //% hours.min=0 hours.max=23
     //% minutes.min = 0 minutes.max = 59
@@ -147,7 +147,7 @@ namespace lumaMatrix {
      * Set internal time to new value
      * @param timestring is in format "hh:mm:ss"
     */
-    //% blockId="Clock_TimeSetStr"
+    //% blockId="ZHAW_Clock_TimeSetStr"
     //% block="set current time to $timestring"
     //% subcategory="Clock" group="Time"
     export function setCurrentTimeStr(timestring: string): void {
@@ -167,7 +167,7 @@ namespace lumaMatrix {
      * Clear icon
      * @param icon is number of icon [0..3]. Others will clear all
     */
-    //% blockId="Clock_IconClear"
+    //% blockId="ZHAW_Clock_IconClear"
     //% block="clear icon || %icon"
     //% icon.defl=-1
     //% subcategory="Clock" group="Icon"
@@ -191,7 +191,7 @@ namespace lumaMatrix {
      * Set an icon to a specified color
      * @param icon is number of icon [0..3]
     */
-    //% blockId="Clock_IconSet"
+    //% blockId="ZHAW_Clock_IconSet"
     //% block="set icon %icon to color %color"
     //% color.shadow="colorNumberPicker"
     //% subcategory="Clock" group="Icon"
@@ -214,7 +214,7 @@ namespace lumaMatrix {
     /**
      * Set colours of the words to new values
      */
-    //% blockId="Clock_ColorsSet"
+    //% blockId="ZHAW_Clock_ColorsSet"
     //% block="set word colors | hour color $hourColor | minute color $minuteColor | word color $wordColor"
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
@@ -236,7 +236,7 @@ namespace lumaMatrix {
      * Enable time setting with joystick. Up/Down for hours and Left/Right for minutes
      * @param state if true enables the joystick
     */
-    //% blockId="Clock_JoystickTimeSet"
+    //% blockId="ZHAW_Clock_JoystickTimeSet"
     //% block="set joystick time setting to %state"
     //% state.shadow="toggleOnOff"
     //% subcategory="Clock" group="Behaviour"
@@ -447,7 +447,7 @@ namespace lumaMatrix {
      * Warning: Do not use other methods from Pixel group while using this as those blocks will work against the clock logic.
      * Optional: joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
      */
-    //% blockId="Clock_CreateWordClock"
+    //% blockId="ZHAW_Clock_CreateWordClock"
     //% block="create word clock | hour color $hourColor minute color $minuteColor word color $wordColor || clock dial $version | set time with joystick %joystickEnable"
     //% version.defl=lumaMatrix.eMatrixVersion.V2
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff

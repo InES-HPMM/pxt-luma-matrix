@@ -18,7 +18,7 @@
 
 //% color=#3162a3 icon="\uf00a" block="Luma Matrix"
 namespace lumaMatrix {
-
+    
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
     let matrixWidth = 8; // x
@@ -69,7 +69,7 @@ namespace lumaMatrix {
     /**
      * Enable serial messages for debugging printed by the Luma Matrix extension.
      */
-    //% blockId="Debug_Enable"
+    //% blockId="ZHAW_Debug_Enable"
     //% block="set serial debugging prints to $enable"
     //% enable.shadow="toggleOnOff"
     //% advanced=true group="Debug"
@@ -100,7 +100,7 @@ namespace lumaMatrix {
      * Initialize the 8 by 8 Neopixel Matrix with a joystick. 
      * This block needs to be execute only once at the start.
      */
-    //% blockId="Matrix_Init"
+    //% blockId="ZHAW_Matrix_Init"
     //% block="initialize Luma Matrix with brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=120
@@ -132,9 +132,8 @@ namespace lumaMatrix {
     }
 
     /**
-     * Initialize the 8 by 8 Neopixel Matrix with a joystick.
-     * This block needs to be execute only once at the start.
-     * This block allows to use custom pins for the input devices.
+     * set custom gpio pins for the input devices. 
+     * Note: Initialize matrix first
      * @param pinSwitchTemp is the GPIO pin for the switch
      * @param pinCenterButtonTemp is the GPIO pin for the center button of the joystick
      * @param pinUpButtonTemp is the GPIO pin for the up button of the joystick
@@ -142,8 +141,8 @@ namespace lumaMatrix {
      * @param pinRightButtonTemp is the GPIO pin for the right button of the joystick
      * @param pinLeftButtonTemp is the GPIO pin for the left button of the joystick
      */
-    //% blockId="Matrix_InitExpert"
-    //% block="initialize LED matrix interface (expert). \nswitch pin $pinSwitchTemp \ncenter button pin $pinCenterButtonTemp \nup button pin $pinUpButtonTemp \ndown button pin $pinDownButtonTemp \nright button pin $pinRightButtonTemp \nleft button pin $pinLeftButtonTemp"
+    //% blockId="ZHAW_Matrix_InitExpert"
+    //% block="customize input pins (expert). \nswitch pin $pinSwitchTemp \ncenter button pin $pinCenterButtonTemp \nup button pin $pinUpButtonTemp \ndown button pin $pinDownButtonTemp \nright button pin $pinRightButtonTemp \nleft button pin $pinLeftButtonTemp"
     //% advanced=true group="Debug"
     export function initializeMatrixInterfaceExpert(
         pinSwitchTemp: DigitalPin,
@@ -173,7 +172,7 @@ namespace lumaMatrix {
     /**
      * Clear the pixels of the Luma Matrix
      */
-    //% blockId="Matrix_Clear"
+    //% blockId="ZHAW_Matrix_Clear"
     //% block="clear matrix"
     //% group="Pixels" weight=110
     export function clear(): void {
@@ -187,7 +186,7 @@ namespace lumaMatrix {
     /**
      * Set the brightness of the pixels inside range from 0 to 255.
      */
-    //% blockId="Matrix_Brightness"
+    //% blockId="ZHAW_Matrix_Brightness"
     //% block="set brightness $brightness"
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=109
@@ -220,7 +219,7 @@ namespace lumaMatrix {
     /**
      * Combine colour channels into a 24 bit colour number
      */
-    //% blockId="Matrix_RGBToColor"
+    //% blockId="ZHAW_Matrix_RGBToColor"
     //% block="red $R green $G blue $B"
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255 
     //% group="Pixels" weight=108
@@ -234,7 +233,7 @@ namespace lumaMatrix {
     /**
      * Set colour of pixel a coordinate to a 24 bit color value
      */
-    //% blockId="Matrix_SetPixelColor"
+    //% blockId="ZHAW_Matrix_SetPixelColor"
     //% block="set pixel at x $x y $y to colour $color"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% color.shadow="colorNumberPicker"
@@ -248,7 +247,7 @@ namespace lumaMatrix {
     /**
      * Set colour of pixel a coordinate to the colour channels
      */
-    //% blockId="Matrix_SetPixelRGB"
+    //% blockId="ZHAW_Matrix_SetPixelRGB"
     //% block="set pixel at | x $x y $y to colour | red $R green $G blue $B"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
@@ -267,7 +266,7 @@ namespace lumaMatrix {
     /**
      * Get a representation of which pixels are turned on. Only bitmap is available without colour information.
      */
-    //% blockId="Matrix_GetMatrixImage"
+    //% blockId="ZHAW_Matrix_GetMatrixImage"
     //% block="image from matrix"
     //% group="Pixels" weight=106
     export function getMatrixImage(): Image {
@@ -306,7 +305,7 @@ namespace lumaMatrix {
     /**
      * Get the buffer with stored colours for each pixel. Each pixel uses 3 bytes in order red, green, blue.
      */
-    //% blockId="Matrix_GetPixelBuffer"
+    //% blockId="ZHAW_Matrix_GetPixelBuffer"
     //% block="pixel buffer"
     //% group="Pixels" weight=106
     export function getPixelBuffer(): Buffer {
@@ -316,8 +315,9 @@ namespace lumaMatrix {
     /**
      * Write a buffer full of colours to the matrix. Color must be split into 3 successive bytes following order red, green, blue.
      */
-    //% blockId="Matrix_ApplyPixelBuffer"
+    //% blockId="ZHAW_Matrix_ApplyPixelBuffer"
     //% block="apply pixel buffer $buf"
+    //% buf.shadow="ZHAW_Matrix_GetPixelBuffer"
     //% group="Pixels" weight=106
     export function applyPixelBuffer(buf: Buffer) {
         const dataLen = buf.length;
@@ -355,7 +355,7 @@ namespace lumaMatrix {
     /**
      * Get the colour of the pixel at coordinate (x,y)
      */
-    //% blockId="Matrix_GetPixelRGB"
+    //% blockId="ZHAW_Matrix_GetPixelRGB"
     //% block="colour at pixel x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% group="Pixels" weight=106
@@ -377,7 +377,7 @@ namespace lumaMatrix {
      * Previously applied color value is considered.
      * Intensity will not go above 255.
      */
-    //% blockId="Matrix_AddPixelRGB"
+    //% blockId="ZHAW_Matrix_AddPixelRGB"
     //% block="add red $R green $G blue $B to pixel at x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
@@ -399,7 +399,7 @@ namespace lumaMatrix {
      * Previously applied color value is considered.
      * Intensity will not go below 0.
      */
-    //% blockId="Matrix_SubtractPixelRGB"
+    //% blockId="ZHAW_Matrix_SubtractPixelRGB"
     //% block="subtract red $R green $G blue $B from pixel at x $x y $y"
     //% x.min=0 x.max=7 y.min=0 y.max=7
     //% R.min=0 R.max=255 G.min=0 G.max=255 B.min=0 B.max=255
@@ -415,7 +415,7 @@ namespace lumaMatrix {
         setOnePixelRGB(x, y, R, G, B);
     }
 
-    //% blockId="Input_GPIORead"
+    //% blockId="ZHAW_Input_GPIORead"
     //% block="GPIO $pin"
     //% blockHidden=true // Function not really needed, just for debugging
     //% subcategory="Input"
@@ -428,7 +428,7 @@ namespace lumaMatrix {
     /**
      * Read Luma Matrix switch position
      */
-    //% blockId="Input_SwitchRead"
+    //% blockId="ZHAW_Input_SwitchRead"
     //% block="switch position"
     //% subcategory="Input"
     export function readSwitch(): number {
@@ -438,7 +438,7 @@ namespace lumaMatrix {
     /**
      * Compare Luma Matrix switch position
      */
-    //% blockId="Input_SwitchReadBool"
+    //% blockId="ZHAW_Input_SwitchReadBool"
     //% block="switch is $state"
     //% state.shadow="toggleOnOff"
     //% subcategory="Input"
@@ -452,7 +452,7 @@ namespace lumaMatrix {
     /**
      * Creates thread to poll switch state and execute callback when state changes. 
     */
-    //% blockId="Input_SwitchCallback"
+    //% blockId="ZHAW_Input_SwitchCallback"
     //% block="when switch value changed"
     //% draggableParameters="reporter"
     //% subcategory="Input"
@@ -473,7 +473,7 @@ namespace lumaMatrix {
     /**
      * Read Luma Matrix joystick position
      */
-    //% blockId="Input_JoystickRead"
+    //% blockId="ZHAW_Input_JoystickRead"
     //% block="joystick direction"
     //% subcategory="Input"
     export function readJoystick(): number {
@@ -495,7 +495,7 @@ namespace lumaMatrix {
     /**
      * Read Luma Matrix joystick position as text
      */
-    //% blockId="Input_JoystickReadStr"
+    //% blockId="ZHAW_Input_JoystickReadStr"
     //% block="joystick direction text"
     //% subcategory="Input"
     export function readJoystickText(): string {
@@ -517,9 +517,9 @@ namespace lumaMatrix {
     /**
      * Compare Luma Matrix joystick position
      */
-    //% blockId="Input_JoystickCompare"
+    //% blockId="ZHAW_Input_JoystickCompare"
     //% block="$joystick == $direction"
-    //% joystick.shadow="Input_JoystickRead"
+    //% joystick.shadow="ZHAW_Input_JoystickRead"
     //% direction.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     export function compareJoystick(joystick: number, direction: eJoystickDirection): boolean {
@@ -549,11 +549,11 @@ namespace lumaMatrix {
         });
     }
 
-    /*
-     * Creates thread to poll joystick direction and execute callback when direction changes. 
+    /**
+     * Creates thread to poll joystick direction and execute callback when specified direction happens. 
     */
-    //% blockId="Input_JoystickCallbackDir"
-    //% block="when joystick direction: %direction"
+    //% blockId="ZHAW_Input_JoystickCallbackDir"
+    //% block="when joystick direction is %direction"
     //% direction.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
     // TODO #BUG when using multiple joystickDirectionThread blocks and the callback function do not finish before executing the other joystickDirectionThread block, microbit crashes.
@@ -579,7 +579,7 @@ namespace lumaMatrix {
     /**
      * Select direction from joystick enum
      */
-    //% blockId="IO_JoystickDirectionEnum" 
+    //% blockId="ZHAW_IO_JoystickDirectionEnum" 
     //% block="direction $dir"
     //% dir.defl=lumaMatrix.eJoystickDirection.Center
     //% subcategory="Input"
@@ -590,7 +590,7 @@ namespace lumaMatrix {
     /**
      * 8 by 8 matrix bitmap
      */
-    //% blockId="Image_8x8"
+    //% blockId="ZHAW_Image_8x8"
     //% block="image 8x8"
     //% imageLiteral=1
     //% imageLiteralColumns=8
@@ -606,9 +606,9 @@ namespace lumaMatrix {
      * Write bitmap of pixels in defined colour to the matrix.
      * layer is true by default and will not clear unset pixels.
      */
-    //% blockId="Matrix_ImageStatic"
+    //% blockId="ZHAW_Matrix_ImageStatic"
     //% block="show image on matrix | $image | with colour $color || layer $layer"
-    //% image.shadow="Image_8x8"
+    //% image.shadow="ZHAW_Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% layer.defl=true
     //% layer.shadow="toggleOnOff"
@@ -639,9 +639,9 @@ namespace lumaMatrix {
     /**
      * Let text scroll across the matrix, letter by letter from right to the left.
      */
-    //% blockId="Matrix_ImageMoving"
+    //% blockId="ZHAW_Matrix_ImageMoving"
     //% block="show moving image on matrix | $image with colour $color and speed $speed in direction $direction"
-    //% image.shadow="Image_8x8"
+    //% image.shadow="ZHAW_Image_8x8"
     //% color.shadow="colorNumberPicker"
     //% speed.defl=10 speed.min=1 speed.max=99
     //% direction.defl=lumaMatrix.eDirection.Right
@@ -692,7 +692,7 @@ namespace lumaMatrix {
     /**
      * Let text scroll across the Luma Matrix pixels.
      */
-    //% blockId="Matrix_TextScroll"
+    //% blockId="ZHAW_Matrix_TextScroll"
     //% block="scroll text $text with colour $color and speed $speed"
     //% color.shadow="colorNumberPicker"
     //% speed.defl=10 speed.min=1 speed.max=100
@@ -707,6 +707,11 @@ namespace lumaMatrix {
             speed = 100 - speed; // make 100 the fastest speed
         }
         speed = linearizeInt(speed, 1, 100, 1, 1000) // Convert speed to ms
+
+        if (text.length < 1){
+            serialDebugMsg("scrollText: Text is empty. \n");
+            return
+        }
 
         if (text.length > 255) {
             text = text.substr(0, 255);
@@ -806,7 +811,7 @@ namespace lumaMatrix {
     /**
      * Defined test sequence which checks every aspect of the hardware. 
      */
-    //% blockId="Debug_MatrixHardware"
+    //% blockId="ZHAW_Debug_MatrixHardware"
     //% block="test LED matrix hardware"
     //% advanced=true group="Debug"
     export function testLedMatrixHW(): void {
