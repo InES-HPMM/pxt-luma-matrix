@@ -31,7 +31,9 @@ namespace lumaMatrix {
         //% block="bitmap"
         Bitmap = 1,
         //% block="color image"
-        RGBImage = 2
+        RGBImage = 2,
+        //% block="pixel (x,y)"
+        Pixel = 3
     }
 
     /**
@@ -170,6 +172,23 @@ namespace lumaMatrix {
 
 
     /**
+     * Send one pixel in single colour to other Luma Matrix over radio. Radio channel needs to be set in advance
+     */
+    //% blockId="ZHAW_RF_SendPixel"
+    //% block="send pixel x $x y $y in color $color"
+    //% x.min=0 x.max=7
+    //% y.min=0 y.max=7
+    //% color.shadow="colorNumberPicker"
+    //% subcategory="Communication" weight=110
+    export function sendPixel(x: number, y: number, color: number) {
+        let data = Buffer.fromArray([eDataType.Pixel, x, y])
+        let colors = [color >> 16 & 0xff, color >> 8 & 0xff, color & 0xff]
+        let packagedBuffer = data.concat(Buffer.fromArray(colors))
+        radio.sendBuffer(packagedBuffer)
+    }
+
+
+    /**
      * Send bitmap in single colour to other Luma Matrix over radio. Radio channel needs to be set in advance
      */
     //% blockId="ZHAW_RF_SendImage"
@@ -239,6 +258,31 @@ namespace lumaMatrix {
             serialDebugMsg("Type: " + dataType + ", Buffer: " + dataLen)
             callback(dataType, receivedBuffer)
         });
+    }
+
+
+    /**
+     * Parse received message for pixel and applies to luma matrix
+     */
+    //% blockId="ZHAW_RF_ParsePixel"
+    //% block="set pixel from $receivedBuffer"
+    //% draggableParameters="reporter"
+    //% subcategory="Communication"
+    export function parsePixel(receivedBuffer: Buffer): void {
+        let dataLen = receivedBuffer.length
+        let dataType = receivedBuffer.getUint8(0)
+
+        if(dataType != eDataType.Pixel){
+            return
+        }
+        
+        let x = receivedBuffer.getUint8(1)
+        let y = receivedBuffer.getUint8(2)
+        let red = receivedBuffer.getUint8(3);
+        let green = receivedBuffer.getUint8(4);
+        let blue = receivedBuffer.getUint8(5);
+
+        lumaMatrix.setOnePixelRGB(x, y, red, green, blue);
     }
 
 
