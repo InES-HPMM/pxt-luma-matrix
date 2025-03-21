@@ -302,6 +302,50 @@ namespace lumaMatrix {
         return img;
     }
 
+
+    /**
+     * Get a representation of which pixels are turned on based on input coordinates. 
+     * Only bitmap is available without colour information.
+     */
+    //% blockId="ZHAW_Matrix_GetImageFromCoordinates"
+    //% block="image from $pixels"
+    //% group="Pixels" weight=106 advanced=true
+    export function getImageFromCoordinates(pixels: number[][]): Image {
+        let img = images.createImage(`
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+    `); // Initialize an 8x8 image
+
+        try {
+            let imagewidth = img.width();
+            let imageheight = img.height();
+
+            for (let i=0; i<pixels.length; i++){
+                img.setPixel(pixels[i][0] % 8, pixels[i][1] % 8, true); // Set the pixel if the coordinate is present
+                /*for (let y = 0; y < imageheight; y++) {
+                    for (let x = 0; x < imagewidth; x++) {
+                        let index = (matrixHeight - 1 - y) * matrixWidth + x;
+                        if (x == pixels[i][0] && y == pixels[i][1]) {
+                            img.setPixel(x, y, true); // Set the pixel if the coordinate is present
+                        } else {
+                            img.setPixel(x, y, false); // Clear the pixel if the bit is 0
+                        }
+                    }
+                }*/
+            }
+        } catch (e) {
+            console.log(`bufferToBitmap error: ${e}`);
+        }
+
+        return img;
+    }
+
     /**
      * Get the buffer with stored colours for each pixel. Each pixel uses 3 bytes in order red, green, blue.
      */
