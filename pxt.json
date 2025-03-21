@@ -13,8 +13,8 @@
         "ines-led-matrix.ts",
         "enums.ts",
         "matrix-lut.ts",
-        "_locales/de/Luma Matrix-strings.json",
-        "_locales/de/Luma Matrix-jsdoc-strings.json",
+        "_locales/de/luma-matrix-strings.json",
+        "_locales/de/luma-matrix-jsdoc-strings.json",
         "wordclock.ts",
         "snake-game.ts",
         "rf-messages.ts"
