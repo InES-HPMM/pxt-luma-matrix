@@ -21,8 +21,8 @@ namespace lumaMatrix {
     
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
-    let matrixWidth = 8; // x
-    let matrixHeight = 8; // y
+    export let matrixWidth = 8; // x
+    export let matrixHeight = 8; // y
     export let currentBrightness = 100; // 0 to 255
     export let pollingInterval = 10 // 10ms Interval for polling LED Matrix Interface. Adjust the polling interval as needed.
     let pinNeopixels: DigitalPin = DigitalPin.P0;
@@ -182,11 +182,13 @@ namespace lumaMatrix {
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=120
     export function initializeMatrix(brightness: number): void {
-        serial.setBaudRate(BaudRate.BaudRate115200)
+        serial.setBaudRate(BaudRate.BaudRate115200);
         serial.redirectToUSB();
 
         currentBrightness = brightness;
-        strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+        if (!strip) {
+            strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+        }
         strip.setBrightness(brightness);
         clear();
         initializeMatrixInterface();

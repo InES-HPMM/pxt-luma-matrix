@@ -56,6 +56,9 @@ namespace lumaMatrix {
         }
 
         private initializeMatrix(): void {
+            if (!this._matrix) {
+                this._matrix = strip;
+            }
             this._matrix.setBrightness(currentBrightness);
             this._matrix.clear();
             this._matrix.show();
