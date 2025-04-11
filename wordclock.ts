@@ -140,7 +140,12 @@ namespace lumaMatrix {
                 return;
             }
         }
-        wordClock.displayTime()
+        if (!wordClock) { // TODO in all exported functions check if class access is save! Do it like this
+            serialDebugMsg("setCurrentTime: Error - WordClock object is not initialized, cannot update displayed time");
+            return
+        } else {
+            wordClock.displayTime()
+        }
     }
 
 
