@@ -96,6 +96,83 @@ namespace lumaMatrix {
         return lowerOutputRangeLimit + factor * (upperOutputRangeLimit - lowerOutputRangeLimit);
     }
 
+    /* Helper method to extract RGB components from a color value. */
+    export function extractRgb(color: number): { r: number, g: number, b: number } {
+        return {
+            r: Math.max(0, Math.min(255, (color >> 16) & 0xFF)),
+            g: Math.max(0, Math.min(255, (color >> 8) & 0xFF)),
+            b: Math.max(0, Math.min(255, color & 0xFF))
+        };
+    }
+
+    /* Helper method to convert RGB to HSV. */
+    export function rgbToHsv(r: number, g: number, b: number): { h: number, s: number, v: number } {
+        /* Normalize RGB values to 0-1 */
+        const rNorm = r / 255;
+        const gNorm = g / 255; 
+        const bNorm = b / 255;
+        
+        /* Find the maximum and minimum RGB values, weird code because makecode max min function only takes two values. */
+        const cMax = Math.max(rNorm, Math.max(gNorm, bNorm));
+        const cMin = Math.min(rNorm, Math.min(gNorm, bNorm));
+        const delta = cMax - cMin;
+        
+        /* Calculate hue (0-360) */
+        let h = 0;
+        if (delta === 0) {
+            h = 0;
+        } else if (cMax === rNorm) {
+            h = 60 * (((gNorm - bNorm) / delta) % 6);
+        } else if (cMax === gNorm) {
+            h = 60 * ((bNorm - rNorm) / delta + 2);
+        } else {
+            h = 60 * ((rNorm - gNorm) / delta + 4);
+        }
+        
+        /* Make sure hue is in range of 0-360 */
+        if (h < 0) {
+            h += 360;
+        } else if (h > 360) {
+            h -= 360;
+        }
+
+        /* Calculate saturation and value */
+        const s = (cMax === 0) ? 0 : delta / cMax;
+        const v = cMax;
+        
+        return { h, s, v };
+    }
+
+    /* Helper method to convert HSV to RGB. */
+    export function hsvToRgb(h: number, s: number, v: number): { r: number, g: number, b: number } {
+        const c = v * s;
+        const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+        const m = v - c;
+        
+        let rPrime = 0, gPrime = 0, bPrime = 0;
+        
+        if (h >= 0 && h < 60) {
+            rPrime = c; gPrime = x; bPrime = 0;
+        } else if (h >= 60 && h < 120) {
+            rPrime = x; gPrime = c; bPrime = 0;
+        } else if (h >= 120 && h < 180) {
+            rPrime = 0; gPrime = c; bPrime = x;
+        } else if (h >= 180 && h < 240) {
+            rPrime = 0; gPrime = x; bPrime = c;
+        } else if (h >= 240 && h < 300) {
+            rPrime = x; gPrime = 0; bPrime = c;
+        } else {
+            rPrime = c; gPrime = 0; bPrime = x;
+        }
+        
+        /* Convert back to 0-255 range */
+        const r = Math.max(0, Math.min(255, Math.round((rPrime + m) * 255)));
+        const g = Math.max(0, Math.min(255, Math.round((gPrime + m) * 255)));
+        const b = Math.max(0, Math.min(255, Math.round((bPrime + m) * 255)));
+        
+        return { r, g, b };
+    }
+
     /**
      * Initialize the 8 by 8 Neopixel Matrix with a joystick. 
      * This block needs to be execute only once at the start.

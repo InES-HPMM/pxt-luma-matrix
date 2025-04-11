@@ -10,7 +10,7 @@
  * -- File:	    snake-game.ts
  * -- Project:  micro:bit InES Matrix
  * -- Date:	    08.01.2025
- * -- Author:   vore, hesu, ebep
+ * -- Author:   hesu, ebep
  * --
  * ------------------------------------------------------------------
  */

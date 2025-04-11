@@ -10,7 +10,7 @@
  * -- File:	    wordclock.ts
  * -- Project:  micro:bit InES Matrix
  * -- Date:	    08.01.2025
- * -- Author:   vore, hesu, ebep
+ * -- Author:   hesu, ebep
  * --
  * ------------------------------------------------------------------
  */
@@ -19,11 +19,12 @@ namespace lumaMatrix {
     let wordClock: WordClock;
     const startTime = control.millis();
     let currentTimeSeconds: number = 0;
-    const timeUpdateInterval: number = 1; // in second
+    const timeUpdateInterval: number = 1; // in seconds
     let timeUpdateIntervalCounter = 0;
     let isUpdatingTime: boolean = false;
     let missedTimeUpdates: number = 0;
-    let wordClockDisplayUpdateInterval = 60; // in seconds
+    let wordClockDisplayUpdateInterval = 0.1; // in seconds
+    const rainbowSpeedColor: number = 2; // increments color (h value of HSV) by this number every wordClockDisplayUpdateInterval
     let joystickTimeSetEnable = false;
     let icons: number[] = [0, 0, 0, 0]
 
@@ -219,8 +220,9 @@ namespace lumaMatrix {
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
+    //% enableRainbowColors.shadow="toggleOnOff"
     //% subcategory="Clock" group="Design"
-    export function setWordColors(hourColor: number, minuteColor: number, wordColor: number){
+    export function setWordColors(hourColor: number, minuteColor: number, wordColor: number,  enableRainbowColors: boolean){
         if (!wordClock) {
             serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
             return
@@ -228,6 +230,7 @@ namespace lumaMatrix {
         wordClock.hourColor = hourColor
         wordClock.minuteColor = minuteColor
         wordClock.wordColor = wordColor
+        wordClock.enableRainbowColors = enableRainbowColors
         wordClock.displayTime()
     }
 
@@ -250,13 +253,17 @@ namespace lumaMatrix {
         public minuteColor: number;
         public wordColor: number;
         public brightness: number;
+        public enableRainbowColors: boolean = false;
+        public rainbowSpeedColor: number;
 
-        constructor(version: number = 1, hourColor: number, minuteColor: number, wordColor: number) {
+        constructor(version: number = 1, hourColor: number, minuteColor: number, wordColor: number, enableRainbowColors: boolean) {
             basic.pause(10);
             this.hourColor = hourColor;
             this.minuteColor = minuteColor;
             this.wordColor = wordColor;
             this.brightness = currentBrightness;
+            this.enableRainbowColors = enableRainbowColors;
+            this.rainbowSpeedColor = rainbowSpeedColor;
             this._matrix = strip;
 
             if (!this._matrix) {
@@ -326,6 +333,35 @@ namespace lumaMatrix {
             }
         }
 
+        private updateRainbowColors(): void {
+            if (this.enableRainbowColors) {                
+                /* Extract RGB components from each color */
+                let hourRgb = extractRgb(this.hourColor);
+                let minuteRgb = extractRgb(this.minuteColor);
+                let wordRgb = extractRgb(this.wordColor);
+
+                /* Convert RGB to HSV */
+                let hourHsv = rgbToHsv(hourRgb.r, hourRgb.g, hourRgb.b);
+                let minuteHsv = rgbToHsv(minuteRgb.r, minuteRgb.g, minuteRgb.b);
+                let wordHsv = rgbToHsv(wordRgb.r, wordRgb.g, wordRgb.b);
+
+                /* Update each hue for the rainbow effect */
+                hourHsv.h = (hourHsv.h + this.rainbowSpeedColor) % 360;
+                minuteHsv.h = (minuteHsv.h + this.rainbowSpeedColor + 0.1 * this.rainbowSpeedColor) % 360;
+                wordHsv.h = (wordHsv.h + this.rainbowSpeedColor + 0.2 * this.rainbowSpeedColor) % 360;
+
+                /* Convert back to RGB */
+                hourRgb = hsvToRgb(hourHsv.h, hourHsv.s, hourHsv.v);
+                minuteRgb = hsvToRgb(minuteHsv.h, minuteHsv.s, minuteHsv.v);
+                wordRgb = hsvToRgb(wordHsv.h, wordHsv.s, wordHsv.v);
+
+                /* Combine RGB in color format, neopixel.rgb equivalent to (r << 16) | (g << 8) | b */
+                this.hourColor = neopixel.rgb(hourRgb.r, hourRgb.g, hourRgb.b);
+                this.minuteColor = neopixel.rgb(minuteRgb.r, minuteRgb.g, minuteRgb.b);
+                this.wordColor = neopixel.rgb(wordRgb.r, wordRgb.g, wordRgb.b);
+            }
+        }
+
         public displayTime(): void {
             this._matrix.clear();
             //this.clearClockArea();
@@ -333,6 +369,9 @@ namespace lumaMatrix {
             let hours = Math.floor((currentTimeSecondsLocal / 3600) % 12);  // ensure hours are between 0 and 11 and are whole numbers
             let minutes = Math.floor((currentTimeSecondsLocal / 60) % 60); // ensure minutes are between 0 and 59 and are whole numbers
             serialDebugMsg("WordClock: hours = " + hours + ", minutes = " + minutes);
+
+            /* Update the rainbow colors */
+            this.updateRainbowColors();
 
             /* Adjust hours and minutes if minutes are more than 60 or less than 0 */
             if (minutes >= 60) {
@@ -371,8 +410,6 @@ namespace lumaMatrix {
                 this.setClockPixels(hoursMapping, this.hourColor);
             }
 
-            /* Set pixels for hours */
-            this.setClockPixels(hoursMapping, this.hourColor);
             hoursMapping = null; // free memory
 
             if (minutes !== 0) {
@@ -453,11 +490,12 @@ namespace lumaMatrix {
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
+    //% enableRainbowColors.shadow="toggleOnOff"
     //% joystickEnable.shadow="toggleOnOff" joystickEnable.defl=true
     //% subcategory="Clock" group="Time"
     // Not if this block is used with the control.inBackground block, it will not work #BUG 
-    export function createWordClock(hourColor: number, minuteColor: number, wordColor: number, version?: eMatrixVersion, joystickEnable?: boolean): void {
-        wordClock = new WordClock(version, hourColor, minuteColor, wordColor);
+    export function createWordClock(hourColor: number, minuteColor: number, wordColor: number, enableRainbowColors: boolean, version?: eMatrixVersion, joystickEnable?: boolean): void {
+        wordClock = new WordClock(version, hourColor, minuteColor, wordColor, enableRainbowColors);
         basic.pause(100);
         if (!wordClock) {
             serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
