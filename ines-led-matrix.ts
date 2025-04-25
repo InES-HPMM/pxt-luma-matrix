@@ -188,6 +188,14 @@ namespace lumaMatrix {
         currentBrightness = brightness;
         if (!strip) {
             strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+            basic.pause(1);
+            if (!strip) {
+                serialDebugMsg("initializeMatrix: Critical Error - Failed to create strip");
+                basic.pause(1000 * 1000000); // This should never happen if so we do not continue and wait for a long time (1000000 seconds)
+                return;
+            }
+        } else {
+            serialDebugMsg("initializeMatrix: Warning - Strip already initialized");
         }
         strip.setBrightness(brightness);
         clear();

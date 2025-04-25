@@ -26,9 +26,10 @@ namespace lumaMatrix {
     export function snake(): void {
         control.inBackground(() => {
             const snakeGame = new SnakeGame();
-            basic.pause(100);
+            basic.pause(1);
             if (!snakeGame) {
-                serialDebugMsg("snake: Error - snakeGame object is not initialized");
+                serialDebugMsg("snake: Critical Error - Failed to create snakeGame object");
+                basic.pause(1000 * 1000000); // This should never happen if so we do not continue and wait for a long time (1000000 seconds)
             } else {
                 serialDebugMsg("snake: snakeGame object initialized successfully");
             }
@@ -73,6 +74,10 @@ namespace lumaMatrix {
          * Set a single pixel on the LED matrix with bounds checking
          */
         private setPixel(x: number, y: number, color: number): void {
+            if (!this._matrix) {
+                serialDebugMsg("SnakeGame: Error - Matrix object is not initialized");
+                return;
+            }
             if (x >= 0 && x < 8 && y >= 0 && y < 8) {
                 this._matrix.setPixelColor(y * 8 + x, color);
             }
@@ -203,6 +208,10 @@ namespace lumaMatrix {
          */
         private updateGame(): void {
             if (this.isGameOver) return;
+            if (!this._matrix) {
+                serialDebugMsg("SnakeGame: Error - Matrix object is not initialized");
+                return;
+            }
             this._matrix.clear();
             this.updateSnake();
             this.drawSnake();

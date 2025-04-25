@@ -28,9 +28,10 @@ namespace lumaMatrix {
     export function tetrisMini(): void {
         control.inBackground(() => {
             const tetrisGame = new TetrisMiniGame();
-            basic.pause(100);
+            basic.pause(1);
             if (!tetrisGame) {
-                serialDebugMsg("TetrisMiniGame: Error - tetrisGame object is not initialized");
+                serialDebugMsg("TetrisMiniGame: Critical Error - Failed to create tetrisGame object");
+                basic.pause(1000 * 1000000); // This should never happen if so we do not continue and wait for a long time (1000000 seconds)
             } else {
                 serialDebugMsg("TetrisMiniGame: tetrisGame object initialized successfully");
             }
@@ -135,6 +136,10 @@ namespace lumaMatrix {
 
         /* Set a single pixel on the LED matrix with bounds checking */
         private setPixel(x: number, y: number, color: number): void {
+            if (!this._matrix) {
+                serialDebugMsg("TetrisMiniGame: Error - Matrix object is not initialized");
+                return;
+            }
             if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
                 this._matrix.setPixelColor(y * matrixWidth + x, color);
             }
@@ -201,9 +206,9 @@ namespace lumaMatrix {
                 }
             }
             
-            // Update score with bonus for multiple rows cleared at once
+            /* Update score with bonus for multiple rows cleared at once. */
             if (clearedRows > 0) {
-                // Award bonus points for multiple rows cleared at once (1, 3, 5, 8 points)
+                /* Award bonus points for multiple rows cleared at once (1, 3, 5, 8 points). */
                 const scoreAddition = clearedRows === 1 ? 1 : 
                                      clearedRows === 2 ? 3 : 
                                      clearedRows === 3 ? 5 : 8;
@@ -234,6 +239,10 @@ namespace lumaMatrix {
          * Handles piece falling, locking, and spawning new pieces */
         private updateGame(): void {
             if (this.isGameOver) return;
+            if (!this._matrix) {
+                serialDebugMsg("TetrisMiniGame: Error - Matrix object is not initialized");
+                return;
+            }
             if (!this.movePiece(0, 1)) {
                 this.lockPiece();
                 this.clearRows();
@@ -263,7 +272,7 @@ namespace lumaMatrix {
             this.isGameOver = true;
             serialDebugMsg("TetrisMiniGame: Game Over with score " + this.score);
             
-            // Display game over and score
+            /* Display game over and score. */
             if (this.score < 10) { // Regular game over for normal scores
                 scrollText("Game Over", neopixel.colors(NeoPixelColors.White), 90);
                 scrollText("" + this.score, neopixel.colors(NeoPixelColors.Blue), 85);
