@@ -15,14 +15,15 @@
  * ------------------------------------------------------------------
  */
 
+// TODO use matrixWidth and matrixHeight and figure out how to implement images and handel matrix-luts with these variables size
 
 //% color=#3162a3 icon="\uf00a" block="Luma Matrix"
 namespace lumaMatrix {
     
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
-    export let matrixWidth = 8; // x
-    export let matrixHeight = 8; // y
+    export let matrixWidth = 8; // x, min 4
+    export let matrixHeight = 8; // y, min 4
     export let currentBrightness = 100; // 0 to 255
     export let pollingInterval = 10 // 10ms Interval for polling LED Matrix Interface. Adjust the polling interval as needed.
     let pinNeopixels: DigitalPin = DigitalPin.P0;
@@ -46,7 +47,8 @@ namespace lumaMatrix {
     let totalWidth: number = 0;
     let index: number = 0;
     let debugEnabled: boolean = false;
-    let pixelBuffer: Buffer = Buffer.create(3*8*8)
+    // Create buffer using max dimension to ensure sufficient memory regardless of matrix orientation
+    let pixelBuffer: Buffer = Buffer.create(3 * Math.max(matrixWidth, matrixHeight) * Math.max(matrixWidth, matrixHeight))
 
 
     /* FUNCTIONS */
@@ -291,7 +293,7 @@ namespace lumaMatrix {
                 color = 16777215;
             }
             if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
-                index = (matrixHeight - 1 - y) * matrixWidth + x; // (y)* 8 + x;
+                index = (matrixHeight - 1 - y) * matrixWidth + x;
                 strip.setPixelColor(index, color);
                 pixelBuffer.setUint8(3 * index + 0, (color >> 16) & 0xff)
                 pixelBuffer.setUint8(3 * index + 1, (color >> 8) & 0xff)
@@ -414,7 +416,7 @@ namespace lumaMatrix {
             let imageheight = img.height();
 
             for (let i=0; i<pixels.length; i++){
-                img.setPixel(pixels[i][0] % 8, pixels[i][1] % 8, true); // Set the pixel if the coordinate is present
+                img.setPixel(pixels[i][0] % imagewidth, pixels[i][1] % imageheight, true); // Set the pixel if the coordinate is present
                 /*for (let y = 0; y < imageheight; y++) {
                     for (let x = 0; x < imagewidth; x++) {
                         let index = (matrixHeight - 1 - y) * matrixWidth + x;
@@ -957,24 +959,24 @@ namespace lumaMatrix {
         let colorBlue = neopixel.rgb(0, 0, 255);
         setBrightness(255);
         clear();
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 setPixel(x, y, colorGreen);
             }
         }
         strip.show();
         basic.pause(2000);
         clear();
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 setPixel(x, y, colorRed);
             }
         }
         strip.show();
         basic.pause(2000);
         clear();
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 setPixel(x, y, colorBlue);
             }
         }

@@ -72,7 +72,8 @@ namespace lumaMatrix {
         [0, 0, 0]           // Black
     ];
 
-    let incomImgBuffer: Buffer = Buffer.create(24);
+    // Use maximum dimension to ensure sufficient memory allocation
+    let incomImgBuffer: Buffer = Buffer.create(3 * Math.max(matrixWidth, matrixHeight));
 
     /**
      * Get element from enum with predefined datatypes in messages sent over radio
@@ -107,7 +108,8 @@ namespace lumaMatrix {
     //% image.shadow="ZHAW_Image_8x8"
     //% subcategory="Communication"
     function bitmapToBuffer(image: Image): Buffer {
-        let imgBuffer = control.createBuffer(8); // Create an 8-byte buffer
+        // Create a buffer with one byte per row using maximum dimension for safety
+        let imgBuffer = control.createBuffer(Math.max(matrixWidth, matrixHeight)); 
         try {
             let imagewidth = image.width();
             let imageheight = image.height();
@@ -303,7 +305,7 @@ namespace lumaMatrix {
         let dataType = eDataType.Unknown
 
         dataType = eDataType.Bitmap
-        let imgBuffer = receivedBuffer.slice(0, 8); // First 8 bytes for image data
+        let imgBuffer = receivedBuffer.slice(0, Math.max(matrixWidth, matrixHeight)); // First bytes for image data (one byte per row)
         let image = bufferToBitmap(imgBuffer); // Convert to image
         let layer = receivedBuffer.getUint8(9) ? true : false;
 
@@ -344,7 +346,7 @@ namespace lumaMatrix {
         let layer = false; // Default layer
 
         // Check if there's color data
-        if (receivedBuffer.length >= 11) {
+        if (receivedBuffer.length >= 11) { // TODO why 11?
             layer = receivedBuffer.getUint8(11) ? true : false;
         }
 
@@ -370,7 +372,7 @@ namespace lumaMatrix {
     }
 
 
-    // Function to compress a buffer of 192 bytes to 24 bytes
+    // Function to compress a buffer of 192 bytes to 24 bytes // TODO use matrixWidth and matrixHeight
     function compressRGB(buffer: Buffer): Buffer {
         if (buffer.length !== 192) {
             serialDebugMsg("Buffer length must be 192 bytes");
@@ -399,7 +401,7 @@ namespace lumaMatrix {
     }
 
 
-    // Function to decompress a buffer of 24 bytes back to 192 bytes
+    // Function to decompress a buffer of 24 bytes back to 192 bytes // TODO use matrixWidth and matrixHeight
     function decompressRGB(buffer: Buffer): Buffer {
         if (buffer.length !== 24) {
             serialDebugMsg("Buffer length must be 24 bytes");
