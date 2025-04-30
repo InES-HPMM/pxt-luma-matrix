@@ -18,24 +18,29 @@
 
 lumaMatrix.debugEnable(true)
 lumaMatrix.initializeMatrix(135)
-lumaMatrix.scrollText("LUMA MATRIX", 0xff00ff, 90)
-lumaMatrix.showImage(lumaMatrix.matrix8x8(`
-    . . . . . . . .
-    . # # . . # # .
-    . # # . . # # .
-    . . . . . . . .
-    # . . . . . . #
-    . # . . . . # .
-    . . # # # # . .
-    . . . . . . . .
-    `), 0xffff00)
-for (let i = 0; i < 8; i++) {
-    lumaMatrix.setOnePixelRGB(0, i, 0, 255, 0)
-    basic.pause(100)
-}
-basic.pause(2000)
-lumaMatrix.createWordClock(0xff00ff, 0x00ffff, 0xffff00, lumaMatrix.eMatrixVersion.V2)
+// lumaMatrix.scrollText("LUMA MATRIX", 0xff00ff, 90)
+// lumaMatrix.showImage(lumaMatrix.matrix8x8(`
+//    . . . . . . . .
+//    . # # . . # # .
+//    . # # . . # # .
+//    . . . . . . . .
+//    # . . . . . . #
+//    . # . . . . # .
+//    . . # # # # . .
+//    . . . . . . . .
+//    `), 0xffff00)
+// for (let i = 0; i < 8; i++) {
+//    lumaMatrix.setOnePixelRGB(0, i, 0, 255, 0)
+//    basic.pause(100)
+// }
+// basic.pause(2000)
 lumaMatrix.setCurrentTime(15, 33, 0)
+if(0 == lumaMatrix.readSwitch()){
+    lumaMatrix.createWordClock(0xff00ff, 0x00ffff, 0xffff00, true, 2)
+} else {
+    // lumaMatrix.tetrisMini()
+    lumaMatrix.snake()
+}
 
 while (true) {
     basic.pause(5000)

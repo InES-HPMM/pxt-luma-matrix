@@ -15,14 +15,15 @@
  * ------------------------------------------------------------------
  */
 
+// TODO use matrixWidth and matrixHeight and figure out how to implement images and handel matrix-luts with these variables size
 
 //% color=#3162a3 icon="\uf00a" block="Luma Matrix"
 namespace lumaMatrix {
     
     /* GLOBAL VARIABLES */
     export let strip: neopixel.Strip;
-    let matrixWidth = 8; // x
-    let matrixHeight = 8; // y
+    export let matrixWidth = 8; // x, min 4
+    export let matrixHeight = 8; // y, min 4
     export let currentBrightness = 100; // 0 to 255
     export let pollingInterval = 10 // 10ms Interval for polling LED Matrix Interface. Adjust the polling interval as needed.
     let pinNeopixels: DigitalPin = DigitalPin.P0;
@@ -46,7 +47,8 @@ namespace lumaMatrix {
     let totalWidth: number = 0;
     let index: number = 0;
     let debugEnabled: boolean = false;
-    let pixelBuffer: Buffer = Buffer.create(3*8*8)
+    // Create buffer using max dimension to ensure sufficient memory regardless of matrix orientation
+    let pixelBuffer: Buffer = Buffer.create(3 * Math.max(matrixWidth, matrixHeight) * Math.max(matrixWidth, matrixHeight))
 
 
     /* FUNCTIONS */
@@ -96,6 +98,83 @@ namespace lumaMatrix {
         return lowerOutputRangeLimit + factor * (upperOutputRangeLimit - lowerOutputRangeLimit);
     }
 
+    /* Helper method to extract RGB components from a color value. */
+    export function extractRgb(color: number): { r: number, g: number, b: number } {
+        return {
+            r: Math.max(0, Math.min(255, (color >> 16) & 0xFF)),
+            g: Math.max(0, Math.min(255, (color >> 8) & 0xFF)),
+            b: Math.max(0, Math.min(255, color & 0xFF))
+        };
+    }
+
+    /* Helper method to convert RGB to HSV. */
+    export function rgbToHsv(r: number, g: number, b: number): { h: number, s: number, v: number } {
+        /* Normalize RGB values to 0-1 */
+        const rNorm = r / 255;
+        const gNorm = g / 255; 
+        const bNorm = b / 255;
+        
+        /* Find the maximum and minimum RGB values, weird code because makecode max min function only takes two values. */
+        const cMax = Math.max(rNorm, Math.max(gNorm, bNorm));
+        const cMin = Math.min(rNorm, Math.min(gNorm, bNorm));
+        const delta = cMax - cMin;
+        
+        /* Calculate hue (0-360) */
+        let h = 0;
+        if (delta === 0) {
+            h = 0;
+        } else if (cMax === rNorm) {
+            h = 60 * (((gNorm - bNorm) / delta) % 6);
+        } else if (cMax === gNorm) {
+            h = 60 * ((bNorm - rNorm) / delta + 2);
+        } else {
+            h = 60 * ((rNorm - gNorm) / delta + 4);
+        }
+        
+        /* Make sure hue is in range of 0-360 */
+        if (h < 0) {
+            h += 360;
+        } else if (h > 360) {
+            h -= 360;
+        }
+
+        /* Calculate saturation and value */
+        const s = (cMax === 0) ? 0 : delta / cMax;
+        const v = cMax;
+        
+        return { h, s, v };
+    }
+
+    /* Helper method to convert HSV to RGB. */
+    export function hsvToRgb(h: number, s: number, v: number): { r: number, g: number, b: number } {
+        const c = v * s;
+        const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+        const m = v - c;
+        
+        let rPrime = 0, gPrime = 0, bPrime = 0;
+        
+        if (h >= 0 && h < 60) {
+            rPrime = c; gPrime = x; bPrime = 0;
+        } else if (h >= 60 && h < 120) {
+            rPrime = x; gPrime = c; bPrime = 0;
+        } else if (h >= 120 && h < 180) {
+            rPrime = 0; gPrime = c; bPrime = x;
+        } else if (h >= 180 && h < 240) {
+            rPrime = 0; gPrime = x; bPrime = c;
+        } else if (h >= 240 && h < 300) {
+            rPrime = x; gPrime = 0; bPrime = c;
+        } else {
+            rPrime = c; gPrime = 0; bPrime = x;
+        }
+        
+        /* Convert back to 0-255 range */
+        const r = Math.max(0, Math.min(255, Math.round((rPrime + m) * 255)));
+        const g = Math.max(0, Math.min(255, Math.round((gPrime + m) * 255)));
+        const b = Math.max(0, Math.min(255, Math.round((bPrime + m) * 255)));
+        
+        return { r, g, b };
+    }
+
     /**
      * Initialize the 8 by 8 Neopixel Matrix with a joystick. 
      * This block needs to be execute only once at the start.
@@ -105,11 +184,21 @@ namespace lumaMatrix {
     //% brightness.defl=127 brightness.min=0 brightness.max=255
     //% group="Pixels" weight=120
     export function initializeMatrix(brightness: number): void {
-        serial.setBaudRate(BaudRate.BaudRate115200)
+        serial.setBaudRate(BaudRate.BaudRate115200);
         serial.redirectToUSB();
 
         currentBrightness = brightness;
-        strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+        if (!strip) {
+            strip = neopixel.create(pinNeopixels, matrixWidth * matrixHeight, NeoPixelMode.RGB);
+            basic.pause(1);
+            if (!strip) {
+                serialDebugMsg("initializeMatrix: Critical Error - Failed to create strip");
+                basic.pause(1000 * 1000000); // This should never happen if so we do not continue and wait for a long time (1000000 seconds)
+                return;
+            }
+        } else {
+            serialDebugMsg("initializeMatrix: Warning - Strip already initialized");
+        }
         strip.setBrightness(brightness);
         clear();
         initializeMatrixInterface();
@@ -204,7 +293,7 @@ namespace lumaMatrix {
                 color = 16777215;
             }
             if (x >= 0 && x < matrixWidth && y >= 0 && y < matrixHeight) {
-                index = (matrixHeight - 1 - y) * matrixWidth + x; // (y)* 8 + x;
+                index = (matrixHeight - 1 - y) * matrixWidth + x;
                 strip.setPixelColor(index, color);
                 pixelBuffer.setUint8(3 * index + 0, (color >> 16) & 0xff)
                 pixelBuffer.setUint8(3 * index + 1, (color >> 8) & 0xff)
@@ -327,7 +416,7 @@ namespace lumaMatrix {
             let imageheight = img.height();
 
             for (let i=0; i<pixels.length; i++){
-                img.setPixel(pixels[i][0] % 8, pixels[i][1] % 8, true); // Set the pixel if the coordinate is present
+                img.setPixel(pixels[i][0] % imagewidth, pixels[i][1] % imageheight, true); // Set the pixel if the coordinate is present
                 /*for (let y = 0; y < imageheight; y++) {
                     for (let x = 0; x < imagewidth; x++) {
                         let index = (matrixHeight - 1 - y) * matrixWidth + x;
@@ -870,24 +959,24 @@ namespace lumaMatrix {
         let colorBlue = neopixel.rgb(0, 0, 255);
         setBrightness(255);
         clear();
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 setPixel(x, y, colorGreen);
             }
         }
         strip.show();
         basic.pause(2000);
         clear();
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 setPixel(x, y, colorRed);
             }
         }
         strip.show();
         basic.pause(2000);
         clear();
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 setPixel(x, y, colorBlue);
             }
         }

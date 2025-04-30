@@ -10,7 +10,7 @@
  * -- File:	    enums.ts
  * -- Project:  micro:bit InES Matrix
  * -- Date:	    16.12.2024
- * -- Author:   ebep
+ * -- Author:   hesu, ebep
  * --
  * ------------------------------------------------------------------
  */
