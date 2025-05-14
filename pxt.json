@@ -17,6 +17,7 @@
         "_locales/de/luma-matrix-jsdoc-strings.json",
         "wordclock.ts",
         "snake-game.ts",
+        "tetris-mini-game.ts",
         "rf-messages.ts"
     ],
     "testFiles": [
