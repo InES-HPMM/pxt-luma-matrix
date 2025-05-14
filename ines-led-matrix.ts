@@ -770,7 +770,7 @@ namespace lumaMatrix {
     }
 
     /**
-     * Let text scroll across the matrix, letter by letter from right to the left.
+     * Let image scroll across the matrix, row by row from right to the left.
      */
     //% blockId="ZHAW_Matrix_ImageMoving"
     //% block="show moving image on matrix | $image with colour $color and speed $speed in direction $direction"
@@ -821,6 +821,28 @@ namespace lumaMatrix {
             serialDebugMsg("movingImage: Error displaying moving image");
         }
     }
+    
+    /**
+     * Show an ASCII character on the Matrix. Only the first letter of the text string is shown.
+     */
+    //% blockId="ZHAW_Matrix_Text"
+    //% block="show character $text in $color"
+    //% color.shadow="colorNumberPicker"
+    //% group="Pixels" weight=72
+    export function showASCIICharacter(text: string, color: number): void {
+        text = isValidString(text); // validate text to only contains allowed symbols
+        textArray = getTextArray(text[0]);
+        totalWidth = textArray[0].length;
+        for (let x = 0; x < matrixWidth; x++) {
+            for (let y = 0; y < matrixHeight; y++) {
+                if (x >= totalWidth) continue;
+                const PixelOn = textArray[y][x] == 1;
+                setPixel(x, y, PixelOn ? color : 0);
+            }
+        }
+        strip.show();
+    }
+
 
     /**
      * Let text scroll across the Luma Matrix pixels.

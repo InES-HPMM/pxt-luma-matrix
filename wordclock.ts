@@ -221,13 +221,13 @@ namespace lumaMatrix {
      * Set colours of the words to new values
      */
     //% blockId="ZHAW_Clock_ColorsSet"
-    //% block="set word colors | hour color $hourColor | minute color $minuteColor | word color $wordColor"
+    //% block="set word colors hour color $hourColor minute color $minuteColor word color $wordColor || rainbow color $enableRainbowColors"
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
-    //% enableRainbowColors.shadow="toggleOnOff"
+    //% enableRainbowColors.shadow="toggleOnOff" enableRainbowColors.defl=false
     //% subcategory="Clock" group="Design"
-    export function setWordColors(hourColor: number, minuteColor: number, wordColor: number,  enableRainbowColors: boolean){
+    export function setWordColors(hourColor: number, minuteColor: number, wordColor: number,  enableRainbowColors?: boolean){
         if (!wordClock) {
             serialDebugMsg("createWordClock: Error - WordClock object is not initialized");
             return
@@ -500,16 +500,16 @@ namespace lumaMatrix {
      * Optional: joystick enable allows to "scroll" through internal time if turned on. This can be changed during runtime.
      */
     //% blockId="ZHAW_Clock_CreateWordClock"
-    //% block="create word clock | hour color $hourColor minute color $minuteColor word color $wordColor || clock dial $version | set time with joystick %joystickEnable"
+    //% block="create word clock | hour color $hourColor minute color $minuteColor word color $wordColor || rainbow colors $enableRainbowColors clock dial $version set time with joystick %joystickEnable"
     //% version.defl=lumaMatrix.eMatrixVersion.V2
     //% hourColor.shadow="colorNumberPicker" hourColor.defl=0x007fff
     //% minuteColor.shadow="colorNumberPicker" minuteColor.defl=0x00ffff
     //% wordColor.shadow="colorNumberPicker" wordColor.defl=0x00ff00
-    //% enableRainbowColors.shadow="toggleOnOff"
+    //% enableRainbowColors.shadow="toggleOnOff" enableRainbowColors.defl=false
     //% joystickEnable.shadow="toggleOnOff" joystickEnable.defl=true
     //% subcategory="Clock" group="Time"
     // Not if this block is used with the control.inBackground block, it will not work #BUG 
-    export function createWordClock(hourColor: number, minuteColor: number, wordColor: number, enableRainbowColors: boolean, version?: eMatrixVersion, joystickEnable?: boolean): void {
+    export function createWordClock(hourColor: number, minuteColor: number, wordColor: number, enableRainbowColors?: boolean, version?: eMatrixVersion, joystickEnable?: boolean): void {
         wordClock = new WordClock(version, hourColor, minuteColor, wordColor, enableRainbowColors);
         basic.pause(1);
         if (!wordClock) {
