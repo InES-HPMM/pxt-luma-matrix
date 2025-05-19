@@ -1,7 +1,17 @@
 # Challenges
 
-This section contains a series of challenges to help you get started with the Luma Matrix. Each challenge will guide you through a specific task and provide you with the necessary information to complete it.
+In diesem Kapitel werden wir einige Herausforderungen mit der Lumatrix angehen. Diese Herausforderungen sind darauf ausgelegt, dir zu helfen, die Grundlagen der Programmierung mit der Lumatrix zu erlernen und deine Fähigkeiten zu verbessern. Jede Herausforderung wird eine kurze Beschreibung der Aufgabe enthalten.
 
-Let's get started! 🤖🛠️🕹️
+Je nach Aufgabe wird dir eine Vorlage zur Verfügung gestellt, die du verwenden kannst, um deine Lösung zu erstellen. Du kannst die Vorlage kopieren und erweitern, um deine eigene Lösung zu erstellen.
+
+Auf geht's! 🤖🛠️🕹️
+
+```admonish info title="Hilfestellung" collapsible=false
+Teilweise werden in den Aufgaben Blöcke angezeigt, die dir helfen können, die Aufgabe zu lösen. Diese Blöcke sind nicht vollständig und es gibt oft auch andere Wege. 
+```
+
+```admonish tip title="Erweiterungen (Bitte Aufklappen)" collapsible=true
+Wenn du schnell bist, kannst du gerne die Erweiterungen in der jeweiligen Aufgabe ausprobieren. 
+```
 
 <script src="../assets/js/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>

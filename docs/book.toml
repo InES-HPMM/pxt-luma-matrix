@@ -21,5 +21,7 @@ assets_version = "3.0.3" # do not edit: managed by `mdbook-admonish install`
 [output]
 
 [output.html]
+fold.enable = true
+default-theme = "rust"
 additional-css = ["mdbook-admonish.css", "css/makecode.css", "css/page-aspects.css"]
 additional-js = ["js/zoom.js"]

@@ -13,5 +13,13 @@ Achte dabei darauf:
  - Was passiert, wenn der Cursor den Rand der Lumatrix erreicht?
 
 
+```admonish tip title="Erweiterung 1" collapsible=true
+Nutze den Schalter um die Spur des Cursors ein- und auszuschalten. So kannst du auf der Lumatrix zeichnen.
+```
+
+```admonish tip title="Erweiterung 2" collapsible=true
+Die Tasten A und B sind noch nicht belegt. Nutze die Tasten um die Farbe des Cursors zu ändern. Du brauchst vermutlich eine Variable, um die Farbe zu speichern.
+```
+
 ## Vorlage
-<div style="position:relative;height:0;padding-bottom:50%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/#pub:S98402-07380-22569-39071" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>
+<div style="position:relative;height:0;padding-bottom:70%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/#pub:S98402-07380-22569-39071" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>

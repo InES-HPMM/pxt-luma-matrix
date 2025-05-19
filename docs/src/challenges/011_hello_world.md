@@ -10,7 +10,7 @@ In dieser Challenge werden wir die Lumatrix verwenden, um eine einfache Nachrich
 4. Verändere den Text um deine eigene Nachricht anzuzeigen.
 5. Lade den Code erneut auf die Lumatrix herunter.
 
-<div style="position:relative;height:0;padding-bottom:30%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/#pub:S50633-95752-57331-95403" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>
+<div style="position:relative;height:0;padding-bottom:70%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/#pub:S50633-95752-57331-95403" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>
 
 
 <script src="../assets/js/gh-pages-embed.js"></script><script>makeCodeRender("https://makecode.microbit.org/", "ines-hpmm/pxt-luma-matrix");</script>
