@@ -1,4 +1,4 @@
-# Challenge - Cursor
+# Challenge 5 - Cursor
 
 In dieser Aufgabe wirst du den Joystick verwenden, um eine LED auf der Lumatrix "wandern" zu lassen - wie eine Computermaus. Du kannst den Joystick in alle vier Richtungen bewegen, um die LED zu steuern. Wenn du den Joystick nach oben bewegst, wird die LED nach oben wandern und so weiter.
 
@@ -19,6 +19,10 @@ Nutze den Schalter um die Spur des Cursors ein- und auszuschalten. So kannst du 
 
 ```admonish tip title="Erweiterung 2" collapsible=true
 Die Tasten A und B sind noch nicht belegt. Nutze die Tasten um die Farbe des Cursors zu ändern. Du brauchst vermutlich eine Variable, um die Farbe zu speichern.
+```
+
+```admonish tip title="Erweiterung 3" collapsible=true
+Nutze das Funkmodul und lasse deiner Kreativität freien Lauf. Zum Beispiel kannst du die Farbe des Cursors einer anderen Lumatrix ändern. 
 ```
 
 ## Vorlage

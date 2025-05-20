@@ -7,7 +7,8 @@
         - [Challenge 1.1](./challenges/011_hello_world.md)
     - [Challenge 2](./challenges/020_lamp.md)
     - [Challenge 3](./challenges/030_countdown.md)
-    - [Challenge 4](./challenges/cursor.md)
+    - [Challenge 4](./challenges/040_communication.md)
+    - [Challenge 5](./challenges/050_cursor.md)
 
 - [Docs](./documentation/index.md)
     - [Pixel](./documentation/blocks_pixels.md)

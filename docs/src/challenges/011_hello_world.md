@@ -1,5 +1,5 @@
 
-# Challenge 2 - Hallo Lumatrix
+# Challenge 1.1 - Hallo Lumatrix
 
 In dieser Challenge werden wir die Lumatrix verwenden, um eine einfache Nachricht anzuzeigen. Auf dem LED-Matrix-Display können wir Text, Bilder und Animationen anzeigen. Wir werden die Lumatrix verwenden, um einen einfachen Text anzuzeigen, der auf dem Display scrollt.
 
